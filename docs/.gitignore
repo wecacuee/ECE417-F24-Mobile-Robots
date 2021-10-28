@@ -1,0 +1,5 @@
+/.bundle/
+/.jekyll-cache
+/_site
+*.synctex.gz
+auto/

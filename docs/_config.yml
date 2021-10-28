@@ -1,0 +1,45 @@
+url: https://vikasdhiman.info
+baseurl: /ECE417-Mobile-Robots
+theme: plainwhite
+remote_theme:  samarsault/plainwhite-jekyll
+title: Introduction to Robotics (ECE417) at the University of Maine
+author: Vikas Dhiman
+description: Introduction to Robotics (ECE417) at the University of Maine
+show_excerpts: true
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+paginate: 10
+
+
+header_pages:
+  - syllabus.md
+
+
+plugins:
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-feed
+
+plainwhite:
+  name: Introduction to Robotics (ECE417)
+  tagline: |
+     Perception, Planning and Control for Mobile Robots
+
+  sitemap: true
+
+  search: true
+
+  html_lang: "en"
+
+  navigation:
+    - title: Syllabus
+      url: "/syllabus"
+
+  portfolio_image: images/jetbot.jpg
+    
+  condensed_mobile:
+    - home
+    - post
+    - page

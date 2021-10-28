@@ -1,0 +1,60 @@
+---
+layout: default
+---
+
+{%- if page.title -%}
+  <h1 class="page-heading">{{ page.title }}</h1>
+{%- endif -%}
+
+{{ content }}
+
+{%- if site.posts.size > 0 -%}
+  <ul class="posts">
+    <li class="posts-labelgroup" id="posts-labelgroup">
+      <h1 id="posts-label">Updates</h1>
+      <a href="{{site.baseurl}}/feed.xml">
+          <img src="{{site.baseurl}}/images/Feed-icon.svg"
+               style="height:12px; margin:0 4px" />
+      </a>
+      {% if site.plainwhite.search %}
+      <div class="search-container">
+        <div class="search-section">
+          <i class="icon-search"></i>
+          <input type="text" name="search" id="searchbar" autocomplete="off" aria-label="search in posts">
+        </div>
+        <div class="search-results" id="search-results" data-placeholder="No Results" style="display: none;"></div>
+      </div>
+      {% endif %}
+    </li>
+
+    {%- for post in site.posts -%}
+      <li style="clear:right">
+        {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          <h2 class="post-title">{{ post.title | escape }}</h2>
+        </a>
+        <div class="post-meta">
+          <div class="post-date">
+            <i class="icon-calendar"></i>
+            {{ post.date | date: date_format }}
+          </div>
+          {%- if post.categories.size > 0-%}
+          <ul class="post-categories">
+            {%- for tag in post.categories -%}
+              <li><a href="/category/{{ tag }}">{{ tag }}</a></li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </div>
+        <div class="post">
+          {%- if site.show_excerpts -%}
+            {{ post.excerpt }}
+          {%- endif -%}
+          {%- if post.summary_image_url -%}
+            <img src="{{ post.summary_image_url }}" />
+          {%- endif -%}
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
