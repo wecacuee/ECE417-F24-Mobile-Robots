@@ -2,7 +2,7 @@
 layout: page
 ---
 
-# ECE 417/533: Introduction to Robotics
+# ECE 417/598: Introduction to Mobile Robotics
 ### Spring 2022
 ### Vikas Dhiman
 
