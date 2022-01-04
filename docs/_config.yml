@@ -25,7 +25,7 @@ plugins:
 plainwhite:
   name: Introduction to Robotics (ECE417)
   tagline: |
-     Perception, Planning and Control for Mobile Robots
+    Perception, Planning and Control for Mobile Robots
 
   sitemap: true
 
