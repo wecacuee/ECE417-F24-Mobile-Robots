@@ -15,7 +15,7 @@ The definition of Robots has been a receding definition. Humanoids that can do e
 
 ## Textbook:
 
-Robotics, Vision & Control, Peter Corke, Springer Verlag (2011). [Search on libgen.rs](libgen.rc) for a pdf.
+Robotics, Vision & Control, Peter Corke, Springer Verlag (2011). [Search on libgen.rs](http://libgen.rs) for a pdf.
 
 ### Additional references
   + Programming Robots with ROS, O'Reilly Media, Inc (2015).
