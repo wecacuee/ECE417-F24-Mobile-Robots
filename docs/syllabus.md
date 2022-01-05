@@ -14,31 +14,46 @@ The definition of Robots has been a receding definition. Humanoids that can do e
 * Math knowledge equivalent to MAT 128.
 
 ## Textbook:
-Robotics, Vision & Control, Peter Corke, Springer Verlag. (see its webpage for links)
+
+Robotics, Vision & Control, Peter Corke, Springer Verlag (2011). [Search on libgen.rs](libgen.rc) for a pdf.
+
+### Additional references
+  + Programming Robots with ROS, O'Reilly Media, Inc (2015).
+  + Probabilistic Robotics. Sebastian Thrun, Wolfram Burgard, and Dieter Fox. (2005, MIT Press.)
+  
+#### Background references
+  + Introduction to Linear Algebra, Fifth Edition (2016) by Gilbert Strang.
+  + Programming -- Principles and Practice Using C++ (2014) by Bjarne Stroustrup.
 
 
 ## Topics (tentative)
+
  * Introduction to Robotics
- * Space and Time
+ * Representing position and orientation (Chapter 2)
  * Robot Operating Systems
  * Mobile Robotics/Test system
  * Sensing / GNSS
- * Images
- * Image Processing (Object detection)
- * Visual Tracking
- * Visual Servoing
- * Mapping
+ * Images (Chapter 11)
+ * Image Processing (Object detection, Chapter 12)
+ * Visual Tracking (Chapter 15)
+ * Visual Servoing (Chapter 16)
+ * Mapping (Chapter 6)
  * Kalman
- * Localization and Mapping
- * Planning - Spaces and Search
- * Planning - Sampling based methods
+ * Localization and Mapping (Chapter 6)
+ * Planning - Spaces and Search (Chapter 5)
+ * Planning - Sampling based methods (Chapter 5)
  * Grasping & Hands
  * Human Robot Interaction
  * Architectures
  * Ethics
 
-Evaluation Components
-Team Homework: 25%; Midterm Exam: 20%; Labs: 25%; and Final project: 30%
+## Evaluation Components
+Homework: 25%; Midterm Exam: 20%; Labs: 25%; and Final project: 30%
+
+## Similar courses
+
+  + [CSE276A from UCSD by Prof Henrik Christensen](http://hichristensen.net/CSE276A-21/index.html)
+  + <https://www.youtube.com/c/JustinHuang101/>
 
 
 ## Student Learning Outcomes (SLOs)
