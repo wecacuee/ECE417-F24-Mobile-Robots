@@ -1,7 +1,7 @@
 url: https://vikasdhiman.info
 baseurl: /ECE417-Mobile-Robots
 remote_theme:  samarsault/plainwhite-jekyll
-theme: plainwhite
+theme: jekyll-theme-cayman
 title: Introduction to Robotics (ECE417) at the University of Maine
 author: Vikas Dhiman
 description: Introduction to Robotics (ECE417) at the University of Maine
