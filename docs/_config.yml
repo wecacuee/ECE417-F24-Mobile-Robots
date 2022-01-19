@@ -14,6 +14,7 @@ paginate: 10
 
 header_pages:
   - syllabus.md
+  - schedule.md
 
 
 plugins:
@@ -36,5 +37,7 @@ plainwhite:
   navigation:
     - title: Syllabus
       url: "/syllabus"
+    - title: Schedule
+      url: "/schedule"
 
   portfolio_image: images/jetbot.jpg
