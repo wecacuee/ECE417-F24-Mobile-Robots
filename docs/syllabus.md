@@ -9,6 +9,10 @@ layout: page
 ## Motivation
 The definition of Robots has been a receding definition. Humanoids that can do everything autonomously have always been and still called Robots; but Roombas are just “smart” vacuum cleaners now and Teslas are just "Full Self Driving" vehicles---no longer Robots. This course focuses on Mobile Robots: the robots like Roombas and Teslas that move around. This is in contrast to Robotic arms installed in factories for automatic production. We will spend a lecture or two on Robotic arms, but there is an entire course dedicated to those: MEE 444. In this course, we will focus on getting a taste of and understanding the basics of a wide range of Robotics technology, using the open-source Robotic Operating Systems (ROS) framework as an entry point. ROS supports many programming languages, including Python and C++. We will cover basic algorithms for robotic Perception (understanding the world around the robot), Planning and control (taking action on the world to achieve a desired outcome).
 
+## Instructors and office hours
+  + Vikas Dhiman <vikas.dhiman@umaine.edu>; Barrows Hall Rm 105, Th 2-4 PM.
+  + Sarah Meyer-Waldo <sarah.meyerwaldo@maine.edu>; TBD ; Thu 10-11 AM;
+
 ## Prerequisite:
 * Programming knowledge to learn Python/C++. 
 * Math knowledge equivalent to MAT 128.
