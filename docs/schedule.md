@@ -7,9 +7,9 @@ layout: page
 |--------------+------+----------------------------------------------------------------------------------+----------------------+-------------------------|
 | Wed, Jan 19, |    1 | [Introduction to Robotics]({{site.baseurl}}/slides/01-19-intro-to-robotics.html) |                      |                         |
 | Fri, Jan 21, |    1 | Representing position and orientation (Chapter 2)                                | No homework          |                         |
-| Mon, Jan 24, |    2 |                                                                                  |                      | Install Ubuntu + ROS    |
+| Mon, Jan 24, |    2 |                                                                                  |                      | [Install Ubuntu + ROS]({{site.baseurl}}/labnotes/VM and ROS Setup Guide-corrected.pdf) |
 | Wed, Jan 26, |    2 | Robot Operating Systems                                                          |                      |                         |
-| Fri, Jan 28, |    2 |                                                                                  | HW1 due              |                         |
+| Fri, Jan 28, |    2 |                                                                                  | [HW1]({{site.baseurl}}/hw/hw1/hw1.pdf) due |                         |
 | Mon, Jan 31, |    3 | Sensing / GNSS                                                                   |                      | First simulation in ROS |
 | Wed, Feb 2,  |    3 | Images (Chapter 11)                                                              |                      |                         |
 | Fri, Feb 4,  |    3 |                                                                                  | HW2 due              |                         |
