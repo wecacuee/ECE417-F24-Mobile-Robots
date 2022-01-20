@@ -2,6 +2,7 @@
 // 
 // https://archive.org/details/isbn_9780124096738/page/117/mode/2up "Fast Random Rotation matrics" James Arvo
 // To compile use:
+// > sudo apt install libeigen3-dev
 // > g++ -I/usr/include/eigen3 random_rotation.cpp -o random_rotation
 // To run use:
 // > ./random_rotation
