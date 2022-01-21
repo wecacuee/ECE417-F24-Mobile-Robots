@@ -58,6 +58,8 @@ Homework: 25%; Midterm Exam: 20%; Labs: 25%; and Final project: 30%
 
   + [CSE276A from UCSD by Prof Henrik Christensen](http://hichristensen.net/CSE276A-21/index.html)
   + <https://www.youtube.com/c/JustinHuang101/>
+  + [ECE 276A from UCSD by Prof Nikolay Atanasov](https://natanaso.github.io/ece276a2021/)
+  + [ECE 276b from UCSD by Prof Nikolay Atanasov](https://natanaso.github.io/ece276b2021/)
 
 
 ## Student Learning Outcomes (SLOs)
