@@ -7,3 +7,5 @@ dependencies:
   - xtensor-blas=0.19.0
   - notebook
   - eigen
+  - numpy
+  - matplotlib
