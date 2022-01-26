@@ -75,11 +75,13 @@ angles (roll, pitch, yaw) and vice versa. Test the pair of functions with
 randomly generated Euler angles. And check if the converted rotation matrix is
 orthonormal. What happens when pitch = $\pi/2$, are you able to convert from
 rotation matrix to Euler angle? Why or why not? (50 marks. Estimated time: 30 min)
+\label{prob:euler-to-rotmat}
 \end{prob}
 
 \begin{prob}
-  Write a function in C++ that generates a 4x4 transformation given axis-angle
-  representation and translation. (20 marks. Estimated time: 15 min).
+  Write a function in C++ that generates a 4x4 transformation matrix given XYZ Euler
+  angles (roll, pitch, yaw) and translation. You can use the function that you
+  wrote in Prob~\ref{prob:euler-to-rotmat}(20 marks. Estimated time: 15 min).
 \end{prob}
 
 
