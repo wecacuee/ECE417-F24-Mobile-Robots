@@ -70,7 +70,7 @@ Eigen::Vector3d rotmat_to_euler_rpy(const Eigen::Matrix3d& R) {
 
 Eigen::Matrix4d transformation_matrix(const double roll, const double pitch, const double yaw,
                                       const Eigen::Vector3d& trans) {
-    Eigen::Matrix4d T;
+    Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
     Eigen::Matrix3d R = euler_to_rotmat(roll, pitch, yaw);
     T.block(0, 0, 3, 3) = Eigen::Matrix3d::Identity(); // TODO : Replace this
     T.block(0, 3, 3, 1) = Eigen::Vector3d::Ones(); // TODO: Replace this
