@@ -68,10 +68,17 @@ Please look at the function \verb|is_valid_rot| in file \verb|hw1.cpp|.
   In class, we proved the expression to convert roll ($\theta$), pitch
   ($\phi$), yaw ($\psi$) from Euler Angles to Rotation matrix,
   \begin{align}
-    R(\theta, \phi, \psi) = R_z(\psi) R_y(\phi) R_x(\theta).
+    R(\theta, \phi, \psi) =
+    \begin{bmatrix}
+      r_{11}& r_{12} & r_{13} \\
+      r_{21}& r_{22} & r_{23} \\
+      r_{31}& r_{32} & r_{33}
+    \end{bmatrix} 
+                       = R_z(\psi) R_y(\phi) R_x(\theta).
   \end{align}
+  
   What if we want to do the inverse? Prove that given a proper 3x3 rotation
-  matrix $R = [[r_{ij}]_{i=1}^3]_{j=1}^3$ ($R^\top R = I$ and $det(R) = 1$) , the Euler angles are given by
+  matrix  ($R^\top R = I$ and $det(R) = 1$) , the Euler angles are given by
   \begin{align}
     \begin{bmatrix}
     \theta(R) \\
