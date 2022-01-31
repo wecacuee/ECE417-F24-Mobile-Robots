@@ -27,7 +27,7 @@
     R(\theta, \hat{\bfk}) = \bfI + \sin \theta \bfK + (1-cos \theta) \bfK^2.
   \end{align}
 
-  A exponential of a square matrix $\bfM$ is defined as
+  An exponential of a square matrix $\bfM$ is defined as
   \begin{align}
     \exp(\bfM) = \sum_{n=0}^\infty \frac{1}{n!} \bfM^k = \bfI + \frac{1}{1!}\bfM + \frac{1}{2!}\bfM^2 + \dots
   \end{align}
@@ -86,12 +86,38 @@
 
 \section{Jan 31 Lecture}
 \begin{prob}
-  Coming soon
-  % For the given robot write down the axis-angle rotation from joint to joint
-  % assuming the joint angles to be  $\theta_1$, $\theta_2$, $\theta_3$ respectively.
-  % \\
-  % \includegraphics[width=\linewidth]{robot.png}
-  % \\
+  Recall the definition of Denavit-Hartenberg parameters from the
+  \href{https://www.youtube.com/watch?v=rA9tm0gTln8}{video}. Recall that
+  transformation between two joints for the defined parameters $d, \theta, r,
+  \alpha$ is given by,
+  \begin{align}
+    T = T_z(\theta, d) T_x(\alpha, r),
+  \end{align}
+  where
+  \begin{align}
+    T_x(\alpha, r) &= \begin{bmatrix}
+      1 & 0 & 0 & r \\
+      0 & \cos(\alpha) & -\sin(\alpha) & 0 \\
+      0 & \sin(\alpha) & \cos(\alpha) & 0 \\
+      0 & 0 & 0 & 1 \\
+      \end{bmatrix}
+    \\
+    T_z(\theta, d) &= \begin{bmatrix}
+      \cos(\theta) & -\sin(\theta) & 0 &  0 \\
+      \sin(\theta) & \cos(\theta) & 0  & 0 \\
+      0 & 0 & 1 & d & \\
+      0 & 0 & 0 & 1 &
+    \end{bmatrix}
+  \end{align}
+
+  For the robot given below find transformation matrix from joint 4 to joint 1
+  assuming the joint angles to be  $\theta_1$, $\theta_2$, $\theta_3$
+  respectively. Write the expression for ${}^3T_4(\theta_3)$, ${}^2T_3(\theta_2)$, ${}^1T_2(\theta_1)$
+  and then ${}^1T_4(\theta_1, \theta_2, \theta_3)$ in terms of the first three transformations.
+  \\
+  \includegraphics[width=\linewidth]{robot3D.pdf}
+  \\
+  \includegraphics[width=\linewidth]{robot.pdf}
 \end{prob}
 
 \section{ECE 598 only}
