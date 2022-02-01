@@ -9,6 +9,8 @@
 \author{Max marks: 90 marks. ETA: 90 min}
 \date{Due on Feb 4th, 2021, before class, 12:59 PM.}
 \newtheorem{prob}{Problem}
+\newif\ifsol
+\solfalse
 
 \newcommand{\bx}{\bar{x}}
 \newcommand{\by}{\bar{y}}
@@ -16,13 +18,25 @@
 \begin{document}
 
 \maketitle
+
+You can also use the following template to fill in your answers: \href{https://vikasdhiman.info/ECE417-Mobile-Robots/hw/hw2/code/hw2.cpp}{hw2.cpp}
+
 \section{Jan 26 Lecture}
 
 \begin{prob}
   In class we proved the Rodrigues formula that converts from axis-angle
   representation $(\theta, \hat{\bfk})$, where $\theta$ is the angle of rotation
-  and $\hat{\bfk}$ is the axis of rotation. Let $\bfK = [\hat{\bfk}]_{\times}$ be
-  the cross product matrix of $\hat{\bfk}$. The corresponding rotation matrix is
+  and $\hat{\bfk}$ is the axis of rotation ($\|\hat{\bfk}\| = 1$). Let $\bfK = [\hat{\bfk}]_{\times}$ be
+  the cross product matrix of $\hat{\bfk}$. The cross product matrix
+  of $\hat{\bfk} = [k_x, k_y, k_z]^\top$ (such that $k_x^2 + k_y^2 + k_z^2 = 1$) is defined as,
+    \begin{align}
+      \bfK = [\hat{\bfk}]_{\times} = \begin{bmatrix}
+        0 & -k_z & k_y \\
+        k_z & 0 & -k_x \\
+        -k_y & k_x & 0
+      \end{bmatrix}
+    \end{align}
+  The corresponding rotation matrix is
   given by,
   \begin{align}
     R(\theta, \hat{\bfk}) = \bfI + \sin \theta \bfK + (1-cos \theta) \bfK^2.
@@ -37,15 +51,76 @@
   \begin{align}
     \sin \theta = \theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \dots
     \\
-    \cos \theta = 1 - \frac{\theta^2}{2!} + \frac{\theta^4}{3!} - \dots
+    \cos \theta = 1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \dots
   \end{align}
-\end{prob}
 
   \begin{enumerate}
-   \item First prove that $\bfK^3 = - \bfK$. (15 marks, 15 minutes)
-   \item Using the expansion of $\sin\theta$ and $\cos\theta$, prove that
-     $R(\theta, \hat{\bfk}) = \exp(\theta \bfK)$. (30 marks, 30 minutes)
+  \item First prove that $\bfK^3 = - \bfK$. (15 marks, 15 minutes)
+  \item As a result note that $\bfK^4 = - \bfK^2$, $\bfK^5 = \bfK$, and so on.
+    In general, $\bfK^{2n+1} =
+    (-1)^n\bfK$ and $\bfK^{2n+2} = (-1)^n\bfK^2$. Using the expansion of $\sin\theta$ and $\cos\theta$, prove that
+    $R(\theta, \hat{\bfk}) = \exp(\theta \bfK)$. (30 marks, 30 minutes)
   \end{enumerate}
+\end{prob}
+\ifsol
+\paragraph*{Solution}
+Expanding $\bfK^2$
+\begin{align}
+  \bfK^2 &= \begin{bmatrix}
+    0 & -k_z & k_y \\
+    k_z & 0 & -k_x \\
+    -k_y & k_x & 0
+  \end{bmatrix}
+                 \begin{bmatrix}
+                   0 & -k_z & k_y \\
+                   k_z & 0 & -k_x \\
+                   -k_y & k_x & 0
+                 \end{bmatrix}
+  \\
+         &= \begin{bmatrix}
+           -k_z^2 - k_y^2  & k_y k_x & k_z k_x \\
+           k_xk_y & -k_z^2 - k_x^2 & k_z k_y \\
+           k_x k_z & k_y k_z & -k_y^2 - k_x^2
+         \end{bmatrix}.
+\end{align}
+Expanding $\bfK^3$,
+\begin{align}
+  &\bfK^3 = \begin{bmatrix}
+    0 & -k_z & k_y \\
+    k_z & 0 & -k_x \\
+    -k_y & k_x & 0
+  \end{bmatrix}
+                 \notag\\&\qquad
+         \begin{bmatrix}
+           -k_z^2 - k_y^2  & k_y k_x & k_z k_x \\
+           k_xk_y & -k_z^2 - k_x^2 & k_z k_y \\
+           k_x k_z & k_y k_z & -k_y^2 - k_x^2
+         \end{bmatrix}
+  \\&=
+  \begin{bmatrix}
+    -k_xk_yk_z +k_xk_yk_z & k_z (k_z^2 + k_x^2 + k_y^2) & -k_y (k_z^2 + k_x^2 + k_y^2)\\
+    -k_z (k_z^2 + k_x^2 + k_y^2) & -k_xk_yk_z +k_xk_yk_z & k_x (k_z^2 + k_x^2 + k_y^2)\\
+    k_y (k_z^2 + k_x^2 + k_y^2) & -k_x (k_z^2 + k_x^2 + k_y^2) & -k_xk_yk_z +k_xk_yk_z
+    \end{bmatrix}
+\end{align}
+We know that $k_x^2 + k_y^2 + k_z^2 = 1$. Applying that we get the desired
+result, $\bfK^3 = - \bfK$.
+
+Expanding Rodrigues formula using expansion of $\sin\theta$ and $\cos\theta$, we
+get
+\begin{align}
+  R(\theta, \hat{\bfk}) = \bfI + \bfK(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!}  - \dots) + \bfK^2(\frac{\theta^2 }{2!} - \frac{\theta^4}{4!} + \dots )
+\end{align}
+Now, note that $\bfK^3 = -\bfK$, $\bfK^4 = -\bfK^2$, $\bfK^5 = \bfK$. Moving
+$\bfK$ inside the series with $\theta$, we get
+\begin{align}
+  &R(\theta, \hat{\bfk}) = \bfI + (\theta\bfK + \frac{(\theta\bfK)^3}{3!} + \frac{(\theta\bfK)^5}{5!}  + \dots)
+    \notag\\
+  &\quad
+  + (\frac{(\theta\bfK)^2 }{2!} + \frac{(\theta\bfK)^4}{4!} + \dots )
+  \end{align}
+  This is exactly the series expansion of $\exp(\theta\bfK)$ by definition.
+\fi
 
 \begin{prob}
   Write a pair of functions in C++ that converts rotation matrix from axis-angle
@@ -114,13 +189,88 @@
   For the robot given below find transformation matrix from joint 4 to joint 1
   assuming the joint angles to be  $\theta_1$, $\theta_2$, $\theta_3$
   respectively. Write the expression for ${}^3T_4(\theta_3)$, ${}^2T_3(\theta_2)$, ${}^1T_2(\theta_1)$
-  and then ${}^1T_4(\theta_1, \theta_2, \theta_3)$ in terms of the first three transformations.
+  and then ${}^1T_4(\theta_1, \theta_2, \theta_3)$ in terms of the first three
+  transformations. You do not need to expand the expression of  ${}^1T_4(\theta_1, \theta_2, \theta_3)$.
   \\
   \includegraphics[width=\linewidth]{robot3D.pdf}
   \\
   \includegraphics[width=\linewidth]{robot.pdf}
   (15 marks. 15 min)
 \end{prob}
+\ifsol
+\paragraph*{Solution}
+\begin{align}
+  &{}^3T_4(\theta_3) =
+                      \begin{bmatrix}
+                        cos(\theta_3) & -\sin(\theta_3) & 0 & 0 \\
+                        sin(\theta_3) & cos(\theta_3) & 0 & 0 \\
+                        0 & 0 & 1 & 0 \\
+                        0 & 0 & 0 & 1
+                      \end{bmatrix}
+                      \begin{bmatrix}
+    1 & 0 & 0 & 19.2 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+                \notag\\
+  &\quad= \begin{bmatrix}
+    cos(\theta_3) & -\sin(\theta_3) & 0 & 19.2\cos(\theta_3) \\
+    sin(\theta_3) & cos(\theta_3) & 0 & 19.2\sin(\theta_3) \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  &{}^2T_3(\theta_2) =
+    \begin{bmatrix}
+      cos(\theta_2) & -\sin(\theta_2) & 0 & 0 \\
+      sin(\theta_2) & cos(\theta_2) & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+                  \begin{bmatrix}
+                    1 & 0 & 0 & 19.2 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & 0 & 1
+                  \end{bmatrix}
+                                \notag\\
+  &\quad= \begin{bmatrix}
+    cos(\theta_2) & -\sin(\theta_2) & 0 & 19.2\cos(\theta_2) \\
+    sin(\theta_2) & cos(\theta_2) & 0 & 19.2\sin(\theta_2) \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  &{}^1T_2(\theta_1) =
+    \begin{bmatrix}
+      cos(\theta_1) & -\sin(\theta_1) & 0 & 0 \\
+      sin(\theta_1) & cos(\theta_1) & 0 & 0 \\
+      0 & 0 & 1 & 27.2 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+                  \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 0 & -1 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 0 & 1
+                  \end{bmatrix}
+                                \notag\\
+  &\quad= \begin{bmatrix}
+    cos(\theta_1) & 0 & sin(\theta_1) & 0 \\
+    sin(\theta_1) & 0 & -cos(\theta_1) & 0 \\
+    0 & 1 & 0 & 27.2 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+\begin{align}
+  {}^1T_4(\theta_1, \theta_2, \theta_3) = {}^1T_2(\theta_1) {}^2T_3(\theta_2) {}^3T_4(\theta_3)
+\end{align}
+\fi
 
 \section{ECE 598 only}
 
