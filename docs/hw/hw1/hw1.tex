@@ -134,6 +134,25 @@ Please look at the function \verb|is_valid_rot| in file \verb|hw1.cpp|.
     -s_\phi & c_\phi s_\theta & c_\phi c_\theta
     \end{bmatrix}
 \end{align}
+
+Starting from the first term of R.H.S. of the equation to be proved,
+%
+\begin{mutline}
+  \arctan2(r_{32}, r_{33})
+  = \arctan2(c_\phi s_\theta, c_\phi c_\theta) = \tan^{-1}(\frac{c_\phi
+    s_\theta}{c_\phi c_\theta}) = \tan^{-1}(\frac{s_\theta}{c_\theta}) =
+  \tan^{-1}(\tan(\theta)) = \theta.
+\end{mutline}
+%
+For the second term, $-\arcsin(r_{31}) = -\sin^{-1}(-s_\phi) =  \phi$.
+For the third term ,
+\begin{mutline}
+  \arctan2(r_{21}, r_{11})
+  = \arctan2(s_\psi c_\phi, c_\psi c_\phi) = \tan^{-1}(\frac{s_\psi
+    c_\phi}{c_\psi c_\phi}) = \tan^{-1}(\frac{s_\psi}{c_\psi}) =
+  \tan^{-1}(\tan(\psi)) = \psi.
+\end{mutline}
+
 \fi
 
 \begin{prob}
@@ -147,7 +166,9 @@ rotation matrix to Euler angle? Why or why not? (50 marks. Estimated time: 30 mi
 
 \ifsol
 \paragraph*{Solution}
-Please check function \verb|euler_to_rotmat| and \verb|rotmat_to_euler_rpy| in \verb|hw1.cpp|
+Please check function \verb|euler_to_rotmat| and \verb|rotmat_to_euler_rpy| in
+\verb|hw1.cpp|. When pitch $=\frac{\pi}{2}$ works some of the time, but not all the time because of the
+Gimbal lock matrix to Euler angle conversion has multiple possible solutions.
 \fi
 
 \begin{prob}
