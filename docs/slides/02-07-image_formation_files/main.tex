@@ -1,9 +1,12 @@
 \documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\input{sym.tex}
 \setbeamertemplate{navigation symbols}{}
 
 \title{ECE 417/598: Image formation}
 \author{Vikas Dhiman}
-\date{Feb 2, 2022}
+\date{Feb 7, 2022}
 \begin{document}
 \begin{frame}
   \titlepage
@@ -38,6 +41,24 @@
     \footnote{Chapter 6. Hartley and Zisserman}
   \end{frame}
 
+  \begin{frame}{Review}
+    \includegraphics[width=\linewidth]{media/pinhole-camera-model-2.png}
+    \newcommand{\ubfu}{\underline{\bfu}}
+    \newcommand{\ubfX}{\underline{\bfX}}
+    \begin{align}
+      \bfK &= \begin{bmatrix}
+        f_x & s & u_0 \\
+        0 & f_y & v_0 \\
+        0 & 0 & 1 \\
+      \end{bmatrix}
+      \\
+      \bfu &= [x, y]^\top \\
+      \ubfX &= [X, Y, Z]^\top\\
+      \ubfu &= [\bfu^\top, 1]^\top \\
+      \ubfu &= K \ubfX
+      \end{align}
+    \end{frame}
+
   \begin{frame}{A numerical example}
     Image is a grid of numbers. The vale in the grid represents intensity values.
     \includegraphics[width=\linewidth]{media/image-as-a-matrix.png}
@@ -59,7 +80,13 @@
 
 
   \begin{frame}{Pseudo-Inverse}
-
+    \begin{align}
+      \bfA \bfA^\dagger \bfA &=  \bfA \\
+      \text{If SVD of $\bfA$ is given by } \bfA &= \bfU \Sigma \bfV^\top 
+      \text{ then } \bfA^\dagger = \bfU \Sigma^{-1} \bfV^\top \\
+      \text{if } \bfA \text{ is tall, then } \bfA^\dagger &= (\bfA^\top \bfA)^{-1} \bfA^\top \\
+      \text{if } \bfA \text{ is fat, then } \bfA^\dagger &=  \bfA^\top (\bfA \bfA^\top)^{-1}
+    \end{align}
   \end{frame}
 
   \begin{frame}{Points as rays: aka Prospective geometry}

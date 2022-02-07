@@ -5,7 +5,7 @@ import matplotlib.mlab as mlab
 
 def log(*args):
     log_message = ''.join([str(arg) for arg in args])
-    print time.strftime('%H:%M:%S > ') + str(log_message)
+    print(time.strftime('%H:%M:%S > ') + str(log_message))
 
 def rowsort(rows):
     '''
@@ -39,25 +39,25 @@ def add_pose_error(pose,dist,x_scale=0.5,rot_scale=10,seed=None):
         dx =  np.random.uniform(low=-x_scale, high=x_scale, size=3)
         drot =  np.radians(np.random.uniform(low=-rot_scale, high=rot_scale, size=3))
     else:
-        print 'Unsupported distribution: ' + dist
+        print('Unsupported distribution: ' + dist)
         1/0
     
     err = np.hstack((dx, drot))
-    print 'drot (rad):', drot
-    print 'dx (m):', dx
+    print('drot (rad):', drot)
+    print('dx (m):', dx)
     P = pose.get()
     pose.set(P+err)
-    print 'Perturbed pose: ' + str(P + err)
+    print('Perturbed pose: ' + str(P + err))
 
 def savewindow(window_name, file_name):
     '''Save the VPython window as an image to file.'''
-    print 'Saving window', window_name, 'to', file_name
+    print('Saving window', window_name, 'to', file_name)
     # TODO this is very slow around 1 second try and find a better way
     time.sleep(2)
     subprocess.call(['import', '-window', window_name, file_name])
     # stop updates to the window interfering with the save?
     time.sleep(1)
-    print 'Done'
+    print('Done')
 
 def depth2xyzs(depthnp, K, color=None, depth_filter=None):
     rows, cols = depthnp.shape

@@ -619,16 +619,15 @@ def examples():
 
     print('Colors')
     polydata = tvtk.SphereSource().output
-    visualise(polydata, color_by_normals=True, renderer=renderer)
+    visualise(polydata, color_by_normals=True)
 
     show_window()
 
 if __name__ == '__main__':
-    ply_reader = tvtk.PLYReader()
-    ply_reader.input = "00000.ply"
+    ply_reader = tvtk.PLYReader(file_name="00000.ply")
     ply_reader.update()
     polydata = ply_reader.output
-    visualise(polydata, color_by_normals=True, renderer=renderer)
+    visualise(polydata, color_by_normals=False, renderer=renderer)
 
     show_window()
 
