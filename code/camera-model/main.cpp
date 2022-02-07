@@ -20,6 +20,13 @@
 
 #include "QVTKWidget.h"
 
+Eigen::Matrix3d
+load_calibration(const std::string& filepath) {
+    auto fd = h5::open(filepath, H5F_ACC_RDONLY);
+    Eigen::MatrixXd K = h5::read<Eigen::MatrixXd>(fd, "/NP1_ir_K").transpose();
+    return K;
+}
+
 vtkSmartPointer<vtkImageData>
 load_depth_image(const std::string& filepath) {
     auto fd = h5::open(filepath, H5F_ACC_RDONLY);
@@ -76,6 +83,8 @@ void show_image(int argc, char** argv, vtkSmartPointer<vtkImageData> imagedata) 
 int main(int argc, char** argv) {
     vtkSmartPointer<vtkImageData> depthimagedata = load_depth_image("./NP1_0.h5");
     vtkSmartPointer<vtkImageData> jpegimagedata = load_jpg_image("./NP1_0.jpg");
+    Eigen::Matrix3d K = load_calibration("calibration.h5");
+    std::cout << K << "\n";
 
 
     show_image(argc, argv, jpegimagedata);

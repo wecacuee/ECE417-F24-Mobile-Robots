@@ -1,0 +1,10 @@
+name: open3d
+channels:
+  - conda-forge
+  - open3d-admin
+dependencies:
+  - notebook
+  - numpy
+  - matplotlib
+  - open3d
+  - mayavi
