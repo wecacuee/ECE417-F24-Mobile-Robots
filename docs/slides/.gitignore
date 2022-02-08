@@ -1,5 +1,8 @@
+*.nav
+*.snm
+*.toc
+/out
 *.aux
-*.bbl
-*.blg
 *.log
 *.out
+out/

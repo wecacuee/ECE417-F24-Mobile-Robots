@@ -1,0 +1,5 @@
+/build
+/devel
+.catkin_workspace
+.gdb_history
+src/CMakeLists.txt
