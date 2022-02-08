@@ -48,11 +48,13 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
+  <!-- ROS dependencies -->
   <depend>roscpp</depend>
   <depend>sensor_msgs</depend>
   <depend>pcl_ros</depend>
-  <depend>opencv</depend>
-  <depend>pcl</depend>
+  <!-- System dependencies -->
+  <depend>libopencv-dev</depend>
+  <depend>libpcl-all-dev</depend>
   <exec_depend>rviz</exec_depend>
 
 
