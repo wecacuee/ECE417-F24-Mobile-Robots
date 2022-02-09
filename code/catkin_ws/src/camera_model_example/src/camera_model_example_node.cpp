@@ -2,9 +2,6 @@
 
 #include <ros/ros.h>
 
-// sudo apt-get install libeigen3-dev
-#include <Eigen/Dense>
-
 // sudo apt-get install libopencv-dev
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -66,10 +63,10 @@ visualize_rgb_image(const cv::Mat& rgbimg) {
 /**
  * Generates coordinates for every pixel
  */
-Eigen::MatrixXd
+cv::Mat_<double>
 create_hom_pixel_coordinates(const cv::MatSize& shape) {
     int npixels = shape[0]*shape[1];
-    Eigen::MatrixXd hom_pixel_coords(3, npixels);
+    cv::Mat_<double> hom_pixel_coords(3, npixels);
     for (int v = 0; v < shape[0]; ++v) {
         for (int u = 0; u < shape[1]; ++u) {
             hom_pixel_coords(0, v*shape[1] + u) = u + 0.5;
@@ -144,38 +141,34 @@ int main(int argc, char** argv) {
     // By using latch = true, we can publish once and it will be "latched". No need to publish at a high rate
     ros::Publisher pcd_publisher = nh.advertise<PointCloud>(/*topic=*/"point_cloud", /*queue_size=*/1, /*launch=*/true);
 
-    Eigen::MatrixXd depthimg_eig;
-    cv::cv2eigen(depthimg_f, depthimg_eig);
     /*****************************************************************************************************
      * 7th Feb Lecture's math begins here
      *****************************************************************************************************/
-    Eigen::Matrix3d K{700,   0, 319.5,
-                      0,   700, 239.5,
-                      0,     0,    1};
+    cv::Matx33d K(700,   0, 319.5,
+                  0,   700, 239.5,
+                  0,     0,    1);
     // Kinv = K⁻¹
-    Eigen::Matrix3d Kinv = K.inv();
+    cv::Matx33d Kinv = K.inv();
 
     // hom_pixel_coords = 𝐮
-    Eigen::MatrixXd hom_pixel_coords = create_hom_pixel_coordinates(depthimg_f.size); // 3 x n matrix where n = rows x cols
+    cv::Mat_<double> hom_pixel_coords = create_hom_pixel_coordinates(depthimg_f.size); // 3 x n matrix where n = rows x cols
 
     // unscaled_world_coords = K⁻¹𝐮
-    Eigen::MatrixXd unscaled_world_coords = Kinv * hom_pixel_coords;
-    Eigen::MatrixXd world_coords(unscaled_world_coords.rows, unscaled_world_coords.cols);
+    cv::Mat_<double> unscaled_world_coords = Kinv * hom_pixel_coords;
+    cv::Mat_<double> world_coords(unscaled_world_coords.rows, unscaled_world_coords.cols);
 
     // world_coords = 𝐗 = 𝜆K⁻¹𝐮
     // 𝐗 = [X, Y, Z]
     // world_coords.row(2) = Z = depth[u, v] for all u, v
-    Eigen::Map<Eigen::RowVectorXf> depthimg_eig_flat(depthimg_eig.data(),
-                                                     1, depthimg_eig.rows * depthimg_eig.cols);
-    world_coords.row(2) = depthimg_eig_flat; // Convert 480x640 depth image into a 1xn array.
+    world_coords.row(2) = 1*depthimg_f.reshape(1, 1); // Convert 480x640 depth image into a 1xn array.
 
     // 𝜆 = Z/[K⁻¹𝐮]₃   // where Z = depth
-    Eigen::MatrixXd lambda = depthimg_eig_flat.array() / unscaled_world_coords.row(2).array();
+    cv::Mat_<double> lambda = depthimg_f.reshape(1, 1) / unscaled_world_coords.row(2);
 
     // world_coords.rows(0) = X = 𝜆K⁻¹𝐮
-    world_coords.row(0) = lambda.array() * unscaled_world_coords.row(0).array();
+    world_coords.row(0) = lambda.mul(unscaled_world_coords.row(0));
     // world_coords.rows(1) = Y = 𝜆K⁻¹𝐮
-    world_coords.row(1) = lambda.array() * unscaled_world_coords.row(1).array();
+    world_coords.row(1) = lambda.mul(unscaled_world_coords.row(1));
 
     /*****************************************************************************************************
      * 7th Feb Lecture's math ends here
