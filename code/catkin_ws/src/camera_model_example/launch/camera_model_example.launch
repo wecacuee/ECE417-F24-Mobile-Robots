@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <node pkg="camera_model_example" type="camera_model_example_node" name="camera_model_example_node" output="screen">
+    <node pkg="camera_model_example" type="camera_model_example_node" name="camera_model_example_node_with_eigen" output="screen">
       <param name="depth_img_filepath" value="$(find camera_model_example)/data/00000.png" />
       <param name="rgb_img_filepath" value="$(find camera_model_example)/data/00000.jpg" />
     </node>
