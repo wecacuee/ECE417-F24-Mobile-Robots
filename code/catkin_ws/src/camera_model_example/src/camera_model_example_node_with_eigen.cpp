@@ -122,7 +122,7 @@ publish_point_cloud(const Eigen::MatrixXd& world_coords,
 
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "camera_model_example_node");
+    ros::init(argc, argv, "camera_model_example_node_with_eigen");
     std::string depth_img_filepath;
     if ( ! ros::param::get("~depth_img_filepath", depth_img_filepath)) {
         throw std::runtime_error("Private parameter ~depth_img_filepath is required");
@@ -145,8 +145,9 @@ int main(int argc, char** argv) {
     // By using latch = true, we can publish once and it will be "latched". No need to publish at a high rate
     ros::Publisher pcd_publisher = nh.advertise<PointCloud>(/*topic=*/"point_cloud", /*queue_size=*/1, /*launch=*/true);
 
-    Eigen::MatrixXd depthimg_eig;
-    cv::cv2eigen(depthimg_f, depthimg_eig);
+    Eigen::MatrixXd depthimg_eig_flat;
+    // Convert 480x640 depth image into a 1xn array, where n = 480*640
+    cv::cv2eigen(depthimg_f.reshape(1, 1), depthimg_eig_flat);
     /*****************************************************************************************************
      * 7th Feb Lecture's math begins here
      *****************************************************************************************************/
@@ -166,12 +167,7 @@ int main(int argc, char** argv) {
     // world_coords = 𝐗 = 𝜆K⁻¹𝐮
     // 𝐗 = [X, Y, Z]
     // world_coords.row(2) = Z = depth[u, v] for all u, v
-    Eigen::Map<Eigen::MatrixXd> depthimg_eig_flat(
-        depthimg_eig.data(),
-        (Eigen::Index)1,
-        depthimg_eig.rows() * depthimg_eig.cols()
-        );
-    world_coords.row(2) = 1*depthimg_eig_flat; // Convert 480x640 depth image into a 1xn array.
+    world_coords.row(2) = depthimg_eig_flat;
 
     // 𝜆 = Z/[K⁻¹𝐮]₃   // where Z = depth
     Eigen::MatrixXd lambda = depthimg_eig_flat.array() / unscaled_world_coords.row(2).array();
