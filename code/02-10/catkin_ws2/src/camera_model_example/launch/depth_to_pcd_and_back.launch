@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="camera_model_example"  type="camera_model_example_node_with_eigen"   name="xyz">
+    <param  name="depth_img_filepath" value="$(find  camera_model_example)/data/00000.png" />
+  </node>
+  <node pkg="camera_model_example"  type="point_cloud_to_depth_img"  name="point_cloud_to_depth_img"  />
+  <node pkg="tf2_ros"  type="static_transform_publisher"  name="w2m" args="0  0  0  0  0  0  world  map"/>
+  <node pkg="rviz"  type="rviz"   name="rviz"  args="-d $(find camera_model_example)/rviz/point_cloud.rviz"  />
+</launch>
