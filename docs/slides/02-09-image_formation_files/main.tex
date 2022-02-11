@@ -1,0 +1,126 @@
+\documentclass[times]{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{lmodern} 
+\input{sym.tex}
+\setbeamertemplate{navigation symbols}{}
+
+\title{ECE 417/598: Pseudo-Inverse review}
+\author{Vikas Dhiman}
+\date{Feb 9, 2022}
+\begin{document}
+\begin{frame}
+  \titlepage
+  \end{frame}
+  \begin{frame}
+    \includegraphics[width=\linewidth]{media/purity.png}
+  \end{frame}
+
+  \begin{frame}
+    \begin{minipage}[b]{0.1\linewidth}\tiny{Robotics is applied everything}\\
+      \includegraphics[width=\linewidth]{media/HONDA_ASIMO.jpg}\end{minipage}%
+    \hspace{0.3\linewidth}\includegraphics[width=0.5\linewidth]{media/purity.png}
+  \end{frame}
+  \begin{frame}
+    \href{https://github.com/wecacuee/ECE417-Mobile-Robots}{Link to github}
+    \end{frame}
+  \begin{frame}{Pseudo-Inverse}
+    \begin{align}
+      \bfA \bfA^\dagger \bfA &=  \bfA \\
+      \text{If SVD of $\bfA$ is given by } \bfA &= \bfU \Sigma \bfV^\top 
+      \text{ then } \bfA^\dagger = \bfU \Sigma^{-1} \bfV^\top \\
+      \text{if } \bfA \text{ is tall, then } \bfA^\dagger &= (\bfA^\top \bfA)^{-1} \bfA^\top \\
+      \text{if } \bfA \text{ is fat, then } \bfA^\dagger &=  \bfA^\top (\bfA \bfA^\top)^{-1}
+    \end{align}\footnote{See Appendix A of Gilbert Strang (1988): Linear Algebra
+    and Its Applications}
+
+  \end{frame}
+  \begin{frame}{Pseudo-Inverse for tall matrix by Optimization}
+    \begin{align}
+      \min_{\bfx} &\|A\bfx - \bfb\|_2^2
+                    \\
+      &= \min_\bfx (A\bfx - \bfb)^\top (A\bfx - \bfb)
+      \\
+      &= \min_\bfx (\bfx^\top A^\top - \bfb^\top) (A\bfx - \bfb)
+      \\
+      &= \min_\bfx (\bfx^\top A^\top - \bfb^\top) (A\bfx - \bfb)
+      \\
+      &= \min_\bfx \bfx^\top A^\top A\bfx - \bfb^\top A\bfx - \bfx^\top A^\top \bfb + \bfb^\top \bfb
+    \end{align}\footnote{Also see Chapter 3 of Gilbert Strang (1988): Linear Algebra
+      and Its Applications}
+  \end{frame}
+
+  \begin{frame}
+
+    Recall that a minimum (or maximum) point of a differentiable function $f(\bfx)$,
+    $f'(\bfx)  = 0$. Let us define vector derivative as
+
+    \begin{align}
+      \frac{\partial f(\bfx)}{\partial \bfx} = \begin{bmatrix}
+          \frac{\partial f(\bfx)}{\partial x_1}
+            \\
+            \frac{\partial f(\bfx)}{\partial x_2}
+            \\
+            \vdots
+            \\
+            \frac{\partial f(\bfx)}{\partial x_n}
+          \end{bmatrix}
+    \end{align}
+    You can verfiy that
+    \begin{align}
+      \frac{\partial }{\partial \bfx} \bfx^\top Q \bfx &= 2 Q\bfx
+      \\
+      \frac{\partial }{\partial \bfx} \bfb^\top \bfx &= \bfb
+      \end{align}
+  \end{frame}
+
+  \begin{frame}
+    At a minimum point $\bfx$,
+    \begin{align}
+     &\frac{\partial }{\partial \bfx} \bfx^\top A^\top A\bfx - \bfb^\top A\bfx - \bfx^\top A^\top \bfb + \bfb^\top \bfb = 0
+       \\
+      \text{or } & 2A^\top A\bfx - 2 A^\top \bfb = 0
+      \\
+      \text{or } & \bfx = \underbrace{(A^\top A)^{-1} A^\top}_{A^\dagger} \bfb
+    \end{align}
+  \end{frame}
+
+  \begin{frame}{Application }
+    \includegraphics[width=\linewidth]{media/scatter-plot.pdf}
+  \end{frame}
+  \begin{frame}
+    \includegraphics[width=0.5\linewidth]{media/straight-line-approx-gilbert-strang.png}
+ \end{frame}
+
+
+  \begin{frame}{Homogeneous representation of lines}
+    \[ ax + by + c = 0\]
+  \end{frame}
+
+  \begin{frame}{Projective space}
+    \[ \bbP^2 = \bbR^3 - (0, 0, 0)^\top \]
+    \end{frame}
+
+    \begin{frame}{Homogeneous representation of points}
+      \[ ax + by + c = 0\]
+    \end{frame}
+
+    \begin{frame}{Eq of line in Projective space}
+      The point $\bfx \in \bbP^2$ lies on a line $\bfl$ if and only if
+      $\bfx^\top \bfl = 0$.
+      \end{frame}
+      \begin{frame}{Intersection of lines}
+        \end{frame}
+
+  \begin{frame}{Vanishing Point}
+    \includegraphics[width=0.7\linewidth]{media/vanishing-lines.jpeg}
+    \\
+    \includegraphics[width=0.7\linewidth]{media/vanishing-points.png}
+  \end{frame}
+
+  \begin{frame}{Vanishing Point}
+    \includegraphics[width=0.5\linewidth]{media/vanishing-point-formation.png}
+  \end{frame}
+
+\end{document}
