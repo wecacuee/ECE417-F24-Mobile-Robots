@@ -13,7 +13,8 @@
 \newtheorem{defn}{Definition}
 \newtheorem{exmpl}{Example}
 
-\DeclareMathOperator{\atantwo}{atan2}
+\DeclareMathOperator{\atantwo}{arctan2}
+\DeclareMathOperator{\tr}{tr}
 
 \begin{document}
 \maketitle
@@ -110,6 +111,12 @@ A block matrix  is a matrix denoted in terms  of  other matrices,
   \end{align}
   The diagonal of a square matrix  $A$ is defined  to be the vector
   \[  \text{diag}(A)= \begin{bmatrix} a_{11} \\   a_{22} \\ \vdots  \\ a_{nn} \end{bmatrix}\]
+\end{defn}
+
+
+\begin{defn}[Trace of a square matrix]
+  Trace  of a square matrix  $A$ is defined as the sum its diagonal elements,
+  \[ \tr(A) = \sum_{i=1}^n a_{ii} \].
 \end{defn}
 
 \begin{defn}[Identity matrix]
@@ -311,6 +318,12 @@ long as sub-matrix multiplication is properly defined,
   (AB)^\top = B^\top A^\top
   \]
 
+\subsubsection{Properties of trace  operator}
+Trace is a linear operator:
+\begin{align}
+  \tr(\alpha A  +  \beta B) = \alpha \tr(A) +  \beta \tr(B),
+\end{align}
+for compatible matrices  $A$ and $B$   and scalars $\alpha$ and $\beta$.
 
 \section{Trignometry review}
 \includegraphics[width=\linewidth]{media/trig.pdf}
@@ -460,7 +473,7 @@ long as sub-matrix multiplication is properly defined,
   \begin{align}
     B_w^\top  B_w \bfp_w = B_w^\top   B_c  \bfp_c
     \end{align}
-    Cancel out $B_w^\top \bfo$ on both sides.  Replace $B_w^\top  B_w = I$.
+    Replace $B_w^\top  B_w = I$.
     \begin{align}
       I \bfp_w = B_w^\top   B_c  \bfp_c
       \text{ or } \bfp_w = B_w^\top   B_c  \bfp_c
@@ -615,6 +628,26 @@ coordinate  frame.
   \implies   &\bfp_w = R(\theta) \bfp_c + {}^w\bft_c
 \end{align}
 
+\newcommand{\ubfp}{\underline{\bfp}}
+This relation is often written  in  terms of homogeneous   coordinates  which
+are   obtained by  appending 1 to euclidean coordinates  $\ubfp_w
+= \begin{bmatrix}
+  \bfp_w \\ 1   \end{bmatrix}$ and  $\ubfp_c
+= \begin{bmatrix}
+  \bfp_c \\ 1   \end{bmatrix}$.
+
+The matrix that transforms homogeneous coordinates in one  coordinate  frame to
+another is called the transformation matrix. For  2D  systems it is  $3 \times
+3$ matrix denoted  by ${}^wT_c$,
+%
+\begin{align}
+  \ubfp_w = \begin{bmatrix}
+    R(\theta) & {}^w\bft_c  \\
+    \boldsymbol{0}^\top &  1
+  \end{bmatrix}  \ubfp_c  = {}^wT_c \ubfp_c
+\end{align}
+%
+
 \begin{figure}
   \includegraphics[width=\linewidth]{media/rot+trans-2D.pdf}
   \caption{The coordinate  frame $\{C\}$  is rotated around origin by an $\theta$
@@ -622,12 +655,295 @@ coordinate  frame.
   \label{fig:rot+trans-2D}
 \end{figure}
 
+\section{Principal 3D  Rotations}
+\includegraphics[width=\linewidth]{media/euler-angles.pdf}
+2D Rotation can be  easily extended to rotation around an axis  in 3D.  Rotation
+around  X-axis, Y-axis, Z-axis   is respectively given  by,
+\begin{align}
+  R_x(\phi) &= \text{Roll}(\phi)  = \begin{bmatrix}
+    1  &  0 &  0 \\
+    0  &  \cos(\phi)  &  -  \sin(\phi) \\
+    0  &  \sin(\phi)  &  \cos(\phi)
+    \end{bmatrix}
+  \notag\\
+  R_y(\theta) & = \text{Pitch}(\theta)  = \begin{bmatrix}
+    \cos(\phi)  &  0 &  \sin(\phi) \\
+    0  &  1 &  0 \\
+    -\sin(\phi)  &   & \cos(\phi)
+  \end{bmatrix}
+\notag\\
+  R_z(\psi) & = \text{Yaw}(\psi)  = \begin{bmatrix}
+    \cos(\psi)  &  -  \sin(\psi)  & 0    \\
+    \sin(\psi)  &  \cos(\psi)  &  0   \\
+    0 &  0     &   1
+  \end{bmatrix}
+\end{align}
 \section{3D  Rotation matrix   from Euler  angles}
+Euler  angles   can be applied sequentially  in  one  of the two ways:
+\begin{enumerate}
+  \item Proper Euler angles (z-x-z, x-y-x, y-z-y, z-y-z, x-z-x, y-x-y)
+  \item Tait-Bryan angles   (x-y-z, y-z-x, z-x-y, x-z-y, z-y-x, y-x-z).
+  \end{enumerate}
+  
+One of the most  common application  of Euler angles is X-Y-Z:
+\begin{align}
+  R(\phi, \theta, \psi) = R_z(\psi)R_y(\theta)R_x(\phi) = \text{Yaw}(\psi)\text{Pitch}(\theta)\text{Roll}(\phi).
+\end{align}
+Note that the rotation matrix  application is read  from right  to  left.
+
+\begin{align}
+  &R(\phi, \theta, \psi) =  \begin{bmatrix}
+  c_\psi & - s_\psi & 0 \\
+  s_\psi & c_\psi & 0 \\
+  0 & 0 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    c_\theta & 0 & s_\theta \\
+    0 & 1 & 0 \\
+    - s_\theta & 0 & c_\theta
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & c_\phi & - s_\phi \\
+      0 & s_\phi & c_\phi
+      \end{bmatrix}
+\notag\\&\quad
+  =\begin{bmatrix}
+    c_\psi & - s_\psi & 0 \\
+    s_\psi & c_\psi & 0 \\
+    0 & 0 & 1
+  \end{bmatrix}
+            \begin{bmatrix}
+              c_\theta & s_\theta s_\phi & s_\theta c_\phi \\
+              0 & c_\phi & -s_\phi \\
+              -s_\theta & c_\theta s_\phi & c_\theta c_\phi
+            \end{bmatrix}
+\notag\\&\quad
+  = \begin{bmatrix}
+    c_\psi c_\theta & c_\psi s_\theta s_\phi - s_\psi c_\phi & c_\psi s_\theta c_\phi+ s_\psi s_\phi \\
+    s_\psi c_\theta & s_\psi s_\theta s_\phi + c_\psi c_\phi & s_\psi s_\theta c_\phi - c_\psi s_\phi \\
+    -s_\theta & c_\theta s_\phi & c_\theta c_\phi
+    \end{bmatrix}
+\end{align}
+
+For a  given 3D  rotation matrix $R$, whose   elements  are   $r_{ij}$ as follows
+%
+\begin{align}
+R =  \begin{bmatrix}
+  r_{11}  &   r_{12} &   r_{13}   \\
+  r_{21}  &   r_{22} &   r_{23}   \\
+  r_{31}  &   r_{32} &   r_{33} 
+  \end{bmatrix},
+\end{align}
+%
+the roll,  pitch, yaw  angles can  be read as,
+\begin{align}
+  \phi &= \atantwo(r_{32},   r_{33}) \\
+  \theta &= -\arcsin(r_{31}) \\
+  \psi &= \atantwo(r_{22}, r_{21})
+  \end{align}
+
+\subsection{Gimbal lock}
+
+When pitch $\theta  = \frac{\pi}{2}$, then yaw-axis (Z-axis) coincides with
+roll-axis (X-axis). In such a  case,  inversion from a rotation matrix leads to
+infinitely possible solutions, because  $c_\theta = 0$ and   that leads  to
+$r_{32} = r_{33} =  r_{22} = r_{21} = 0$.
+
+\subsection{Orthogonality and determinant}
+Let 3D rotation  be represented  by a block matrix of 2D rotation $R_2(\phi)$.
+\[
+  R_x(\phi) = \begin{bmatrix}
+          1  &   \boldsymbol{0}^\top   \\
+               \boldsymbol{0}  &   R_2(\phi)
+          \end{bmatrix}
+\]
+
+\begin{align}
+  &R_x^\top(\phi) R_x(\phi) =  \begin{bmatrix}
+    1  &   \boldsymbol{0}^\top   \\
+    \boldsymbol{0}  &   R_2(\phi)
+  \end{bmatrix}^\top
+  \begin{bmatrix}
+    1  &   \boldsymbol{0}^\top   \\
+    \boldsymbol{0}  &   R_2(\phi)
+  \end{bmatrix}
+ \notag\\
+  &\quad
+ =
+  \begin{bmatrix}
+    1  &   \boldsymbol{0}^\top   \\
+    \boldsymbol{0}  &   R_2^\top(\phi)R_2(\phi)
+  \end{bmatrix}
+                      = I
+\end{align}
+
+Same  check can be applied to $R_y(\theta)$ and  $R_z(\psi)$  as   well. If two
+matrices  $A$ and  $B$ are orthogonal, then $AB$ is also orthogonal:
+\begin{align}
+  (AB)^\top(AB)  = B^\top A^\top A B =   B^\top I  B =  B^\top B = I.
+\end{align}
+
+Hence any combination of principal rotations is also orthogonal.
+
+Similar procedure can  be followed to establish  that  $\det(R) = 1$.
+
 \section{3D  Transformation matrix}
+For  3D  systems transformation matrix is  $4 \times 4$ matrix denoted  by ${}^wT_c$,
+% 
+\begin{align}
+  \ubfp_w = \begin{bmatrix}
+    R(\phi, \theta, \psi) & {}^w\bft_c  \\
+    \boldsymbol{0}^\top &  1
+  \end{bmatrix}  \ubfp_c  = {}^wT_c \ubfp_c,
+\end{align}
+% 
+where  ${}^w\bft_c   \in \bbR^3$, $\ubfp_c =  \begin{bmatrix} \bfp_c   \\
+  1   \end{bmatrix}$ and $\bfp_c  \in \bbR^3$.
+
+
 \section{Axis-angle representation}
+\includegraphics[width=\linewidth]{media/Rodrigues-formula.pdf}
+%
+\begin{align}
+  \bfw &= \hat{\bfk} \times \bfv
+  \\
+  \bfv_\perp &= - \hat{\bfk} \times \bfw = -  \hat{\bfk} \times (\hat{\bfk} \times \bfv)
+  \\
+  \bfv_{\perp,\text{rot}}  &= \bfv_\perp\cos(\theta) + \bfw\sin(\theta)
+  \\
+  \bfv_{\text{rot}} &=  \bfv_\parallel +   \bfv_{\perp,\text{rot}}
+  \notag\\
+       &=  \bfv - \bfv_\perp +   \bfv_\perp\cos(\theta) + \bfw\sin(\theta)
+  \notag\\
+       &=  \bfv - (1-\cos(\theta)) \bfv_\perp + \bfw \sin(\theta)
+  \notag\\
+       &=  \bfv + (1-\cos(\theta)) \hat{\bfk} \times (\hat{\bfk} \times \bfv) +  \sin(\theta) \hat{\bfk} \times \bfv
+\end{align}
+
+Define  cross  product matrix $K$  of $\hat{\bfk} = \begin{bmatrix}  k_x \\ k_y
+  \\ k_z \end{bmatrix}$  as,
+\begin{align}
+  K  = \begin{bmatrix}
+    0   & - k_z & k_y   \\
+    k_z   & 0 & -k_x   \\
+    -k_y   & k_x & 0
+  \end{bmatrix}.
+\end{align}
+
+\begin{align}
+\bfv_{\text{rot}} &=  \bfv + (1-\cos(\theta)) \hat{\bfk} \times (\hat{\bfk} \times \bfv) +  \sin(\theta) \hat{\bfk} \times \bfv
+                    \notag\\
+  &= (I + (1 -\cos(\theta)) K^2  + \sin(\theta) K)\bfv
+\end{align}
+
+Thus the rotation matrix corresponding  to axis-angle $\theta, \hat{\bfk}$ is
+given by,
+%
+\begin{align}
+  R(\theta, \hat{\bfk}) = I + \sin(\theta)K + (1-\cos(\theta))K^2
+\end{align}
+%
+
+To get back $\theta$ and $\hat{\bfk}$   from $R$,  first  note that,
+% 
+\begin{align}
+  K^2 =  \begin{bmatrix}
+    -k_z^2  - k_y^2  & k_x k_y & k_z k_x \\
+    k_xk_y  & -k_x^2- k_z^2 & k_z k_y \\
+    k_x k_z  & k_y k_z &  -k_x^2  - k_y^2
+    \end{bmatrix} 
+\end{align}
+% 
+Also we can use trace to separate $\theta$ from axis,
+%
+\begin{align}
+  \tr(R) &= \tr(I)  + \sin(\theta)\tr(K) + (1-\cos(\theta))\tr(K^2)
+  \notag\\
+  &= 3 + 0 + (1-\cos(\theta))(-2(k_x^2 + k_y^2 + k_z^2)).
+    \notag\\
+  &= 3 - 2 +2\cos(\theta)
+\end{align}
+%
+Thus we get $\theta  =  \arccos(\frac{\tr(R)-1}{2})$. We can estimate axis of
+rotation as the  eigenvector corresponding  eigenvalue 1,   because $R\hat{\bfk}
+= \hat{\bfk}$.
+
 \section{Denavit-Hartenberg  transformations}
 \section{Camera  projection model}
+
+\includegraphics[width=\linewidth]{media/pinhole-camera-model-2.png}
+\newcommand{\ubfu}{\underline{\bfu}}
+\newcommand{\ubfX}{\underline{\bfX}}
+\begin{align}
+  \bfK &= \begin{bmatrix}
+    f_x & s & u_0 \\
+    0 & f_y & v_0 \\
+    0 & 0 & 1 \\
+  \end{bmatrix}
+  \\
+  \bfu &= \begin{bmatrix} u   \\ v \end{bmatrix} \text{ image coordinates in pixels} \\
+  \bfX &= \begin{bmatrix} X   \\  Y   \\ Z\end{bmatrix} \text{ 3D coordinates in world units}\\
+  \ubfu &= \begin{bmatrix} \bfu \\   1\end{bmatrix} \\
+  \lambda \ubfu &= K \bfX, \text{ where } \lambda \ne 0
+\end{align}
 \section{Linear least squares  or  Pseudo-inverse}
+
+Pseudo-inverse of a matrix  $\bfA$ is defined   as a matrix $\bfA^\dagger$, such
+that$\bfA \bfA^\dagger \bfA &=  \bfA$.
+\begin{align}
+  \text{if } \bfA \text{ is tall and full-col rank, then } \bfA^\dagger &= (\bfA^\top \bfA)^{-1} \bfA^\top \\
+  \text{if } \bfA \text{ is fat and full-row rank, then } \bfA^\dagger &=  \bfA^\top (\bfA \bfA^\top)^{-1}
+\end{align}\footnote{See Appendix A of Gilbert Strang (1988): Linear Algebra
+  and Its Applications}
+
+\begin{align}
+  \min_{\bfx} &\|A\bfx - \bfb\|^2
+  \\
+              &= \min_\bfx (A\bfx - \bfb)^\top (A\bfx - \bfb)
+  \\
+              &= \min_\bfx (\bfx^\top A^\top - \bfb^\top) (A\bfx - \bfb)
+  \\
+              &= \min_\bfx (\bfx^\top A^\top - \bfb^\top) (A\bfx - \bfb)
+  \\
+              &= \min_\bfx \bfx^\top A^\top A\bfx - \bfb^\top A\bfx - \bfx^\top A^\top \bfb + \bfb^\top \bfb
+\end{align}
+
+Recall that a minimum (or maximum) point of a differentiable function $f(\bfx)$,
+$f'(\bfx)  = 0$. Let us define vector derivative as
+
+\begin{align}
+  \frac{\partial f(\bfx)}{\partial \bfx} = \begin{bmatrix}
+    \frac{\partial f(\bfx)}{\partial x_1}
+    \\
+    \frac{\partial f(\bfx)}{\partial x_2}
+    \\
+    \vdots
+    \\
+    \frac{\partial f(\bfx)}{\partial x_n}
+  \end{bmatrix}
+\end{align}
+You can verfiy that
+\begin{align}
+  \frac{\partial }{\partial \bfx} \bfx^\top Q \bfx &= 2 Q\bfx
+  \\
+  \frac{\partial }{\partial \bfx} \bfb^\top \bfx &= \bfb
+\end{align}
+
+At a minimum point $\bfx$,
+%
+\begin{align}
+  &\frac{\partial }{\partial \bfx} \left(\bfx^\top A^\top A\bfx - \bfb^\top A\bfx - \bfx^\top A^\top \bfb + \bfb^\top \bfb\right) = 0
+\end{align}
+%
+Note that  $\bfb^\top A\bfx$ is a scalar, and hence $\bfb^\top A\bfx =
+(\bfb^\top A\bfx)^\top = \bfx^\top A^\top \bfb$.
+%
+\begin{align}
+  \implies & 2A^\top A\bfx - 2 A^\top \bfb = 0
+  \\
+  \implies & \bfx = \underbrace{(A^\top A)^{-1} A^\top}_{A^\dagger} \bfb
+\end{align}
 
 \listoftheorems[ignoreall,show={defn}]
 

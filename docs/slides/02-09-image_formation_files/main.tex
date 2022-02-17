@@ -30,8 +30,8 @@
       \bfA \bfA^\dagger \bfA &=  \bfA \\
       \text{If SVD of $\bfA$ is given by } \bfA &= \bfU \Sigma \bfV^\top 
       \text{ then } \bfA^\dagger = \bfU \Sigma^{-1} \bfV^\top \\
-      \text{if } \bfA \text{ is tall, then } \bfA^\dagger &= (\bfA^\top \bfA)^{-1} \bfA^\top \\
-      \text{if } \bfA \text{ is fat, then } \bfA^\dagger &=  \bfA^\top (\bfA \bfA^\top)^{-1}
+      \text{if } \bfA \text{ is tall and full-col rank, then } \bfA^\dagger &= (\bfA^\top \bfA)^{-1} \bfA^\top \\
+      \text{if } \bfA \text{ is fat and full-row rank then } \bfA^\dagger &=  \bfA^\top (\bfA \bfA^\top)^{-1}
     \end{align}\footnote{See Appendix A of Gilbert Strang (1988): Linear Algebra
     and Its Applications}
 
