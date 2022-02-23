@@ -805,11 +805,14 @@ where  ${}^w\bft_c   \in \bbR^3$, $\ubfp_c =  \begin{bmatrix} \bfp_c   \\
 \section{Axis-angle representation}
 \includegraphics[width=\linewidth]{media/Rodrigues-formula.pdf}
 %
+Cross product gives us a vector that is orthogonal to the plane of two vectors,
+let $\bfw = \hat{\bfk} \times \bfv$ be such a vector. Note that the magnitude of
+$\bfw$, $\|\bfw\| = \|\hat{\bfk}\| \bfv \sin(\phi)$, where $\phi$ is the angle
+between the unit-vector $\hat{\bfk}$ and $\bfv$.
 \begin{align}
-  \bfw &= \hat{\bfk} \times \bfv
-  \\
   \bfv_\perp &= - \hat{\bfk} \times \bfw = -  \hat{\bfk} \times (\hat{\bfk} \times \bfv)
-  \\
+\end{align}
+\begin{align}
   \bfv_{\perp,\text{rot}}  &= \bfv_\perp\cos(\theta) + \bfw\sin(\theta)
   \\
   \bfv_{\text{rot}} &=  \bfv_\parallel +   \bfv_{\perp,\text{rot}}
