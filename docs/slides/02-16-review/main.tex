@@ -11,7 +11,10 @@
 \author{Vikas  Dhiman}
 \newtheorem{thm}{Theorem}
 \newtheorem{defn}{Definition}
-\newtheorem{exmpl}{Example}
+\newtheorem{example}{Example}
+\newtheorem{prob}{Problem}
+\newif\ifsol
+\solfalse
 
 \DeclareMathOperator{\atantwo}{arctan2}
 \DeclareMathOperator{\tr}{tr}
@@ -325,6 +328,271 @@ Trace is a linear operator:
 \end{align}
 for compatible matrices  $A$ and $B$   and scalars $\alpha$ and $\beta$.
 
+\section{Gaussian elimination or  $LDU$  factorization}
+A system  of  equations   $A\bfx =  \bfb$  can  be  solved by  Gaussian
+elimination or   equivalently factorizing   $A$  into  triangular
+factorization    also   known  as   $LDU$  factorization. After  this
+factorization, the  matrix $A \in  \bbR^{n \times n}$ is factorized into
+lower-triangular matrix $L$, diagonal matrix $D$ and  uppper-triangular   matrix
+$U$. Sometimes a permutation matrix $P$  is  also required. The  factorization
+is  such  that   $PA = LDU$.
+Let  us   write  the  matrix   $A$ in   terms   of   its    elements  $a_{ij}$.
+Also let  us   denote the $i$th    row of matrix $A$  as $\bfr_i^\top   =   [a_{i1},
+\dots,   a_{in}]$.
+\begin{align}
+  A   =  \begin{bmatrix}
+    a_{11} & a_{12}  &   \dots &  a_{1n} \\
+    a_{21} & a_{22}  &   \dots &  a_{2n} \\
+    \vdots &  \vdots  & \ddots & \vdots \\
+    a_{n1} & a_{n2}  &   \dots &  a_{nn}
+    \end{bmatrix}  =  \begin{bmatrix}  \bfr_1^\top  \\  \bfr_2^\top \\ \vdots \\ \bfr_n^\top\end{bmatrix}.
+\end{align}
+To consider  the  simplest  case, we   assume that $a_{11}
+\ne 0$.  If  this is not the case, rearrange the rows of $A$ such that $a_{11}
+\ne 0$. We want  to make the first element of  the second row to  be zero. This  can  be achieved if  we subtract $\bfr'^\top_2 =  \bfr_2^\top -
+\frac{a_{21}}{a_{11}}   \bfr_1^\top$, where $\bfr'^\top_2$ is  the  new  row
+after the  operation. This is  equivalent to multiplying both sides
+by a  matrix:
+\begin{align*}
+ &\begin{bmatrix} 1  & 0  &  0 &  \dots  & 0 \\
+  -\frac{a_{21}}{a_{11}} & 1  & \dots  &   0  \\
+  0 & 0  & 1 & \dots  &   0  \\
+  \vdots  & \vdots &  \vdots  &   \ddots  &  \vdots   \\
+  0 & 0 &  0   &  \dots  & 1
+\end{bmatrix}A  \\
+&=  \scalebox{0.8}{\mbox{$\begin{bmatrix}
+  a_{11} & a_{12}  &  a_{13} &     \dots &  a_{1n} \\
+  0 & a_{22}-\frac{a_{21}}{a_{11}}a_{12}  & a_{23}-\frac{a_{21}}{a_{11}}a_{13} &  \dots &  a_{2n} -\frac{a_{21}}{a_{11}}a_{1n}\\
+  a_{31} & a_{32}  &  a_{33} &     \dots &  a_{3n} \\
+  \vdots &  \vdots  & \vdots &  \ddots & \vdots \\
+  a_{n1} & a_{n2}  &  a_{n3} &   \dots &  a_{nn}
+\end{bmatrix}$}}.
+\end{align*}
+This makes  sure   that  the  first element  of   second   row is zero.  Since
+we  want  the    represent   matrix $A$   as a    factorization, we want to
+represent the  matrix  operation as one   that   restores  the  ``un-does'' the
+operation   $\bfr_2^{'\top}=\bfr_2^\top - \frac{a_{21}}{a_{11}}\bfr_1^\top$, to
+get back  the  matrix $A$. Such
+an  operation is  $\bfr_2^\top  =\bfr_2^{'\top}+
+\frac{a_{21}}{a_{11}}\bfr_1^\top$.  So we  can  re-write the matrix  $A$ as,
+%
+\begin{align*}
+  &A=\begin{bmatrix} 1  & 0  &  0 &  \dots  & 0 \\
+    \frac{a_{21}}{a_{11}} & 1  & \dots  &   0  \\
+    0 & 0  & 1 & \dots  &   0  \\
+    \vdots  & \vdots &  \vdots  &   \ddots  &  \vdots   \\
+    0 & 0 &  0   &  \dots  & 1
+  \end{bmatrix}  \\
+  &  \scalebox{0.8}{\mbox{$\begin{bmatrix}
+        a_{11} & a_{12}  &  a_{13} &     \dots &  a_{1n} \\
+        0 & a_{22}-\frac{a_{21}}{a_{11}}a_{12}  & a_{23}-\frac{a_{21}}{a_{11}}a_{13} &  \dots &  a_{2n} -\frac{a_{21}}{a_{11}}a_{1n}\\
+        a_{31} & a_{32}  &  a_{33} &     \dots &  a_{3n} \\
+        \vdots &  \vdots  & \vdots &  \ddots & \vdots \\
+        a_{n1} & a_{n2}  &  a_{n3} &   \dots &  a_{nn}
+      \end{bmatrix}$}}.
+\end{align*}
+%
+A  similar  operation  can  be applied to  all rows for  $i \ge 2$ to make  their first element
+to  be zero, $\bfr_i^{'\top} =  \bfr_i^\top  -\frac{a_{i1}}{a_{11}} \bfr_1^\top$
+for all $i \ge 2$.
+% 
+\begin{align*}
+  &A=\begin{bmatrix} 1  & 0  &  0 &  \dots  & 0 \\
+    \frac{a_{21}}{a_{11}} & 1  & \dots  &   0  \\
+    \frac{a_{31}}{a_{11}} & 0  & 1 & \dots  &   0  \\
+    \vdots  & \vdots &  \vdots  &   \ddots  &  \vdots   \\
+    \frac{a_{n1}}{a_{11}} & 0 &  0   &  \dots  & 1
+  \end{bmatrix}  \\
+  &  \scalebox{0.8}{\mbox{$\begin{bmatrix}
+        a_{11} & a_{12}  &  a_{13} &     \dots &  a_{1n} \\
+        0 & a_{22}-\frac{a_{21}}{a_{11}}a_{12}  & a_{23}-\frac{a_{21}}{a_{11}}a_{13} &  \dots &  a_{2n} -\frac{a_{21}}{a_{11}}a_{1n}\\
+        0 & a_{32} -\frac{a_{31}}{a_{11}}a_{13} &  a_{33}-\frac{a_{31}}{a_{11}}a_{13} &     \dots &  a_{3n}-\frac{a_{31}}{a_{11}}a_{1n} \\
+        \vdots &  \vdots  & \vdots &  \ddots & \vdots \\
+        0 & a_{n2}-\frac{a_{n1}}{a_{11}}a_{12}  &  a_{n3} -\frac{a_{n1}}{a_{11}}a_{13}&   \dots &  a_{nn}-\frac{a_{n1}}{a_{11}}a_{1n}
+      \end{bmatrix}$}}.
+\end{align*}
+% 
+Thus we  have made first  column   zero below  the  diagonal  on  the  second
+matrix. As long $a'_{22} = a_{22} - \frac{a_{21}}{a_{11}}a_{12} \ne 0$,  a  similar procedure  can be  applied to the make the second
+column  zero  below   the  diagonal. If $a'_{22} = 0$, then swap the second row
+with a row whos second  element is non-zero. If all  rows  have   second element
+as zero then this step  is done,  target  to   make  the third column  below to
+be zero.  Denote the  second  column  elements  for
+row  $i \ge 2$ by
+$a'_{ij} = a_{ij}  - \frac{a_{i1}}{a_{11}}a_{1j}$.  Then   the  operation
+$\bfr_{i}^{''\top} = \bfr_i^{'\top}  - \frac{a'_{i2}}{a'_{22}}\bfr_2^{'\top}$  for all
+$i \ge 3$, will
+make the second  column below diagonal  to be  zero. And the matrix
+factorization will look  like,
+% 
+\begin{align*}
+  &A=\begin{bmatrix} 1  & 0  &  0 &  \dots  & 0 \\
+    \frac{a_{21}}{a_{11}} & 1  & \dots  &   0  \\
+    \frac{a_{31}}{a_{11}} & \frac{a'_{32}}{a'_{22}}  & 1 & \dots  &   0  \\
+    \vdots  & \vdots &  \vdots  &   \ddots  &  \vdots   \\
+    \frac{a_{n1}}{a_{11}} & \frac{a'_{n2}}{a'_{22}} &  0   &  \dots  & 1
+  \end{bmatrix}  \\
+  &  \scalebox{0.8}{\mbox{$\begin{bmatrix}
+        a_{11} & a_{12}  &  a_{13} &     \dots &  a_{1n} \\
+        0 & a_{22}-\frac{a_{21}}{a_{11}}a_{12}  & a_{23}-\frac{a_{21}}{a_{11}}a_{13} &  \dots &  a_{2n} -\frac{a_{21}}{a_{11}}a_{1n}\\
+        0 & 0 &  a'_{33}-\frac{a'_{32}}{a'_{22}}a'_{23} &     \dots &  a'_{3n}-\frac{a'_{32}}{a'_{22}}a'_{2n} \\
+        \vdots &  \vdots  & \vdots &  \ddots & \vdots \\
+        0 & 0  &  a_{n3} -\frac{a'_{n1}}{a'_{22}}a'_{23}&   \dots &  a'_{nn}-\frac{a'_{n2}}{a'_{22}}a'_{2n}
+      \end{bmatrix}$}}.
+\end{align*}
+% 
+One can  continue this  procedure  until  the second matrix  is all  0's  below
+the  diagonal (upper-triangular)   while  maintaining  that  the  first matrix
+is  all  0's above the  diagonal, (lower-triangular),
+% 
+\begin{align*}
+  &A=\begin{bmatrix} 1  & 0  &  0 &  \dots  & 0 \\
+    \frac{a_{21}}{a_{11}} & 1  & \dots  &   0  \\
+    \frac{a_{31}}{a_{11}} & \frac{a'_{32}}{a'_{22}}  & 1 & \dots  &   0  \\
+    \vdots  & \vdots &  \vdots  &   \ddots  &  \vdots   \\
+    \frac{a_{n1}}{a_{11}} & \frac{a'_{n2}}{a'_{22}} &  \frac{a''_{n3}}{a''_{n3}}   &  \dots  & 1
+  \end{bmatrix}  \\
+  &  \scalebox{0.8}{\mbox{$\begin{bmatrix}
+        a_{11} & a_{12}  &  a_{13} &     \dots &  a_{1n} \\
+        0 & a_{22}-\frac{a_{21}}{a_{11}}a_{12}  & a_{23}-\frac{a_{21}}{a_{11}}a_{13} &  \dots &  a_{2n} -\frac{a_{21}}{a_{11}}a_{1n}\\
+        0 & 0 &  a'_{33}-\frac{a'_{32}}{a'_{22}}a'_{23} &     \dots &  a'_{3n}-\frac{a'_{32}}{a'_{22}}a'_{2n} \\
+        \vdots &  \vdots  & \vdots &  \ddots & \vdots \\
+        0 & 0  &  0&   \dots &  u_{nn}
+      \end{bmatrix}$}}.
+\end{align*}
+% 
+The  first  matrix is denoted   as  $L$   while the   second matrix  is  denoted
+as $DU$.  The second  matrix    can  be   factorized into   diagonal matrix  $D$
+and
+upper-triangular matrix  $U$ so that $U$ matrix has diagonal elements as $1$,
+
+\begin{align*}
+  &A=LDU\\
+  &\text{ where   } L =  \begin{bmatrix} 1  & 0  &  0 &  \dots  & 0 \\
+    \frac{a_{21}}{a_{11}} & 1  & \dots  &   0  \\
+    \frac{a_{31}}{a_{11}} & \frac{a'_{32}}{a'_{22}}  & 1 & \dots  &   0  \\
+    \vdots  & \vdots &  \vdots  &   \ddots  &  \vdots   \\
+    \frac{a_{n1}}{a_{11}} & \frac{a'_{n2}}{a'_{22}} &  \frac{a''_{n3}}{a''_{n3}}   &  \dots  & 1
+  \end{bmatrix}\\
+  &DU = \scalebox{0.8}{\mbox{$\begin{bmatrix}
+        a_{11} & a_{12}  &  a_{13} &     \dots &  a_{1n} \\
+        0 & a_{22}-\frac{a_{21}}{a_{11}}a_{12}  & a_{23}-\frac{a_{21}}{a_{11}}a_{13} &  \dots &  a_{2n} -\frac{a_{21}}{a_{11}}a_{1n}\\
+        0 & 0 &  a'_{33}-\frac{a'_{32}}{a'_{22}}a'_{23} &     \dots &  a'_{3n}-\frac{a'_{32}}{a'_{22}}a'_{2n} \\
+        \vdots &  \vdots  & \vdots &  \ddots & \vdots \\
+        0 & 0  &  0&   \dots &  u'_{nn}
+      \end{bmatrix}$}}
+\end{align*}
+% 
+Let the elements of upper-triangular $DU$ matrix  be denoted  by $u'_{ij}$,
+%
+\begin{align*}
+  DU &= \begin{bmatrix}
+    u'_{11} & u'_{12}  &   \dots &  u'_{1n} \\
+    0 & u'_{22}  &   \dots &  u'_{2n} \\
+    \vdots &  \vdots  & \ddots & \vdots \\
+    0 & 0  &   \dots &  u'_{nn}
+      \end{bmatrix}.
+\end{align*}
+%
+Such  a matrix  can be factorized into diagonal  matrix  $D$  and $U$
+where $D$ has the diagonal elements of $U$ while  $U$  rows  are  divided  by
+the  diagonal element,
+%
+\begin{align*}
+  D &= \begin{bmatrix}
+    u'_{11} & 0  & 0  &  \dots &  0 \\
+    0 & u'_{22}  & 0   &   \dots &  0 \\
+    0 & 0   & u'_{33}  &   \dots &  0 \\
+    \vdots &  \vdots  & \vdots  & \ddots & \vdots \\
+    0 & 0  &   0   & \dots &  u'_{nn}
+  \end{bmatrix}.
+                       \\
+  U  &=  \begin{bmatrix}
+    1 & \frac{u'_{12}}{u'_{11}} & \frac{u'_{13}}{u'_{11}} &   \dots &  \frac{u'_{1n}}{u'_{11}} \\
+    0 & 1  &   \frac{u'_{23}}{u'_{22}} &   \dots &  \frac{u'_{2n}}{u'_{22}} \\
+    0 & 0  &   1 & \dots &  \frac{u'_{3n}}{u'_{33}} \\
+    \vdots &  \vdots  & \vdots  & \ddots & \vdots \\
+    0 & 0  &   0 &  \dots &  1
+  \end{bmatrix}
+\end{align*}
+
+\begin{example}
+  Let $A$ be   the  matrix,
+  \[
+    A   =  \begin{bmatrix}
+      1 &   2  &  3  \\
+      4 & 5 &   6 \\
+      2 & 4 &   6
+    \end{bmatrix}
+    \]
+\begin{enumerate}
+  \item  Step  1: Row 2 = Row  2 -  4 times Row  1  or $\bfr_2^{'\top} =
+    \bfr_2^\top  -  4 \bfr_1^\top$.
+    \[
+      A   =  \begin{bmatrix}
+        1 &   2  &  3  \\
+        4 & 5 &   6 \\
+        2 & 4 &   6
+      \end{bmatrix}
+      =   \begin{bmatrix}
+        1 & 0  &  0 \\
+        4  &  1 &  0  \\
+        0  &  0 &  1
+        \end{bmatrix}\begin{bmatrix}
+        1 & 2 &  3  \\
+        0 & -3 &  -6 \\
+        2 & 4 &  6
+      \end{bmatrix}
+    \]
+    The  first  matrix ``un-does'' $\bfr_2^{'\top} =
+    \bfr_2^\top  -  4 \bfr_1^\top$, because  it  operates  $\bfr_2^{\top} =
+    \bfr_2^{'\top}  +  4 \bfr_1^\top$    on  the   second  matrix  to get back $A$.
+  \item Step 2: Row  3  =   Row  3 - 2  times row 1  or   $\bfr_3^{'\top} =
+    \bfr_3^\top  -  2 \bfr_1^\top$,
+    \[
+      A   =  \begin{bmatrix}
+        1 &   2  &  3  \\
+        4 & 5 &   6 \\
+        2 & 4 &   6
+      \end{bmatrix}
+      =   \begin{bmatrix}
+        1 & 0  &  0 \\
+        4  &  1 &  0  \\
+        2  &  0 &  1
+      \end{bmatrix}\begin{bmatrix}
+        1 & 2 &  3  \\
+        0 & -3 &  -6 \\
+        0 & 0 &  0
+      \end{bmatrix}
+    \]
+    We do   not need to do any more  operations because we already got
+    lower-triangular  and  upper-triangular   decomposition.  We can separate
+    the diagonal from the  upper-triangular  matrix,
+
+    \item  Step   3:  Separate  the diagonal components  from upper-triangular matrix,
+    \[
+      A   
+      =   \underbrace{\begin{bmatrix}
+        1 & 0  &  0 \\
+        4  &  1 &  0  \\
+        2  &  0 &  1
+      \end{bmatrix}}_{L}
+      \underbrace{\begin{bmatrix}
+        1 & 0 &  0  \\
+        0 & -3 &  0 \\
+        0 & 0 &  0
+      \end{bmatrix}}_{D}
+      \underbrace{\begin{bmatrix}
+        1 & 2 &  3  \\
+        0 & 1 &  2 \\
+        0 & 0 &  0
+      \end{bmatrix}}_{U}
+    \]
+\end{enumerate}
+\end{example}
+
+
+
 \section{Trignometry review}
 \includegraphics[width=\linewidth]{media/trig.pdf}
 
@@ -341,7 +609,7 @@ for compatible matrices  $A$ and $B$   and scalars $\alpha$ and $\beta$.
  for  example, $\{C\}$ or $\{W\}$.
 \end{defn}
 
-\begin{exmpl}[2D Coordinate frame]
+\begin{example}[2D Coordinate frame]
   The figure~\ref{fig:rot-2D} contains two coordinate frames the one  shown  in
   red and   the one   shown in green. Both have  the  same origin, but
   different  basis vectors. The $\{W\}$ coordinate frame shown in green has
@@ -406,7 +674,7 @@ for compatible matrices  $A$ and $B$   and scalars $\alpha$ and $\beta$.
   \end{aligned}
   \label{eq:basis-c-in-basic-w}
 \end{equation}
-\end{exmpl}
+\end{example}
 
 \begin{defn}[2D Coordinates of a  point]
   The coordinate of a point $\bfp$ in a given coordinate frame $\{W\}$ with
@@ -422,7 +690,7 @@ for compatible matrices  $A$ and $B$   and scalars $\alpha$ and $\beta$.
   \end{align}
 \end{defn}
 
-\begin{exmpl}[Fig~\ref{fig:rot-2D}]
+\begin{example}[Fig~\ref{fig:rot-2D}]
   The point $\bfp$ can be represented in coordinate frames $\{W\}$ and  $\{C\}$.
   Let the projection on the basis $B_c = [\hat{\bfx}_c, \hat{\bfy}_c]$ be
   $\bfp_c$, while that on $B_w  = [\hat{\bfx}_w, \hat{\bfy}_w]$ be $\bfp_w$.
@@ -434,7 +702,7 @@ for compatible matrices  $A$ and $B$   and scalars $\alpha$ and $\beta$.
            \label{eq:pt-as-basis}
   \end{align}
   %
-\end{exmpl}
+\end{example}
 
 \begin{thm}[2D  Rotation matrix]
   In a coordinate transformation  as  given in Fig~\ref{fig:rot-2D}, the
@@ -872,7 +1140,410 @@ Thus we get $\theta  =  \arccos(\frac{\tr(R)-1}{2})$. We can estimate axis of
 rotation as the  eigenvector corresponding  eigenvalue 1,   because $R\hat{\bfk}
 = \hat{\bfk}$.
 
-\section{Denavit-Hartenberg  transformations}
+%\section{Denavit-Hartenberg  transformations}
+
+\begin{prob}
+  Degrees of Freedom of a quantity is the number independent scalar variables
+  needed to represent that quantity. What is degrees of freedom required to 
+  \begin{enumerate}
+    \item Position and orientation in 1-D
+    \item Position and orientation in 2-D
+    \item Position and orientation in 3-D
+    \item Position and orientation in 4-D
+  \end{enumerate} (10 marks. Estimated time: 15 min)
+  Justify your answer.
+\end{prob}
+
+\ifsol
+\paragraph*{Solution}
+\begin{enumerate}
+  \item 1D: position requires 1-DoF,  orientation requires a binary flag.
+  \item 2D: position requires 2-DoF, orientation requires a single angle: 1-DoF.
+  \item 3D: position requires 3-DoF, orientation requires 3-DoF because there
+    are three pairs of axis X-Y, Y-Z, Z-X.
+  \item 4D: position requires 4-DoF, orientation requires 6-DoF because there
+    are 6 pairs of axis: $^4C_2 = 6$.
+\end{enumerate}
+\fi
+
+\begin{prob}
+  Write a program in C++ that checks if a given
+  3x3 matrix is a valid Rotation matrix is a valid Rotation matrix  (check for
+  orthonormality i.e. orthogonality and determinant = 1). You may use Eigen's
+  matrix multiplication and determinant() function. (10 marks. Used in the
+  following problems. Estimated time: 15 min). 
+\end{prob}
+
+\ifsol
+\paragraph*{Solution}
+Please look at the function \verb|is_valid_rot| in file \verb|hw1.cpp|.
+\fi
+
+\begin{prob}
+  In class, we proved the expression to convert roll ($\theta$), pitch
+  ($\phi$), yaw ($\psi$) from Euler Angles to Rotation matrix,
+  \begin{align}
+    R(\theta, \phi, \psi) =
+    \begin{bmatrix}
+      r_{11}& r_{12} & r_{13} \\
+      r_{21}& r_{22} & r_{23} \\
+      r_{31}& r_{32} & r_{33}
+    \end{bmatrix} 
+                       = R_z(\psi) R_y(\phi) R_x(\theta).
+  \end{align}
+  
+  What if we want to do the inverse? Prove that given a proper 3x3 rotation
+  matrix  ($R^\top R = I$ and $det(R) = 1$) , the Euler angles are given by
+  \begin{align}
+    \begin{bmatrix}
+    \theta(R) \\
+    \phi(R) \\
+    \psi(R)
+    \end{bmatrix}
+    = \begin{bmatrix}
+      \atantwo(r_{32}, r_{33}) \\
+      -\arcsin(r_{31}) \\
+      \atantwo(r_{21}, r_{11})
+      \end{bmatrix}
+  \end{align}
+  where $r_{ij}$ is the element in $i$th row and $j$th column of the rotation
+  matrix $R$. (10 marks. Used in the
+  following problems. Estimated time: 15 min).
+\end{prob}
+
+\ifsol
+\paragraph*{Solution}
+\begin{align}
+&R(\theta, \phi, \psi) = \begin{bmatrix}
+  c_\psi & - s_\psi & 0 \\
+  s_\psi & c_\psi & 0 \\
+  0 & 0 & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    c_\phi & 0 & s_\phi \\
+    0 & 1 & 0 \\
+    - s_\phi & 0 & c_\phi
+    \end{bmatrix}
+ \notag\\&\quad
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & c_\theta & - s_\theta \\
+      0 & s_\theta & c_\theta
+      \end{bmatrix}
+\notag\\&\quad
+  =\begin{bmatrix}
+    c_\psi & - s_\psi & 0 \\
+    s_\psi & c_\psi & 0 \\
+    0 & 0 & 1
+  \end{bmatrix}
+            \begin{bmatrix}
+              c_\phi & s_\phi s_\theta & s_\phi c_\theta \\
+              0 & c_\theta & -s_\theta \\
+              -s_\phi & c_\phi s_\theta & c_\phi c_\theta
+            \end{bmatrix}
+\notag\\&\quad
+  = \begin{bmatrix}
+    c_\psi c_\phi & c_\psi s_\phi s_\theta - s_\psi c_\theta & c_\psi s_\phi c_\theta+ s_\psi s_\theta \\
+    s_\psi c_\phi & s_\psi s_\phi s_\theta + c_\psi c_\theta & s_\psi s_\phi c_\theta - c_\psi s_\theta \\
+    -s_\phi & c_\phi s_\theta & c_\phi c_\theta
+    \end{bmatrix}
+\end{align}
+
+Starting from the first term of R.H.S. of the equation to be proved,
+%
+\begin{mutline}
+  \atantwo(r_{32}, r_{33})
+  = \atantwo(c_\phi s_\theta, c_\phi c_\theta) = \tan^{-1}(\frac{c_\phi
+    s_\theta}{c_\phi c_\theta}) = \tan^{-1}(\frac{s_\theta}{c_\theta}) =
+  \tan^{-1}(\tan(\theta)) = \theta.
+\end{mutline}
+%
+For the second term, $-\arcsin(r_{31}) = -\sin^{-1}(-s_\phi) =  \phi$.
+For the third term ,
+\begin{mutline}
+  \atantwo(r_{21}, r_{11})
+  = \atantwo(s_\psi c_\phi, c_\psi c_\phi) = \tan^{-1}(\frac{s_\psi
+    c_\phi}{c_\psi c_\phi}) = \tan^{-1}(\frac{s_\psi}{c_\psi}) =
+  \tan^{-1}(\tan(\psi)) = \psi.
+\end{mutline}
+
+\fi
+
+\begin{prob}
+  Write a pair of functions in C++ that converts rotation matrix from XYZ Euler
+angles (roll, pitch, yaw) and vice versa. Test the pair of functions with
+randomly generated Euler angles. And check if the converted rotation matrix is
+orthonormal. What happens when pitch = $\pi/2$, are you able to convert from
+rotation matrix to Euler angle? Why or why not? (50 marks. Estimated time: 30 min)
+\label{prob:euler-to-rotmat}
+\end{prob}
+
+\ifsol
+\paragraph*{Solution}
+Please check function \verb|euler_to_rotmat| and \verb|rotmat_to_euler_rpy| in
+\verb|hw1.cpp|. When pitch $=\frac{\pi}{2}$ works some of the time, but not all the time because of the
+Gimbal lock matrix to Euler angle conversion has multiple possible solutions.
+\fi
+
+\begin{prob}
+  Write a function in C++ that generates a 4x4 transformation matrix given XYZ Euler
+  angles (roll, pitch, yaw) and translation. You can use the function that you
+  wrote in Prob~\ref{prob:euler-to-rotmat}(20 marks. Estimated time: 15 min).
+\end{prob}
+
+\ifsol
+\paragraph*{Solution}
+Please check function \verb|transformation_matrix| in \verb|hw1.cpp|
+\fi
+
+
+\begin{prob}
+  In class we proved the Rodrigues formula that converts from axis-angle
+  representation $(\theta, \hat{\bfk})$, where $\theta$ is the angle of rotation
+  and $\hat{\bfk}$ is the axis of rotation ($\|\hat{\bfk}\| = 1$). Let $\bfK = [\hat{\bfk}]_{\times}$ be
+  the cross product matrix of $\hat{\bfk}$. The cross product matrix
+  of $\hat{\bfk} = [k_x, k_y, k_z]^\top$ (such that $k_x^2 + k_y^2 + k_z^2 = 1$) is defined as,
+    \begin{align}
+      \bfK = [\hat{\bfk}]_{\times} = \begin{bmatrix}
+        0 & -k_z & k_y \\
+        k_z & 0 & -k_x \\
+        -k_y & k_x & 0
+      \end{bmatrix}
+    \end{align}
+  The corresponding rotation matrix is
+  given by,
+  \begin{align}
+    R(\theta, \hat{\bfk}) = \bfI + \sin \theta \bfK + (1-cos \theta) \bfK^2.
+  \end{align}
+
+  An exponential of a square matrix $\bfM$ is defined as
+  \begin{align}
+    \exp(\bfM) = \sum_{n=0}^\infty \frac{1}{n!} \bfM^k = \bfI + \frac{1}{1!}\bfM + \frac{1}{2!}\bfM^2 + \dots
+  \end{align}
+
+  Recall the series expansion of $\sin \theta$, and $\cos \theta$,
+  \begin{align}
+    \sin \theta = \theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \dots
+    \\
+    \cos \theta = 1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \dots
+  \end{align}
+
+  \begin{enumerate}
+  \item First prove that $\bfK^3 = - \bfK$. (15 marks, 15 minutes)
+  \item As a result note that $\bfK^4 = - \bfK^2$, $\bfK^5 = \bfK$, and so on.
+    In general, $\bfK^{2n+1} =
+    (-1)^n\bfK$ and $\bfK^{2n+2} = (-1)^n\bfK^2$. Using the expansion of $\sin\theta$ and $\cos\theta$, prove that
+    $R(\theta, \hat{\bfk}) = \exp(\theta \bfK)$. (30 marks, 30 minutes)
+  \end{enumerate}
+\end{prob}
+\ifsol
+\paragraph*{Solution}
+Expanding $\bfK^2$
+\begin{align}
+  \bfK^2 &= \begin{bmatrix}
+    0 & -k_z & k_y \\
+    k_z & 0 & -k_x \\
+    -k_y & k_x & 0
+  \end{bmatrix}
+                 \begin{bmatrix}
+                   0 & -k_z & k_y \\
+                   k_z & 0 & -k_x \\
+                   -k_y & k_x & 0
+                 \end{bmatrix}
+  \\
+         &= \begin{bmatrix}
+           -k_z^2 - k_y^2  & k_y k_x & k_z k_x \\
+           k_xk_y & -k_z^2 - k_x^2 & k_z k_y \\
+           k_x k_z & k_y k_z & -k_y^2 - k_x^2
+         \end{bmatrix}.
+\end{align}
+Expanding $\bfK^3$,
+\begin{align}
+  &\bfK^3 = \begin{bmatrix}
+    0 & -k_z & k_y \\
+    k_z & 0 & -k_x \\
+    -k_y & k_x & 0
+  \end{bmatrix}
+                 \notag\\&\qquad
+         \begin{bmatrix}
+           -k_z^2 - k_y^2  & k_y k_x & k_z k_x \\
+           k_xk_y & -k_z^2 - k_x^2 & k_z k_y \\
+           k_x k_z & k_y k_z & -k_y^2 - k_x^2
+         \end{bmatrix}
+  \\&=
+  \begin{bmatrix}
+    -k_xk_yk_z +k_xk_yk_z & k_z (k_z^2 + k_x^2 + k_y^2) & -k_y (k_z^2 + k_x^2 + k_y^2)\\
+    -k_z (k_z^2 + k_x^2 + k_y^2) & -k_xk_yk_z +k_xk_yk_z & k_x (k_z^2 + k_x^2 + k_y^2)\\
+    k_y (k_z^2 + k_x^2 + k_y^2) & -k_x (k_z^2 + k_x^2 + k_y^2) & -k_xk_yk_z +k_xk_yk_z
+    \end{bmatrix}
+\end{align}
+We know that $k_x^2 + k_y^2 + k_z^2 = 1$. Applying that we get the desired
+result, $\bfK^3 = - \bfK$.
+
+Expanding Rodrigues formula using expansion of $\sin\theta$ and $\cos\theta$, we
+get
+\begin{align}
+  R(\theta, \hat{\bfk}) = \bfI + \bfK(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!}  - \dots) + \bfK^2(\frac{\theta^2 }{2!} - \frac{\theta^4}{4!} + \dots )
+\end{align}
+Now, note that $\bfK^3 = -\bfK$, $\bfK^4 = -\bfK^2$, $\bfK^5 = \bfK$. Moving
+$\bfK$ inside the series with $\theta$, we get
+\begin{align}
+  &R(\theta, \hat{\bfk}) = \bfI + (\theta\bfK + \frac{(\theta\bfK)^3}{3!} + \frac{(\theta\bfK)^5}{5!}  + \dots)
+    \notag\\
+  &\quad
+  + (\frac{(\theta\bfK)^2 }{2!} + \frac{(\theta\bfK)^4}{4!} + \dots )
+  \end{align}
+  This is exactly the series expansion of $\exp(\theta\bfK)$ by definition.
+\fi
+
+\begin{prob}
+  Write a pair of functions in C++ that converts rotation matrix from axis-angle
+  representation and vice versa. Recall that
+  \begin{align}
+    R(\theta, \hat{\bfk}) = \bfI + \sin \theta \bfK + (1-cos \theta) \bfK^2.
+  \end{align}
+  and to get axis-angle back from a given rotation matrix
+  \begin{align}
+    R = \begin{bmatrix}
+      r_{11} & r_{12} & r_{13} \\
+      r_{21} & r_{22} & r_{23} \\
+      r_{31} & r_{32} & r_{33}
+      \end{bmatrix},
+  \end{align}
+  we have
+  \begin{align}
+    \theta &= \cos^{-1} \left(\frac{\text{tr}(R) - 1}{2}\right)
+    \\
+    \hat{\bfk} &= \frac{1}{2\sin\theta}\begin{bmatrix}
+      r_{32} - r_{23} \\
+      r_{13} - r_{31} \\
+      r_{21} - r_{12}
+      \end{bmatrix} \text{ if  } \theta \ne 0 \text{ or } \pi.
+  \end{align}
+ If $\theta = 0 \text{ or } \pi$, then
+ \begin{align}
+   \hat{\bfk} = \pm\begin{bmatrix}
+    \sqrt{(r_{11} + 1)/2}\\
+    \sqrt{(r_{22} + 1)/2}\\
+    \sqrt{(r_{33} + 1)/2}
+   \end{bmatrix}
+   \end{align}
+  
+  (30 marks. Estimated time: 30 min)
+  \label{prob:euler-to-rotmat}
+\end{prob}
+
+
+\begin{prob}
+  Recall the definition of Denavit-Hartenberg parameters from the
+  \href{https://www.youtube.com/watch?v=rA9tm0gTln8}{video}. Recall that
+  transformation between two joints for the defined parameters $d, \theta, r,
+  \alpha$ is given by,
+  \begin{align}
+    T = T_z(\theta, d) T_x(\alpha, r),
+  \end{align}
+  where
+  \begin{align}
+    T_x(\alpha, r) &= \begin{bmatrix}
+      1 & 0 & 0 & r \\
+      0 & \cos(\alpha) & -\sin(\alpha) & 0 \\
+      0 & \sin(\alpha) & \cos(\alpha) & 0 \\
+      0 & 0 & 0 & 1 \\
+      \end{bmatrix}
+    \\
+    T_z(\theta, d) &= \begin{bmatrix}
+      \cos(\theta) & -\sin(\theta) & 0 &  0 \\
+      \sin(\theta) & \cos(\theta) & 0  & 0 \\
+      0 & 0 & 1 & d & \\
+      0 & 0 & 0 & 1 &
+    \end{bmatrix}
+  \end{align}
+
+  For the robot given below find transformation matrix from joint 4 to joint 1
+  assuming the joint angles to be  $\theta_1$, $\theta_2$, $\theta_3$
+  respectively. Write the expression for ${}^3T_4(\theta_3)$, ${}^2T_3(\theta_2)$, ${}^1T_2(\theta_1)$
+  and then ${}^1T_4(\theta_1, \theta_2, \theta_3)$ in terms of the first three
+  transformations. You do not need to expand the expression of  ${}^1T_4(\theta_1, \theta_2, \theta_3)$.
+  \\
+  \includegraphics[width=\linewidth]{media/robot3D.pdf}
+  \\
+  \includegraphics[width=\linewidth]{media/robot.pdf}
+  (15 marks. 15 min)
+\end{prob}
+\ifsol
+\paragraph*{Solution}
+\begin{align}
+  &{}^3T_4(\theta_3) =
+                      \begin{bmatrix}
+                        cos(\theta_3) & -\sin(\theta_3) & 0 & 0 \\
+                        sin(\theta_3) & cos(\theta_3) & 0 & 0 \\
+                        0 & 0 & 1 & 0 \\
+                        0 & 0 & 0 & 1
+                      \end{bmatrix}
+                      \begin{bmatrix}
+    1 & 0 & 0 & 19.2 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+                \notag\\
+  &\quad= \begin{bmatrix}
+    cos(\theta_3) & -\sin(\theta_3) & 0 & 19.2\cos(\theta_3) \\
+    sin(\theta_3) & cos(\theta_3) & 0 & 19.2\sin(\theta_3) \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  &{}^2T_3(\theta_2) =
+    \begin{bmatrix}
+      cos(\theta_2) & -\sin(\theta_2) & 0 & 0 \\
+      sin(\theta_2) & cos(\theta_2) & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+                  \begin{bmatrix}
+                    1 & 0 & 0 & 19.2 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & 0 & 1
+                  \end{bmatrix}
+                                \notag\\
+  &\quad= \begin{bmatrix}
+    cos(\theta_2) & -\sin(\theta_2) & 0 & 19.2\cos(\theta_2) \\
+    sin(\theta_2) & cos(\theta_2) & 0 & 19.2\sin(\theta_2) \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+
+\begin{align}
+  &{}^1T_2(\theta_1) =
+    \begin{bmatrix}
+      cos(\theta_1) & -\sin(\theta_1) & 0 & 0 \\
+      sin(\theta_1) & cos(\theta_1) & 0 & 0 \\
+      0 & 0 & 1 & 27.2 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+                  \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 0 & -1 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 0 & 1
+                  \end{bmatrix}
+                                \notag\\
+  &\quad= \begin{bmatrix}
+    cos(\theta_1) & 0 & sin(\theta_1) & 0 \\
+    sin(\theta_1) & 0 & -cos(\theta_1) & 0 \\
+    0 & 1 & 0 & 27.2 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+\begin{align}
+  {}^1T_4(\theta_1, \theta_2, \theta_3) = {}^1T_2(\theta_1) {}^2T_3(\theta_2) {}^3T_4(\theta_3)
+\end{align}
+\fi
 \section{Camera  projection model}
 
 \includegraphics[width=\linewidth]{media/pinhole-camera-model-2.png}
@@ -893,7 +1564,7 @@ rotation as the  eigenvector corresponding  eigenvalue 1,   because $R\hat{\bfk}
 \section{Linear least squares  or  Pseudo-inverse}
 
 Pseudo-inverse of a matrix  $\bfA$ is defined   as a matrix $\bfA^\dagger$, such
-that$\bfA \bfA^\dagger \bfA &=  \bfA$.
+that$\bfA \bfA^\dagger \bfA =  \bfA$.
 \begin{align}
   \text{if } \bfA \text{ is tall and full-col rank, then } \bfA^\dagger &= (\bfA^\top \bfA)^{-1} \bfA^\top \\
   \text{if } \bfA \text{ is fat and full-row rank, then } \bfA^\dagger &=  \bfA^\top (\bfA \bfA^\top)^{-1}
