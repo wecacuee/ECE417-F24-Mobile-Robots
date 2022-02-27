@@ -4,3 +4,7 @@
 [submodule "docs/slides/reveal.js"]
 	path = docs/slides/reveal.js
 	url = https://github.com/rajgoel/reveal.js.git
+[submodule "docs/labnotes/02-28/virtual-jetbot/jetbot_ros"]
+	path = docs/labnotes/02-28/virtual-jetbot/jetbot_ros
+	url = https://github.com/dusty-nv/jetbot_ros.git
+	branch = melodic
