@@ -57,6 +57,7 @@ On the  left hand pane,  click on Insert >  "https://modelsim.gazebo.org"  >  "A
 #### Check gazebo models directory
 
 Make sure the  `/home/<username>/.gazebo/models` directory has ambulance in  it.
+
 ![](gazebo-models-directory-created.png)
 
 #### Check the gazebo models directory in terminal
@@ -79,7 +80,42 @@ Go  to  melodic  branch  of jetbot_ros  repository:
 
 [https://github.com/dusty-nv/jetbot_ros/tree/melodic](https://github.com/dusty-nv/jetbot_ros/tree/melodic)
 
-Click on "Code" and press "Download ZIP".
+Click on "Code" and press "Download ZIP". Save  the  zip file  to  somewhere. Let us create a directory for todays  lab  and move  the zip file there  and then extract  it. Assuming  that  you  saved it in the `~/Downloads/`  directory, we can   do:
 
+``` shellsession
+$ mkdir  -p  ~/lab-02-28-catkin_ws/src
+$ mv ~/Downloads/jetbot_ros-melodic.zip  ~/lab-02-28-catkin_ws/src
+$ cd ~/lab-02-28-catkin_ws/src
+$ unzip jetbot_ros-melodic.zip
+```
+This should unzip jetbot_ros-melodic.zip and you  should see  the following files:   
 
+``` shellsession
+$ cd ~/lab-02-28-catkin_ws/src
+$ ls  jetbot_ros-melodic/
+CMakeLists.txt  gazebo  LICENSE.md  package.xml  README.md  scripts  src
+```
+
+# Tell gazebo about the location of jetbot  models
+
+Gazebo looks for gazebo models in the  `~/.gazebo/models`  directory. We will  create   a soft-link   from `~/.gazebo/models/jetbot`   to `~/lab-02-28-catkin_ws/src/jetbot_ros-melodic/gazebo/jetbot`  using   the  following command
+
+``` shellsession
+$ ln  -s ~/lab-02-28-catkin_ws/src/jetbot_ros-melodic/gazebo/jetbot ~/.gazebo/models/jetbot
+```
+
+Check that the link is created:
+
+``` shellsession
+$ ls  -l ~/.gazebo/models/jetbot
+lrwxrwxrwx 1 vdhiman vdhiman 70 Feb 27 15:21 /home/vdhiman/.gazebo/models/jetbot -> /home/vdhiman/lab-02-28-catkin_ws/src/jetbot_ros-melodic/gazebo/jetbot
+```
+
+If the link is shown in  red, that  means that  the target directory does   not  exist. Look for typos.
+
+Launch  gazebo  again.
+
+``` shellsession
+gazebo
+```
 
