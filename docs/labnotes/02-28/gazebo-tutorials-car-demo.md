@@ -593,8 +593,96 @@ Right-click on a model now to see what's available.
 
 Browse through different models  available in the "Insert" section of Gazebo and create  a  world of  your own. Replace the world file in the  `demo-light.launch` file  and   re-run the car  demo.
 
-# Exercise 3
 
-To connect joystick to the virtual machine, click Devices > USB > "ShanWan USB for Windows".
+# Control prius using a Joystick
 
-Follow the [joystick tutorial](http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick) and edit the `demo-light.launch` file (if it needs to be edited) to connect joystick to the prius. Identify the buttons that move the prius around.
+* To connect joystick to the virtual machine, click Devices > USB > "ShanWan USB for Windows".
+
+Connect your joystick to your computer. Now let's see if Linux recognized your joystick.
+
+``` shellsession
+ls /dev/input/
+```
+
+
+You will see a listing of all of your input devices similar to below:
+
+```
+by-id    event0  event2  event4  event6  js1   mouse0
+by-path  event1  event3  event5  js0     js2   mice  mouse1
+```
+As you can see above, the joystick devices are referred to by jsX ; in this case, our joystick could be js0, js1 or js2. We have to try them all one-by-one. Let's make sure that the joystick is working.
+
+```
+sudo jstest /dev/input/jsX
+```
+
+You will see the output of the joystick on the screen. Move the joystick around to see the data change. Some of the joysticks are remappings of keyboards or mouse. Their values will not change as you move the joystick around.
+
+```
+    Driver version is 2.1.0.
+    Joystick (Logitech Logitech Cordless RumblePad 2) has 6 axes (X, Y, Z, Rz, Hat0X, Hat0Y)
+    and 12 buttons (BtnX, BtnY, BtnZ, BtnTL, BtnTR, BtnTL2, BtnTR2, BtnSelect, BtnStart, BtnMode, BtnThumbL, BtnThumbR).
+    Testing ... (interrupt to exit)
+    Axes:  0:     0  1:     0  2:     0  3:     0  4:     0  5:     0 Buttons:  0:off  1:off  2:off  3:off  4:off  5:off  6:off  7:off  8:off  9:off 10:off 11:off
+```
+
+
+For me, `/dev/input/js2` worked, which means its values changed when fiddled with joystick. I will use `/dev/input/js2` going forward.
+
+Now let's make the joystick accessible for the ROS joy node. 
+
+``` shellsession
+rosrun joy joy_node _dev:=/dev/input/jsX
+```
+
+You will see something similar to:
+```
+    [ INFO] 1253226189.805503000: Started node [/joy], pid [4672], bound on [aqy], xmlrpc port [33367], tcpros port [58776], logging to [/u/mwise/ros/ros/log/joy_4672.log], using [real] time
+
+    [ INFO] 1253226189.812270000: Joystick device: /dev/input/js0
+
+    [ INFO] 1253226189.812370000: Joystick deadzone: 2000
+```
+
+Now in a new terminal you can rostopic echo the joy topic to see the data from the joystick:
+
+```
+rostopic echo /joy
+```
+
+As you move the joystick around, you will see something similar to : 
+
+```
+---
+header: 
+  seq: 9414
+  stamp: 
+    secs: 1325530130
+    nsecs: 146351623
+  frame_id: ''
+axes: [-0.0038758506998419762, -0.0038453321903944016, -0.0, -0.999969482421875, 0.0, 0.0]
+buttons: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+---
+header: 
+  seq: 9415
+  stamp: 
+    secs: 1325530130
+    nsecs: 146351623
+  frame_id: ''
+axes: [-0.0038758506998419762, -0.0038453321903944016, -0.0, -0.999969482421875, 0.0, 0.0]
+buttons: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+---
+header: 
+  seq: 9416
+  stamp: 
+    secs: 1325530130
+    nsecs: 146351623
+  frame_id: ''
+axes: [-0.0038758506998419762, -0.0038453321903944016, -0.0, -0.999969482421875, 0.0, 0.0]
+buttons: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+---
+```
+
+## Exercise 3
+Once you have identified which joystick device works for you `/dev/input/jsX`. Replace the appropriate line in `demo-light.launch` and control the prius with the joystick.
