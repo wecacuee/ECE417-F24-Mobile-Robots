@@ -130,7 +130,7 @@ What can we do with gazebo?
    * Install necessary packages
 
    ```
-   sudo apt install  ros-noetic-fake-localization  ros-noetic-robot-state-publisher
+   sudo apt install  ros-noetic-fake-localization  ros-noetic-robot-state-publisher ros-noetic-joy
    ```
    
    * Compile the catkin  workspace
@@ -592,3 +592,9 @@ Right-click on a model now to see what's available.
 # Exercise  2 
 
 Browse through different models  available in the "Insert" section of Gazebo and create  a  world of  your own. Replace the world file in the  `demo-light.launch` file  and   re-run the car  demo.
+
+# Exercise 3
+
+To connect joystick to the virtual machine, click Devices > USB > "ShanWan USB for Windows".
+
+Follow the [joystick tutorial](http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick) from and edit the `demo-light.launch` file to connect joystick to the prius. Identify the buttons that move the prius around.
