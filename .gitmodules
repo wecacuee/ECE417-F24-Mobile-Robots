@@ -8,3 +8,6 @@
 	path = docs/labnotes/02-28/virtual-jetbot/src/jetbot_ros-melodic
 	url = https://github.com/dusty-nv/jetbot_ros.git
 	branch = melodic
+[submodule "docs/labnotes/02-28/virtual-jetbot/src/car_demo"]
+	path = docs/labnotes/02-28/virtual-jetbot/src/car_demo
+	url = https://github.com/wecacuee/car_demo.git
