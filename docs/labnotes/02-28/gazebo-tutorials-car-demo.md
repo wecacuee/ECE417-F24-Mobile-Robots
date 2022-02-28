@@ -46,7 +46,7 @@ In  the  end,  this is how my virtual  machine   settings look like
 lsmod | grep vbox
 ```
 
-     I  see  the following  output  on  my machine. You should see vboxsf,vboxguest   and vboxvideo.
+     I  see  the following  output  on  my machine. You should see vboxguest   and vboxvideo.
      ``` 
 $ lsmod | grep vbox
 vboxsf                 77824  1
