@@ -152,14 +152,14 @@ What can we do with gazebo?
 
    * Roslaunch  demo-light.launch
 
-    ```shellsession
-    source devel/setup.bash
-    roslaunch car_demo demo-light.launch
-    ```
+```shellsession
+source devel/setup.bash
+roslaunch car_demo demo-light.launch
+```
 
-    ![](images/gazebo-vis.png)
+![](images/gazebo-vis.png)
 
-    ![](images/rviz-car-demo.png)
+![](images/rviz-car-demo.png)
 
   * To move the car,  you can directly publish prius_msgs/Control type messages. In  another  terminal,  you can set throttle  to 1000 and shift_gear to 2 (forward)
   
