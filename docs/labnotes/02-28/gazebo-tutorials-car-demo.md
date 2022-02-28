@@ -267,9 +267,6 @@ For example, to use the `empty_sky.world` which is shipped with Gazebo, use the 
 gzserver worlds/empty_sky.world
 ~~~
 
-# Exercise 1
-   * Find the world file used in car demo. (Hint: find the  demo.launch  file and  look for the path to the world file.)
-
 ## Graphical Client
 
 The graphical client connects to a running `gzserver` and visualizes the elements. This is also a tool which allows you to modify the running simulation.
@@ -586,6 +583,10 @@ Right-click on a model now to see what's available.
 
 
 ![](https://github.com/osrf/gazebo_tutorials/raw/master/guided_b/files/ftu3-mouse-controls.png)
+
+
+# Exercise 1
+   * Find the world file used in car demo. (Hint: find the  demo.launch  file and  look for the path to the world file.)
 
 
 # Exercise  2 
