@@ -597,4 +597,4 @@ Browse through different models  available in the "Insert" section of Gazebo and
 
 To connect joystick to the virtual machine, click Devices > USB > "ShanWan USB for Windows".
 
-Follow the [joystick tutorial](http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick) from and edit the `demo-light.launch` file to connect joystick to the prius. Identify the buttons that move the prius around.
+Follow the [joystick tutorial](http://wiki.ros.org/joy/Tutorials/ConfiguringALinuxJoystick) and edit the `demo-light.launch` file (if it needs to be edited) to connect joystick to the prius. Identify the buttons that move the prius around.
