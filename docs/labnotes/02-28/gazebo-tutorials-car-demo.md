@@ -104,7 +104,7 @@ gazebo
 ![](gazebo-screenshot.png)
 
 
-#  Vetting appetite:  Car  Demo
+#  Whetting appetite:  Car  Demo
 
 What can we do with gazebo?
 
