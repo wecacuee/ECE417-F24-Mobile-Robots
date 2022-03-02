@@ -105,6 +105,36 @@
   \]
 \end{frame}
 
+\begin{frame}
+  Four fundamental subspaces of matrix $A\in \bbR^{m\times n}$:
+\begin{enumerate}
+    \item Column space: All possible values of $\bfb = A\bfx$ for any $\bfx \in \bbR^n$.
+    \item Null space: All possible values of $\bfx \in \bbR^n$ so that $A\bfx = \boldsymbol{0}_m$.
+    \item Row space: Column space of $A^\top$. All possible values of
+      $\bfb = A^\top\bfx$ for any $\bfx \in \bbR^m$.
+    \item Left Null space: Null space of $A^\top$. All possible values of $\bfy
+      \in \bbR^{m}$ so that $\bfy^\top\bfA = 0$.
+ \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \includegraphics[width=0.7\linewidth]{media/four-fundamental-subspaces.png}
+\end{frame}
+
+\begin{frame}
+  The four fundamental subspaces of $A$
+    \[
+    A   =  \begin{bmatrix}
+      1 &   2  &  3  \\
+      4 & 5 &   6 \\
+      2 & 4 &   6
+      \end{bmatrix}
+      \]
+\end{frame}
+
+\begin{frame}{Geometric intuition}
+\end{frame}
+
 \begin{frame}{Eigenvalues  and Eigenvectors}
 
 For a  square  matrix $A$, the $\lambda_i$ and  $\bfx_i$ that satisfy  the
@@ -134,20 +164,6 @@ hence, characteristic   equation
 
 \end{frame}
 
-\begin{frame}
-  
-  We introduce two vocabulary words to describe what we have seen.
-  Let $A$ be a square matrix and $\lambda$ a scalar.
-\begin{itemize}
-  \item The geometric multiplicity of $\lambda$ is the dimension of the
-  $\lambda$-eigenspace. In other words, $\dim \calN( (A − λI))$.
-  \item The algebraic multiplicity of $\lambda$ is the number of times $(\lambda − t)$
-  occurs as a factor of $\det(A − tI)$.
-  \end{itemize}
-  \begin{theorem}
-  geometric multiplicity of $\lambda$ $\le$ algebraic multiplicity of $\lambda$
-  \end{theorem}
-\end{frame}
 
 \begin{frame}{Numerical example}
   \[
