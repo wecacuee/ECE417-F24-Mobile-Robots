@@ -10,7 +10,11 @@
 \author{Vikas Dhiman.  }
 \date{March 4, 2022}
 \begin{document}
+
 \newcommand{\ubfu}{\underline{\bfu}}
+\begin{frame}
+  \titlepage
+  \end{frame}
 \begin{frame}
   \includegraphics[width=\linewidth]{media/lane-from-points.pdf}
   \begin{align*}
@@ -76,9 +80,77 @@ hence, characteristic   equation
     2 & 4 &   6
   \end{bmatrix}
   \]
-Find eigen values and eigen vectors.
+Find eigen values and eigen vectors Eigen library.
+
+\url{https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/slides/03-04-linear-algebra_files/findeig.cpp}
+
 \end{frame}
 
+\begin{frame}
+  Not all matrices possess n linearly independent eigenvectors, and
+  therefore not all matrices are diagonalizable. The standard example of a
+  "defective matrix" is
+  \[
+    A = \begin{bmatrix}
+      0 & 1 \\ 0 & 0
+      \end{bmatrix}
+      \]
+\end{frame}
+
+\begin{frame}
+  If the eigenvectors $x_1, \dots, x_k$ correspond to different eigenvalues
+  $\lambda_1, \dots, \lambda_k$ then those eigenvectors are linearly independent.
+  \end{frame}
+
+\begin{frame}
+  Find the eigen values and vectors of rotation matrix
+  \[
+    R(\theta) = \begin{bmatrix}
+      \cos(\theta) & -\sin(\theta) \\
+      \sin(\theta) & \cos(\theta)
+      \end{bmatrix}
+    \]
+\end{frame}
+
+\begin{frame}
+  Find the eigen values and vectors of rotation matrix
+  \[
+    R(\theta) = \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & \cos(\theta) & -\sin(\theta) \\
+      0 & \sin(\theta) & \cos(\theta)
+    \end{bmatrix}
+  \]
+\end{frame}
+
+\begin{frame}
+  Compute the exponential of matrix $A = \begin{bmatrix} -2 & 1 \\ 1 &
+    -2\end{bmatrix}$ using the series expansion of $\exp(A)$ and  the fact that
+  $A^n =  S\Lambda^nS^{-1}$.
+  \end{frame}
+
+\begin{frame}
+    Property 1: If $A = A^H$ , then for all complex vectors $x \in \bbC^n$, the number $x^HAx$ is real.
+\end{frame}
+\begin{frame}
+    Property 2: Every eigenvalue of a Hermitian matrix is real.
+\end{frame}
+
+\begin{frame}
+  Property 3: The eigenvectors of a real symmetric matrix or a Hermitian matrix, if
+  they come from different eigenvalues, are orthogonal to one another.
+  \\
+  If $A = A^T$ , the diagonalizing matrix S can be an orthogonal matrix Q.
+\end{frame}
+
+
+
+\begin{frame}{Hierarchy of transforms}
+  \includegraphics[width=\linewidth]{media/hierarchy-of-transforms.png}
+\end{frame}
+
+\begin{frame}
+\end{frame}
 
 \begin{frame}{Singular Value  Decomposition (SVD)}
   \begin{align}
@@ -102,46 +174,5 @@ Find eigen values and eigen vectors.
 \end{frame}
 
 
-  \includegraphics[width=\linewidth]{media/homography-maps-a-line-to-a-line.png}
-\end{frame}
-\begin{frame}{Examples  of  Homography}
-  \includegraphics[width=\linewidth]{media/examples-of-homography.png}
-\end{frame}
-
-\begin{frame}
-  \includegraphics[width=0.60\linewidth]{media/audi top view camera.jpg}
-\end{frame}
-
-\begin{frame}{Computing Homography}
-  \includegraphics[width=0.45\linewidth]{media/removing-perspective-distortion.png}
-  \includegraphics[width=0.45\linewidth]{media/removing-perspective-distortion-b.png}
-\end{frame}
-
-
-\begin{frame}{Computing Homography}
-  \includegraphics[width=0.45\linewidth]{media/removing-perspective-distortion.png}
-  \includegraphics[width=0.45\linewidth]{media/removing-perspective-distortion-b.png}
-\end{frame}
-
-\begin{frame}{Solving for Homography derivation}
-\end{frame}
-
-\begin{frame}{Direct Linear Transformation   (DLT) algorithm}
-  \includegraphics[width=\linewidth]{media/DLT-algorithm.png}
-\end{frame}
-
-\begin{frame}{2D homography}
-  Given a set of points $\bfx_i \in \bbP^2$ and a corresponding set of
-  points $\bfx'_i \in \bbP^2$, compute the projective transformation that takes each
-  $\bfx_i$ to $\bfx'_i$ . In a practical situation, the points $\bfx_i$ and   $\bfx'_i$  are points in two images
-  (or the same image), each image being considered as a projective plane  $\bbP^2$.
-\end{frame}
-
-\begin{frame}{3D  to  2D camera projection matrix estimation}
-  Given a set of points $\bfX_i$ in 3D space, and a set
-  of corresponding points $\bfx_i$ in an image, find the 3D to 2D projective
-  $\bfP$ mapping
-  that maps $\bfX_i$ to $\bfx_i  =  \bfP\bfX_i$.
-\end{frame}
 
 \end{document}
