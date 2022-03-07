@@ -135,6 +135,8 @@ date: 2022-03-07
   
     ![](gazebo-fps.png)
 
-  
+## Exercise 1
 
+* What FPS did you get with glmark2?
+* What FPS did you get with gazebo?
 
