@@ -1,0 +1,100 @@
+\documentclass[times,t]{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{lmodern} 
+\input{sym.tex}
+\setbeamertemplate{navigation symbols}{}
+
+\title{ECE 417/598: Singular Value Decompsition }
+\author{Vikas Dhiman.  }
+\date{March 7, 2022}
+\begin{document}
+
+\newcommand{\ubfu}{\underline{\bfu}}
+\begin{frame}
+  \titlepage
+  \end{frame}
+\begin{frame}
+  \includegraphics[width=\linewidth]{media/lane-from-points.pdf}
+  \begin{align*}
+    \ubfu_1 &= [100, 98, 1]^\top\\
+    \ubfu_2 &= [105, 95, 1]^\top\\
+    \ubfu_3 &= [107, 90, 1]^\top\\
+    \ubfu_4 &= [110, 85, 1]^\top
+    \end{align*}
+    Find  the line $\bfl$ such that it is the ``closest line'' passing through
+    $\bfu_1, \dots, \bfu_4$.
+\end{frame}
+
+\begin{frame}
+  \[
+  U = \begin{bmatrix}\bfu_1^\top  \\
+    \bfu_2^\top \\
+    \bfu_3^\top \\
+    \bfu_4^\top
+  \end{bmatrix}
+  \]
+  We want to solve for $\bfl$ such that
+  \[
+    U \bfl = 0
+  \]
+\end{frame}
+
+\begin{frame}
+  If the eigenvectors $x_1, \dots, x_k$ correspond to different eigenvalues
+  $\lambda_1, \dots, \lambda_k$ then those eigenvectors are linearly independent.
+\end{frame}
+
+\begin{frame}{Hierarchy of transforms}
+  \includegraphics[width=\linewidth]{media/hierarchy-of-transforms.png}
+\end{frame}
+
+\begin{frame}{Conjugate (or Hermitian) Transpose}
+\end{frame}
+
+\begin{frame}{Hermitian or Symmetric matrices}
+\end{frame}
+
+\begin{frame}
+    Property 1: If $A = A^H$ , then for all complex vectors $x \in \bbC^n$, the number $x^HAx$ is real.
+\end{frame}
+\begin{frame}
+    Property 2: Every eigenvalue of a Hermitian matrix is real.
+\end{frame}
+
+\begin{frame}
+  Property 3: The eigenvectors of a real symmetric matrix or a Hermitian matrix, if
+  they come from different eigenvalues, are orthogonal to one another.
+  \\
+  If $A = A^T$ , the diagonalizing matrix S can be an orthogonal matrix $S^{-1}
+  = S^T$ if they come from different eigenvalues.
+\end{frame}
+
+
+
+
+\begin{frame}{Singular Value  Decomposition (SVD)}
+  \begin{align}
+    A  &=   U  \begin{bmatrix}\Sigma   &  0  \\   0  &  0 \end{bmatrix} V^\top \\
+    A^\top A &= V \Sigma^2  V^{-1} \\
+    A^\top A \bfv_i  &= \lambda_i \bfv_i & \lambda_i = \sigma_i^2\\
+    A V   &= U \begin{bmatrix}\Sigma   &  0  \\   0  &  0 \end{bmatrix}\\
+    U^+   &=  \Sigma^{-1}AV^+
+    \end{align}
+\end{frame}
+
+\begin{frame}{Numerical example}
+  Find singular value decomposition
+  \[
+    A   =  \begin{bmatrix}
+      1 &   2  &  3  \\
+      4 & 5 &   6 \\
+      2 & 4 &   6
+    \end{bmatrix}
+  \]
+\end{frame}
+
+
+
+\end{document}
