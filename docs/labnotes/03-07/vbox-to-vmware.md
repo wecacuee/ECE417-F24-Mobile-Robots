@@ -29,9 +29,9 @@ date: 2022-03-07
 
     ![](vbox-export-appliance-4.png)
   
-  * This will generate an  OVF file. The location of my Ubuntu.ovf file  was
+  * This will generate an  OVA file. The location of my Ubuntu.ova file  was
    
-    `C:\Users\vdhiman\Documents\Ubuntu.ovf`
+    `C:\Users\vdhiman\Documents\Ubuntu.ova`
     
     The file size for  me was around 50 GB. 
 
@@ -45,7 +45,7 @@ date: 2022-03-07
   
 ## Import VirtualBox in VMware Workstation player
 
-  * "Open" the Ubuntu.ovf saved earlier.
+  * "Open" the Ubuntu.ova saved earlier.
   
   ![](vmware-open-ova.png)
 
