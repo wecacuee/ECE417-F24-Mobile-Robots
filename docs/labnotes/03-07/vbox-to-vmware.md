@@ -117,20 +117,21 @@ date: 2022-03-07
    roslaunch car_demo demo-light.launch
    ```
   
-  *  We will disable software rendering and enable hardware acceleration  in Gazebo.A
-     To disable software rendering open `demo-light.launch` and remove the following line:
+  * We will disable software rendering and enable hardware acceleration  in Gazebo.
+    To disable software rendering open `demo-light.launch` and remove the following line:
   
-    ```
-    <env name="LIBGL_ALWAYS_SOFTWARE"  value="1"  />
-    ```
+  ```
+  <env name="LIBGL_ALWAYS_SOFTWARE"  value="1"  />
+  ```
     
-    Run gazebo. For  me this did not  work in VMware. 
+  Run gazebo. For  me this did not  work in VMware. 
 
-  * Instead replace the above env line in the `demo-light.launch`. Falling back to OpenGL 2.1 from OpenGL 3.3
+  * Instead replace the above env line in the `demo-light.launch` with env line given below. Falling back to OpenGL 2.1 from OpenGL 3.3
 
     ```
     <env name="SVGA_VGPU10"  value="0"  />
     ```
+
   * I get 60 FPS on gazebo
   
     ![](gazebo-fps.png)
