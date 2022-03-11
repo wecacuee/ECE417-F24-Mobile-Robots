@@ -160,10 +160,6 @@ date: 2022-03-07
   ```
   
   Press some buttons on the joystick, if the output on the terminal changes, then it is the right joystick.
-  
-  
-  
-  
 
 ## Exercise 1
 
