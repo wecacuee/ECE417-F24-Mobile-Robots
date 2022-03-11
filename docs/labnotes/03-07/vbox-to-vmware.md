@@ -135,6 +135,35 @@ date: 2022-03-07
   * I get 60 FPS on gazebo
   
     ![](gazebo-fps.png)
+    
+## Connecting joystick to VMWare
+
+  * When you connect the USB device to the computer, it will ask whether you want to connect it the host or the virtual machine. Select that you want to connect it to virtual machine.
+  * Check that "Player" -> "Removable devices" -> "Shenzen Shenwan PC/PS3/Android" is checked. 
+  
+  ![](joystick.png)
+
+  * If not, click "Connect (Disconnect from host)"
+
+  ![](joystick-connect.png)
+  
+  * Check "/dev/input/jsX" using `ls` and `jstest`
+  
+  ```
+  ls /dev/input/js*
+  ```
+
+  The only device I see on my machine is `/dev/input/js0`. Check if that is the right device.
+
+  ```
+  jstest /dev/input/js0
+  ```
+  
+  Press some buttons on the joystick, if the output on the terminal changes, then it is the right joystick.
+  
+  
+  
+  
 
 ## Exercise 1
 
