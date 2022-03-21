@@ -82,8 +82,8 @@ In the [TurtleSim tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSu
  1. Write a subscriber to the topic `/prius/front_camera/image_raw`. Start from the subscriber code provided in the tutorial. Save the file as `~/02-28/catkin_ws/src/car_demo/car_demo/nodes/image_to_bird_eye_view.cpp`
 
  2. Change the topic to `/prius/front_camera/image_raw` instead of "chatter".
- 3. Change the topic message type from `std::Strings::ConstPtr` to `<A variation of message type from Exercise 2>::ConstPtr`.
- 4. For the class  `sensor_msgs::Image::ConstPtr`, you will need to  include `#include "<message type from Exercise 2>.h"` instead of `#include "std_msgs/String.h"`.
+ 3. Change the topic message type from `std_msgs::Strings::ConstPtr` to `<A variation of message type from Exercise 2>::ConstPtr`.
+ 4. You will need to  include `#include "<message type from Exercise 2>.h"` instead of `#include "std_msgs/String.h"`.
  5. Since message `std_msgs::String` had a `data`  field, you were able to print  `msg->data.c_str()`. What fields does "message type from exercise 2" have? (output of `rosmsg show`). Use `ROS_INFO` to print the height, width and encoding of the image.
  6. Make other necessary changes to subscribe the topic `/prius/front_camera/image_raw`.
  6. Use the following two function `convert_image_msg_to_eigen`  to convert from `message type from exercise to 2` into `Eigen::MatrixXd` type; and then `eigen_imshow` visualize the `Eigen::MatrixXd` image.  
