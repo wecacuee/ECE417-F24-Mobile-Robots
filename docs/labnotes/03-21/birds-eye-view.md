@@ -78,7 +78,7 @@ xdg-open frame0000.jpg
 
 ## Exercise 3:  Writing a custom subscriber to the topic
 
-In the [TurtleSim tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29), we learnt how to write subscriber to a topic. 
+In the [TurtleSim tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29), we learnt how to write a subscriber to a topic. 
  1. Write a subscriber to the topic `/prius/front_camera/image_raw`. Start from the subscriber code provided in the tutorial. Save the file as `~/02-28/catkin_ws/src/car_demo/car_demo/nodes/image_to_bird_eye_view.cpp`
 
  2. Change the topic to `/prius/front_camera/image_raw` instead of "chatter".
