@@ -2,6 +2,7 @@
 layout: post
 title: ECE417  2022  Lab week  7, Computing birds eye view
 date: 2022-03-21
+usemathjax: true
 ---
 
 # Summary of steps
@@ -208,7 +209,7 @@ rosrun car_demo image_to_bird_eye_view
 2. Look at  the documentation of [`sensor_msgs/CameraInfo` message type](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/CameraInfo.html)
 3. Use  `rostopic echo` to find the camera calibratrion matrix (K)  for the gazebo camera. 
 
-# Exercise 5: Loop over  each pixel of the camera image 
+# Exercise 5: Generate Birds Eye View (BEV) image
 
 1. Modify `~/02-28/catkin_ws/src/car_demo/car_demo/nodes/image_to_bird_eye_view.cpp` to loop over every pixel of the image, `cout` the gray scale intensity of image at every pixel. The  higher the value, the brighter the pixel. Black is 0, and white is 1.
 
@@ -283,4 +284,10 @@ https://github.com/wecacuee/car_demo/blob/lab-03-21-ex-5/car_demo/nodes/image_to
 
 4. Move the car around using joystick. Change the height of bird-eye-view camera. You might have to move the camera  forward as well  to get more view. Submit 5 screenshots with different heights and of different locations in the M-city.
 
-5. (Optional) Can you  reduce the number of matrix multiplications by using a Homography matrix?
+5. (Optional) Can you  reduce the number of matrix multiplications by using a Homography matrix? Combine the following  steps of into a single matrix operation $$ u_f = H u_b $$. Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
+    
+    1. $$ X_b = h_b K^{-1}u_b$$
+
+    2. $$ X_f = R^f_b X_b + t_b^f $$
+
+    3. $$ u_f =  K X_f  $$
