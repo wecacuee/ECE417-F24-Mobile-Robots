@@ -207,7 +207,7 @@ rosrun car_demo image_to_bird_eye_view
 
 1. Use `rostopic info`, `rostopic echo` and subsequently `rosmsg show` on the topic `/prius/front_camera/camera_info`.
 2. Look at  the documentation of [`sensor_msgs/CameraInfo` message type](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/CameraInfo.html)
-3. Use  `rostopic echo` to find the camera calibratrion matrix (K)  for the gazebo camera. 
+3. Use  `rostopic echo` on `/prius/front_camera/camera_info` on to find the camera calibratrion matrix (K)  for the gazebo camera. 
 
 # Exercise 5: Generate Birds Eye View (BEV) image
 
