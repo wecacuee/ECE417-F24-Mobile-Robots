@@ -241,7 +241,7 @@ rosrun car_demo image_to_bird_eye_view
 
     3. $$ u_f =  K X_f  $$
 
-    Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b = 14$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
+    Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b = 15$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
 
     ```c++
     Eigen::MatrixXd birds_eye_view_image(eigen_image.rows(),
@@ -260,6 +260,7 @@ rosrun car_demo image_to_bird_eye_view
         0, -1, 0; //  Rotation for camera looking downwards
     Eigen::Vector3d t;
     t << 0, -14, 14; // Camera moved 14m upwards (negative Y-axis), 14 forwards (Z-axis)
+    double bev_height = -t(1) +  camera_height; // BEV camera height
     for (int bev_row = 0; bev_row < birds_eye_view_image.rows(); ++bev_row) {
         for (int bev_col = 0; bev_col < birds_eye_view_image.cols(); ++bev_col)  {
             u_bev << bev_col + 0.5, bev_row + 0.5, 1;
@@ -301,3 +302,8 @@ https://github.com/wecacuee/car_demo/blob/lab-03-21-ex-5/car_demo/nodes/image_to
     3. $$ u_f =  K X_f  $$
     
     Hint: Since the 3rd coordinate of $$u_b$$ is known to be 1, so we can construct a 3x3 matrix such  that $$ [0_3, 0_3, t^f_b] u_b = t^f_b $$, where $$0_3$$ is 3x1 vector of zeros. Then you can write $$ X_f $$ as a single matrix multiplication with $$u_b$$. $$X_f = (R^f_b h_bK^{-1} + [0_3, 0_3, t_b^f])u_b $$.
+
+<!--
+Answer: 
+$$ H = h_b K R^f_b K^{-1} + [0_3, 0_3, K t_b^f] $$
+-->
