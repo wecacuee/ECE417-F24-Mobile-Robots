@@ -233,7 +233,15 @@ rosrun car_demo image_to_bird_eye_view
    }
    ```
 
-3. Delete the above lines of code for printing pixel values. Assume the camera height from the ground be 1.4 meters. Let us try to  find out the image from a camera that is looking downwards and is at height of 15m from ground the and 14m directly in front of the car camera. Get the K matrix from Exercise 4. Find the birds eye view image by  filling in the formulas in the following code
+3. Delete the above lines of code for printing pixel values. Assume the camera height from the ground be 1.4 meters. Let us try to  find out the image from a camera that is looking downwards and is at height of 15m from ground the and 14m directly in front of the car camera. Get the K matrix from Exercise 4. Find the birds eye view image by  filling in the formulas in the following code. You have to implement the following three steps in the code.
+
+    1. $$ X_b = h_b K^{-1}u_b$$
+
+    2. $$ X_f = R^f_b X_b + t_b^f $$
+
+    3. $$ u_f =  K X_f  $$
+
+    Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b = 14$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
 
     ```c++
     Eigen::MatrixXd birds_eye_view_image(eigen_image.rows(),
@@ -284,7 +292,7 @@ https://github.com/wecacuee/car_demo/blob/lab-03-21-ex-5/car_demo/nodes/image_to
 
 4. Move the car around using joystick. Change the height of bird-eye-view camera. You might have to move the camera  forward as well  to get more view. Submit 5 screenshots with different heights and of different locations in the M-city.
 
-5. (Optional) Can you  reduce the number of matrix multiplications by using a Homography matrix? Combine the following  steps of into a single matrix operation $$ u_f = H u_b $$. Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b = 14$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
+5. (Optional) Can you  reduce the number of matrix multiplications by using a Homography matrix? Combine the following  steps of into a single matrix operation $$ u_f = H u_b $$. 
     
     1. $$ X_b = h_b K^{-1}u_b$$
 
