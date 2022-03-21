@@ -284,10 +284,12 @@ https://github.com/wecacuee/car_demo/blob/lab-03-21-ex-5/car_demo/nodes/image_to
 
 4. Move the car around using joystick. Change the height of bird-eye-view camera. You might have to move the camera  forward as well  to get more view. Submit 5 screenshots with different heights and of different locations in the M-city.
 
-5. (Optional) Can you  reduce the number of matrix multiplications by using a Homography matrix? Combine the following  steps of into a single matrix operation $$ u_f = H u_b $$. Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
+5. (Optional) Can you  reduce the number of matrix multiplications by using a Homography matrix? Combine the following  steps of into a single matrix operation $$ u_f = H u_b $$. Here $$u_b \in  \mathbb{P}^2$$ is a point on  BEV image and $$ u_f \in \mathbb{P}^2 $$ is a point on Front camera image. $$h_b = 14$$ is the height of BEV  camera from the ground, $$K$$ is camera calibration matrix, $$R^f_b$$  is the rotation matrix that rotates points from BEV camera to front camera and $$t^f_b$$ is the corresponding translation (also the origin of the BEV camera in front camera frame.) 
     
     1. $$ X_b = h_b K^{-1}u_b$$
 
     2. $$ X_f = R^f_b X_b + t_b^f $$
 
     3. $$ u_f =  K X_f  $$
+    
+    Hint: Since the 3rd coordinate of $$u_b$$ is known to be 1, so we can construct a 3x3 matrix such  that $$ [0_3, 0_3, t^f_b] u_b = t^f_b $$, where $$0_3$$ is 3x1 vector of zeros. Then you can write $$ X_f $$ as a single matrix multiplication with $$u_b$$. $$X_f = (R^f_b h_bK^{-1} + [0_3, 0_3, t_b^f])u_b $$.
