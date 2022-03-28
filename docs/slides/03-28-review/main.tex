@@ -1,0 +1,59 @@
+
+\documentclass[times,t]{beamer}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{lmodern} 
+\input{sym.tex}
+\setbeamertemplate{navigation symbols}{}
+
+\title{ECE 417/598: Review}
+\author{Vikas Dhiman}
+\date{March 25, 2022}
+\DeclareMathOperator{\diag}{diag}
+\begin{document}
+
+
+\newcommand{\ubfu}{\underline{\bfu}}
+\newcommand{\ubfx}{\underline{\bfx}}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Concepts to review and remember}
+  \begin{enumerate}
+    \item 2D/3D Rotation, translation, and transformation matrices
+    \item 3D Rotation from euler angles and vice versa
+    \item 3D Rotation from axis-angle and vice versa
+    \item Pinhole camera model. Image point to 3D ray and 3D point to image point.
+    \item Image line to 3D plane.
+    \item Least squares solution by function minimization
+    \item Line-plane intersection
+    \item Line-line intersection
+    \item Plane-plane intersection
+    \item SVD in terms of eigen values and vectors. Properties of eigen values,
+      eigen vectors and SVD matrices.
+    \item Null space and column space
+    \item Implicit and explicit equations of lines and planes.
+    \item Conversion of any linear system of equations into $Ax = b$ form or $Ax
+      = 0$ form.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{}
+  Find the 3D position of the
+  pothole the $t+1$ coordinate frame, in terms of $d = 1$ (the movement of the camera),
+  image-coordinates of the pothole $\underline{\bfu}_t$, $\underline{\bfu}_{t+1}$ (provided in figure), camera matrix $K$ (provided in figure).
+  The car has moved from directly forward along $Z_t$-axis by $d=1$m without any rotation.
+  We get two images at time $t$ and at $t+1$. The detection of the pothole at
+  time $t$ is $\underline{\bfu}_t = [100, 75, 1]^\top$ and
+  $\underline{\bfu}_{t+1} = [100, 95, 1]^\top$.
+  Provide the formula or pseudo-code for computing the
+  pothole coordinates. 
+  \includegraphics[width=0.7\linewidth]{media/image-road-triangulation-ray-ray.pdf}
+\end{frame}
+
+\begin{frame}
+\end{frame}
+
+\end{document}
