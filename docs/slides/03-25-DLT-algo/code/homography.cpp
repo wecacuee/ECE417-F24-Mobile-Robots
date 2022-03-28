@@ -153,6 +153,8 @@ int main(int argc, char** argv) {
         std::cout << "u_" << i << " = " << us[i] << "\n";
         std::cout << "u'_" << i << " = " << ups[i] << "\n";
     }
+    // Deliberately swapped ups and us because conversion from desired image pts 
+    // to current image pts leads to a denser image.
     Eigen::Matrix3d H = findHomography(ups, us);
     std::cout << " H: " << H << "\n";
     testHomographyFit(us, ups, H);
