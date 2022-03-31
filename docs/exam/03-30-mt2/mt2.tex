@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{ulem}
+\usepackage{hyperref}
 \input{sym}
 
 \title{ECE 417 Midterm 2 2022 practice problem set}
@@ -63,6 +64,7 @@
 \end{prob}
 \newpage
 \paragraph*{Solution}
+Watch lecture \url{https://drive.google.com/file/d/1cY02DTagpckbYl5gS0PYBu569vlZUNN6/view?usp=sharing}
 \begin{enumerate}
 \item Write cross product as a matrix operation
   \[ [\ubfu_i]_{\times}= \begin{bmatrix}
@@ -210,6 +212,7 @@
 
 \paragraph*{Solution}
 
+Watch lecture \url{https://drive.google.com/file/d/1JaEwLxQ2BvT30sVxshmglBz_v5FjC1hW/view?usp=sharing}
 See homework 4 solution.
 
 \begin{figure}
@@ -229,7 +232,9 @@ See homework 4 solution.
   full rank, hence invertible.
 \end{prob}
 
-\newpage
+\paragraph*{Solution}
+Watch this lecture \url{https://drive.google.com/file/d/1wgY2LAw7LQnh_IyHY0XDAr2yorXta93Z/view?usp=sharing}
+
 \begin{prob}
   Let matrix $A \in \bbR^{m \times n}$ be a $m \times n$ matrix. We are given
   that $B = A^\top A$ has $n$ orthonormal eigen vectors $\bfe_1, \dots \bfe_n$ with
@@ -241,8 +246,10 @@ See homework 4 solution.
   eigen vectors of matrix $B = A^\top A$.
 \end{prob}
 
-\newpage
 \paragraph*{Solution}
+Go through these \href{https://vikasdhiman.info/ECE417-Mobile-Robots/slides/03-07-linear-algebra_files/main.pdf.pdf}{slides}.
+Watch this lecture \url{https://drive.google.com/file/d/13aO_XI7kykQNOs5RJ0fhqtL5fgEzVfkN/view?usp=sharing}
+
 The matrix of right singular vectors of $A$ is same as the eigen vector matrix
 of $B = A^\top A$.
 \begin{align}
@@ -286,6 +293,7 @@ $V$, first $r$ column vectors of $V_{1:r} \in \bbR^{n \times r}$ and $V_{r+1:n}
 \end{prob}
 \newpage
 \paragraph*{Solution}
+Watch lecture \url{https://drive.google.com/file/d/17Cr0rMr567gfRNrrj9ri9vtsFaNLqW7t/view?usp=sharing}
 
 \begin{enumerate}
 \item Null space of $A$ ($\calN(A) = V_{r+1:n}$).
@@ -350,6 +358,7 @@ $V$, first $r$ column vectors of $V_{1:r} \in \bbR^{n \times r}$ and $V_{r+1:n}
 \newpage
 \section*{Practice problem solutions}
 \paragraph*{Solution 6}
+Watch lecture \url{https://drive.google.com/file/d/13aO_XI7kykQNOs5RJ0fhqtL5fgEzVfkN/view?usp=sharing}
 Let $\bfl \in \bbP^2$  be the parameters of the line, so that $\ubfu^\top \bfl = 0$.
 \begin{align*}
   A = \begin{bmatrix}
@@ -366,7 +375,9 @@ the representation of the line $\bfl = \bfv_3$.
 
 \paragraph*{Solution 7}
 
-Let $\bfp \in \bbP^3$  be the parameters of the plane, so that $\ubfx^\top \bfp = 0$.
+Watch the lecture \url{https://drive.google.com/file/d/1PEdgHCf6Ud0WYMVtCRlsjfctDcnBm8E9/view?usp=sharing}
+
+Let $\bfp \in \bbP^3$  be the parameters of the plane, so that $\underline{\bfx}^\top \bfp = 0$.
 \begin{align*}
   A = \begin{bmatrix}
     \bfx_1^\top & 1 \\
@@ -380,9 +391,11 @@ We are looking for the solution of $A \bfp = 0$.
 Let the SVD of $A = U\Sigma V^\top$. Let $V = [\bfv_1, \bfv_2, \bfv_3, \bfv_4]$, then
 the representation of the line $\bfp = \bfv_4$.
 \paragraph*{Solution 8}
+Watch the lecture \url{https://drive.google.com/file/d/1JaEwLxQ2BvT30sVxshmglBz_v5FjC1hW/view?usp=sharing}
 $\bfx = \lambda (\bfp_{1:3} \times \bfq_{1:3}) + \begin{bmatrix} \bfp_{1:3}^\top
   \\ \bfq_{1:3}\end{bmatrix}^\dagger \begin{bmatrix}-p_4 \\ q_4 \end{bmatrix}$
 \paragraph*{Solution 9}
+Watch the lecture \url{https://drive.google.com/file/d/1foVVQBC0krljjJ3f-UP4zsHn4l-c611e/view?usp=sharing}
 \[
   \begin{bmatrix}\bfd_1& -\bfd_2\end{bmatrix}\begin{bmatrix} \lambda_1 \\
     \lambda_2\end{bmatrix} = \bfz - \bfy
@@ -396,6 +409,7 @@ $\bfx = \lambda (\bfp_{1:3} \times \bfq_{1:3}) + \begin{bmatrix} \bfp_{1:3}^\top
     \[ \bfx = \lambda_1 \bfd_1 + \bfy \]
 \paragraph*{Solution 10}
 
+Watch the lecture \url{https://drive.google.com/file/d/1wgY2LAw7LQnh_IyHY0XDAr2yorXta93Z/view?usp=sharing}
 \[
   \lambda \bfp_{1:3}^\top \bfd + \bfp_{1:3}^\top \bfx_0  + p_4 = 0
   \]
