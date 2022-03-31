@@ -123,7 +123,7 @@ Watch lecture \url{https://drive.google.com/file/d/1cY02DTagpckbYl5gS0PYBu569vlZ
           multiplication with the unknowns
           \[
             \begin{bmatrix}
-              \mathbf{0}^\top & -w_i \ubfX_i^\top & y_i \ubfX_i \\
+              \mathbf{0}^\top & -w_i \ubfX_i^\top & y_i \ubfX_i^\top \\
               w_i \ubfX_i^\top & \mathbf{0}^\top  & -x_i \ubfX_i^\top \\
               -y_i \ubfX_i^\top & x_i \ubfX_i^\top & \mathbf{0}^\top
               \end{bmatrix}_{3 \times 12}
@@ -137,7 +137,7 @@ Watch lecture \url{https://drive.google.com/file/d/1cY02DTagpckbYl5gS0PYBu569vlZ
      \item Pick only two of the equations as only two are linearly independent.
        \[
          \begin{bmatrix}
-           \mathbf{0}^\top & -w_i \ubfX_i^\top & y_i \ubfX_i \\
+           \mathbf{0}^\top & -w_i \ubfX_i^\top & y_i \ubfX_i^\top \\
            w_i \ubfX_i^\top & \mathbf{0}^\top  & -x_i \ubfX_i^\top
          \end{bmatrix}_{2 \times 12}
          \begin{bmatrix}
@@ -151,10 +151,10 @@ Watch lecture \url{https://drive.google.com/file/d/1cY02DTagpckbYl5gS0PYBu569vlZ
        $\ubfu_1, \dots, \ubfu_n$ and $\ubfX_1, \dots, \ubfX_n$.
        \[
          \begin{bmatrix}
-           \mathbf{0}^\top & -w_1 \ubfX_1^\top & y_1 \ubfX_1 \\
+           \mathbf{0}^\top & -w_1 \ubfX_1^\top & y_1 \ubfX_1^\top \\
            w_1 \ubfX_1^\top & \mathbf{0}^\top  & -x_1 \ubfX_1^\top \\
            \vdots & \vdots & \vdots\\
-           \mathbf{0}^\top & -w_n \ubfX_n^\top & y_n \ubfX_n \\
+           \mathbf{0}^\top & -w_n \ubfX_n^\top & y_n \ubfX_n^\top \\
            w_n \ubfX_n^\top & \mathbf{0}^\top  & -x_n \ubfX_n^\top \\
          \end{bmatrix}_{2n \times 12}
          \begin{bmatrix}
@@ -170,10 +170,10 @@ Watch lecture \url{https://drive.google.com/file/d/1cY02DTagpckbYl5gS0PYBu569vlZ
      to the smallest singular value.
      \[
       A = \begin{bmatrix}
-        \mathbf{0}^\top & -w_1 \ubfX_1^\top & y_1 \ubfX_1 \\
+        \mathbf{0}^\top & -w_1 \ubfX_1^\top & y_1 \ubfX_1^\top \\
         w_1 \ubfX_1^\top & \mathbf{0}^\top  & -x_1 \ubfX_1^\top \\
         \vdots & \vdots & \vdots\\
-        \mathbf{0}^\top & -w_n \ubfX_n^\top & y_n \ubfX_n \\
+        \mathbf{0}^\top & -w_n \ubfX_n^\top & y_n \ubfX_n^\top \\
         w_n \ubfX_n^\top & \mathbf{0}^\top  & -x_n \ubfX_n^\top \\
        \end{bmatrix} = U\Sigma V^T
      \]
