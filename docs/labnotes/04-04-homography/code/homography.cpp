@@ -12,7 +12,7 @@ void onMouse(int event, int x, int y, int flags, void *userdata) {
         static_cast<std::vector<Eigen::Vector3d>* >(userdata);
     if (cv::EVENT_LBUTTONUP == event) {
         Eigen::Vector3d pt; pt << x, y, 1;
-        std::cout << "u" << pt << "\n";
+        std::cout << "u = [" << pt << "]\n";
         points_clicked->push_back(pt);
     }
 }
@@ -51,6 +51,10 @@ Eigen::Matrix3d
 findHomography(const std::vector<Eigen::Vector3d>& us,
                const std::vector<Eigen::Vector3d>& ups)
 {
+    if (us.size() < 4 || ups.size() < 4) {
+        std::cerr << "Need at least four points got " << us.size() << " and " << ups.size() << "\n";
+        throw std::runtime_error("Need atleast four points");
+    }
     Eigen::MatrixXd A(8, 9); A.setZero();
     for (int i = 0; i < us.size(); ++i) {
         // [[0ᵀ      -w'ᵢ uᵢᵀ   yᵢ' uᵢᵀ]]
@@ -114,6 +118,7 @@ int main(int argc, char** argv) {
         fpath = "../../data/removing-perspective-distortion.png";
     } else {
         fpath = argv[1];
+        collect_points = true;
     }
 
     std::cout << "file path : " << fpath << "\n";
@@ -125,6 +130,7 @@ int main(int argc, char** argv) {
     cv::cv2eigen(img_64f, eigen_img);
     std::vector<Eigen::Vector3d> us;
     if (collect_points) {
+        std::cout << "Left click on any rectangular object in the  image in the following order: left top, left bottom, right top, right bottom. When done press any key.";
         us = collectPoints(img);
     } else {
         {
@@ -147,6 +153,11 @@ int main(int argc, char** argv) {
             u << 335, 225, 1;
             us.push_back(u);
         }
+    }
+
+    if (us.size() < 4) {
+        std::cerr << "Need at least four points got " << us.size() << "\n";
+        throw std::runtime_error("Need atleast four points");
     }
 
     std::vector<Eigen::Vector3d> ups = us;

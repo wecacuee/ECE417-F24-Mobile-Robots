@@ -12,7 +12,7 @@ void onMouse(int event, int x, int y, int flags, void *userdata) {
         static_cast<std::vector<Eigen::Vector3d>* >(userdata);
     if (cv::EVENT_LBUTTONUP == event) {
         Eigen::Vector3d pt; pt << x, y, 1;
-        std::cout << "u" << pt << "\n";
+        std::cout << "u = [" << pt << "]\n";
         points_clicked->push_back(pt);
     }
 }
@@ -55,18 +55,20 @@ findHomography(const std::vector<Eigen::Vector3d>& us,
     for (int i = 0; i < us.size(); ++i) {
         // [[0ᵀ      -w'ᵢ uᵢᵀ   yᵢ' uᵢᵀ]]
         //  [wᵢ'uᵢᵀ        0ᵀ   -xᵢ uᵢᵀ]]
-        A.block(2*i, 3, 1, 3) = -ups[i](2)*us[i].transpose();
-        A.block(2*i, 6, 1, 3) = ups[i](1)*us[i].transpose();
-        A.block(2*i+1, 0, 1, 3) = ups[i](2)*us[i].transpose();
-        A.block(2*i+1, 6, 1, 3) = -ups[i](0)*us[i].transpose();
+        A.block(2*i, 3, 1, 3) = Eigen::Vector3d::Zero().transpose();// TODO Replace this with correct formula
+        A.block(2*i, 6, 1, 3) = Eigen::Vector3d::Zero().transpose(); // TODO Replace this with correct formula 
+        A.block(2*i+1, 0, 1, 3) = Eigen::Vector3d::Zero().transpose(); // TODO Replace this with correct formula
+        A.block(2*i+1, 6, 1, 3) = Eigen::Vector3d::Zero().transpose(); // TODO Replace this with correct formula
     }
 
     auto svd = A.jacobiSvd(Eigen::ComputeFullV);
+    // y = v₉
+    Eigen::VectorXd nullspace = Eigen::VectorXd::Zero(9); // TODO Replace this with correct formula
+
     Eigen::Matrix3d H;
-    Eigen::VectorXd nullspace = svd.matrixV().col(8);
-    H.row(0) = nullspace.block(0, 0, 3, 1).transpose();
-    H.row(1) = nullspace.block(3, 0, 3, 1).transpose();
-    H.row(2) = nullspace.block(6, 0, 3, 1).transpose();
+    H.row(0) = Eigen::Vector3d::Zero().transpose(); // TODO: replace with correct formula
+    H.row(1) = Eigen::Vector3d::Zero().transpose(); // TODO: replace with correct formula
+    H.row(2) = Eigen::Vector3d::Zero().transpose(); // TODO: replace with correct formula
 
     return H;
 }
@@ -81,7 +83,8 @@ applyHomography(const Eigen::Matrix3d& H,
         for (int new_col = 0; new_col < new_img.cols(); ++new_col) {
             u << new_col + 0.5, new_row + 0.5, 1;
             /**** Apply homography for each pixel ***/
-            up = H * u;
+            // u' = H * u
+            up = Eigen::Vector3d::Zero(); // TODO replace with correct formula
             up /= up(2);
             /**** Apply homography for each pixel ***/
             int row = round(up(1));
@@ -111,6 +114,7 @@ int main(int argc, char** argv) {
         fpath = "../../data/removing-perspective-distortion.png";
     } else {
         fpath = argv[1];
+        collect_points = true;
     }
 
     std::cout << "file path : " << fpath << "\n";
@@ -122,6 +126,7 @@ int main(int argc, char** argv) {
     cv::cv2eigen(img_64f, eigen_img);
     std::vector<Eigen::Vector3d> us;
     if (collect_points) {
+        std::cout << "Left click on any rectangular object in the  image in the following order: left top, left bottom, right top, right bottom. When done press any key.";
         us = collectPoints(img);
     } else {
         {
