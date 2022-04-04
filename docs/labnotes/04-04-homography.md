@@ -53,7 +53,7 @@ cd ~/04-04/code/build
 
 ![](media/opencv-window-input-points.png)
 
-Left click on marked points in the following order left top, left bottom, right top, right bottom. Then press any key to quit. This will record the coordinates of the marked points. In general you can chose to click on any rectangular thing in the image.
+Left click on marked points in the following order left top, left bottom, right top, right bottom. Then press any key to quit. This will record the coordinates of the marked points. In general you can chose to click on any rectangular thing in the image. Bigger the rectangular thing, better is the H estimation.
 
 ![](media/terminal_output.png)
 ...
