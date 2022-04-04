@@ -1,0 +1,4 @@
+cmake
+libeigen3-dev
+make
+libopencv-dev
