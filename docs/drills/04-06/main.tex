@@ -115,5 +115,164 @@ unequal? If yes, what is the size of final matrix?
   \item $\bfx^\top A^\top \bfy$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
   \end{enumerate}
 \end{prob}
+\newpage
+\section{Solution}
+  \begin{enumerate}
+  \item $AB$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Valid. $AB \in \bbR^{2 \times 4}$.
+  \item $PQ$, where $P \in \bbR^{2 \times 4}$ and $B \in \bbR^{2 \times 4}$.
+    \\
+    Invalid, $4 \ne 2$.
+  \item $A^\top B$, where $A \in \bbR^{3 \times 5}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Valid, $A^\top B \in \bbR^{5 \times 4}$.
+  \item $AB^\top$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times
+      4}$.
+    \\
+    Invalid, because $3 \ne 4$.
+
+  \item $A^\top B^\top$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3
+      \times 4}$.
+    \\
+    Invalid, because $2 \ne 4$.
+  \item $(BA)^\top$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Invalid, because $4 \ne 2$.
+  \item $A\bfx$, where $A \in \bbR^{2 \times 3}$ and $\bfx \in \bbR^{3}$.
+    \\
+    Valid, $A\bfx \in \bbR^{2}$. 
+  \item $A^\top\bfx$, where $A \in \bbR^{2 \times 3}$ and $\bfx \in \bbR^{3
+      \times 1}$.
+    \\
+    Invalid, because $2 \ne 3$.
+  \item $\bfx A$, where $A \in \bbR^{2 \times 3}$ and $\bfx \in \bbR^{3}$.
+    \\
+    Invalid, because $1 \ne 2$.
+  \item $\bfx^\top B$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Valid, $\bfx^\top B \in \bbR^{1 \times 4}$.
+  \item $\bfx B$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Invalid, because $1 \ne 3$.
+  \item $\bfx B^\top$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Invalid, because $1 \ne 4$.
+  \item $\bfx^\top B^\top$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+    \\
+    Invalid, because $3 \ne 4$.
+  \item $\bfx^\top \bfy$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+    \\
+    Valid, $\bfx^\top \bfy \in \bbR$.
+  \item $\bfy^\top \bfx$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+    \\
+    Valid, $\bfy^\top \bfx \in \bbR$.
+  \item $\bfy \bfx$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+    Invalid, because $1 \ne 3$.
+  \item $\bfy^\top \bfx^\top$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+    \\
+    Invalid, because $3 \ne 1$.
+  \item $\bfy \bfx^\top$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+    \\
+    Valid, $\bfy \bfx^\top \in \bbR^{3 \times 3}$.
+  \item $\bfy A \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+    \\
+    Invalid, because $1\ne 3$ and $4\ne 1$.
+    
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+    \\
+    Invalid, because $3 \ne 1$.
+  \item $\bfx^\top A     \bfy    $, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+    \\
+    Valid, $\bfx^\top A     \bfy \in \bbR$.
+  \item $\bfy^\top A^\top \bfx$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+    \\
+    Valid, $\bfy^\top A^\top     \bfx \in \bbR$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+    \\
+    Invalid, because $3 \ne 1$.
+  \item $\bfx^\top A^\top \bfy$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+    \\
+    Invalid, because $3 \ne 4$ and $3 \ne 4$.
+
+  \item $AB$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Valid. $AB \in \bbR^{m \times p}$.
+  \item $PQ$, where $P \in \bbR^{m \times p}$ and $B \in \bbR^{m \times p}$.
+    \\
+    Invalid, $p \ne m$.
+  \item $A^\top B$, where $A \in \bbR^{n \times 5}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Valid, $A^\top B \in \bbR^{5 \times p}$.
+  \item $AB^\top$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times
+      p}$.
+    \\
+    Invalid, because $n \ne p$.
+
+  \item $A^\top B^\top$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n
+      \times p}$.
+    \\
+    Invalid, because $m \ne p$.
+  \item $(BA)^\top$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Invalid, because $p \ne m$.
+  \item $A\bfx$, where $A \in \bbR^{m \times n}$ and $\bfx \in \bbR^{n}$.
+    \\
+    Valid, $A\bfx \in \bbR^{m}$. 
+  \item $A^\top\bfx$, where $A \in \bbR^{m \times n}$ and $\bfx \in \bbR^{n
+      \times 1}$.
+    \\
+    Invalid, because $m \ne n$.
+  \item $\bfx A$, where $A \in \bbR^{m \times n}$ and $\bfx \in \bbR^{n}$.
+    \\
+    Invalid, because $1 \ne m$.
+  \item $\bfx^\top B$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Valid, $\bfx^\top B \in \bbR^{1 \times p}$.
+  \item $\bfx B$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Invalid, because $1 \ne n$.
+  \item $\bfx B^\top$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Invalid, because $1 \ne p$.
+  \item $\bfx^\top B^\top$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+    \\
+    Invalid, because $n \ne p$.
+  \item $\bfx^\top \bfy$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+    \\
+    Valid, $\bfx^\top \bfy \in \bbR$.
+  \item $\bfy^\top \bfx$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+    \\
+    Valid, $\bfy^\top \bfx \in \bbR$.
+  \item $\bfy \bfx$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+    Invalid, because $1 \ne n$.
+  \item $\bfy^\top \bfx^\top$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+    \\
+    Invalid, because $n \ne 1$.
+  \item $\bfy \bfx^\top$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+    \\
+    Valid, $\bfy \bfx^\top \in \bbR^{n \times n}$.
+  \item $\bfy A \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+    \\
+    Invalid, because $1\ne n$ and $p\ne 1$.
+    
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+    \\
+    Invalid, because $n \ne 1$.
+  \item $\bfx^\top A     \bfy    $, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+    \\
+    Valid, $\bfx^\top A     \bfy \in \bbR$.
+  \item $\bfy^\top A^\top \bfx$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+    \\
+    Valid, $\bfy^\top A^\top     \bfx \in \bbR$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+    \\
+    Invalid, because $n \ne 1$.
+  \item $\bfx^\top A^\top \bfy$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+    \\
+    Invalid, because $n \ne p$ and $n \ne p$.
+
+  \end{enumerate}
+
 
 \end{document}
