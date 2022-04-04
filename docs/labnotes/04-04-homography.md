@@ -29,7 +29,7 @@ mkdir -p ~/04-04/code
 
 1. Download [`CMakeLists.txt`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/code/CMakeLists.txt) to `~/04-04/code/CMakeLists.txt`.
 
-2. Download [`homography.cpp`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/code/homography.cpp) and save to `~/04-04/code/homography.cpp)
+2. Download [`homography.cpp`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/code/homography.cpp) and save to `~/04-04/code/homography.cpp`.
 
 3. Download [`data/removing-perspective-distortion.png`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/data/removing-perspective-distortion.png) and save to `~/04-04/code/data/removing-perspective-distortion.png`.
 
