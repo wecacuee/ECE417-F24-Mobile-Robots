@@ -31,7 +31,7 @@ mkdir -p ~/04-04/code
 
 2. Download [`homography.cpp`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/code/homography.cpp) and save to `~/04-04/code/homography.cpp`.
 
-3. Download [`data/removing-perspective-distortion.png`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/data/removing-perspective-distortion.png) and save to `~/04-04/code/data/removing-perspective-distortion.png`.
+3. Download [`data/removing-perspective-distortion.png`](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-04-homography/code/data/removing-perspective-distortion.png) and save to `~/04-04/code/data/removing-perspective-distortion.png`.
 
 ## Compile
 
