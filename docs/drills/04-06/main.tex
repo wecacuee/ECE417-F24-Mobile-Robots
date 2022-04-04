@@ -1,0 +1,119 @@
+\documentclass[twocolumn]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
+\input{sym}
+
+\newtheorem{prob}{Problem}
+\title{Linear algebra drills}
+\begin{document}
+\maketitle
+\section{Valid matrix multiplication and addition}
+\begin{itemize}
+\item  Notation: A matrix $A$ is described as $A \in \bbR^{m \times n}$ (read
+  as: A is in
+  the set of real matrices of size m times n) if A is table of numbers of the form:
+  \[
+    A = \begin{bmatrix}
+      a_{11} & \dots & a_{1n} \\
+      \vdots & \ddots & \vdots \\
+      a_{m1} & \dots & a_{mn},
+      \end{bmatrix}
+ \] and each $a_{ij}$ is a real number also denoted as $a_{ij} \in \bbR$ (read
+ as: $a_{ij}$ is in the set of real numbers); for all $i \in \{1, \dots, m\}$
+ and $j \in \{1, \dots, n\}$.
+\item Rule 1: Transpose of matrix swaps rows and columns. If $A \in \bbR^{m
+    \times n}$, then $A^\top \in \bbR^{n \times m}$.
+ \item Notation: A column vector is a matrix with only one column. Vectors are
+   usually denoted by a boldface small letter $\bfx \in \bbR^{m \times 1}$ and
+   sometimes the second dimension is omitted: $\bfx \in \bbR^{m}$.
+   \[
+     \bfx = \begin{bmatrix}
+       x_1\\ \vdots \\ x_m
+       \end{bmatrix}
+   \]
+   A row vector
+   is a matrix with only one row. Row vectors are often denoted as transpose of
+   column vector $\bfx^\top \in \bbR^{1 \times n}$. The $1$ dimension of row
+   vector is never omitted, 
+   \[
+     \bfx^\top = \begin{bmatrix}
+       x_1& \dots & x_m
+     \end{bmatrix}
+   \]
+\item Rule 2: Matrix multiplication between $A \in \bbR^{m \times n}$ and $B \in \bbR^{p
+  \times q}$ is only valid when $n = p$. When matrix multiplication is valid,
+resulting matrix has size $C = AB \in
+\bbR^{m \times q}$.
+\item Role 3: Scalar-Matrix multiplication is not a type of matrix
+  multiplication. It is a multiplication of a different type. Scalar-matrix
+  multiplication is always valid irrespective of the size of the matrix. 
+\item Rule 4: Matrix addition between $A \in \bbR^{m \times n}$ and $B \in \bbR^{p
+    \times q}$ is only valid when $m = p$ and $n = q$.
+  \item Rule 5: Matrix division and matrix fractions are not defined.
+    $\frac{A}{B}$ or $A / B$ are not defined. (Matrix inverse (when defined) is
+     just another matrix $C = A^{-1}$ that can be multiplied or
+     added with other matrices. If $A \in \bbR^{m \times n}$ then $C = A^{-1}
+     \in \bbR^{n \times m}$.)
+\end{itemize}
+
+\begin{prob}
+  Are the following matrix operations valid? If not, which dimensions are
+unequal? If yes, what is the size of final matrix?
+  \begin{enumerate}
+  \item $AB$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $PQ$, where $P \in \bbR^{2 \times 4}$ and $B \in \bbR^{2 \times 4}$.
+  \item $A^\top B$, where $A \in \bbR^{3 \times 5}$ and $B \in \bbR^{3 \times 4}$.
+  \item $AB^\top$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $A^\top B^\top$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $(BA)^\top$, where $A \in \bbR^{2 \times 3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $A\bfx$, where $A \in \bbR^{2 \times 3}$ and $\bfx \in \bbR^{3}$.
+  \item $A^\top\bfx$, where $A \in \bbR^{2 \times 3}$ and $\bfx \in \bbR^{3
+      \times 1}$.
+  \item $\bfx A$, where $A \in \bbR^{2 \times 3}$ and $\bfx \in \bbR^{3}$.
+  \item $\bfx^\top B$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $\bfx B$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $\bfx B^\top$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $\bfx^\top B^\top$, where $\bfx \in \bbR^{3}$ and $B \in \bbR^{3 \times 4}$.
+  \item $\bfx^\top \bfy$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+  \item $\bfy^\top \bfx$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+  \item $\bfy \bfx$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+  \item $\bfy^\top \bfx^\top$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+  \item $\bfy \bfx^\top$, where $\bfx \in \bbR^{3}$ and $\bfy \in \bbR^{3}$.
+  \item $\bfy A \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+  \item $\bfx^\top A     \bfy    $, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+  \item $\bfx^\top A^\top \bfy$, where $\bfx \in \bbR^{3}$, $A \in \bbR^{3 \times 4}$ and $\bfy \in \bbR^{4}$.
+
+  \item $AB$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times p}$.
+  \item $PQ$, where $P \in \bbR^{m \times p}$ and $B \in \bbR^{m \times p}$.
+  \item $A^\top B$, where $A \in \bbR^{n \times 5}$ and $B \in \bbR^{n \times p}$.
+  \item $AB^\top$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times p}$.
+  \item $A^\top B^\top$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times p}$.
+  \item $(BA)^\top$, where $A \in \bbR^{m \times n}$ and $B \in \bbR^{n \times p}$.
+  \item $A\bfx$, where $A \in \bbR^{m \times n}$ and $\bfx \in \bbR^{n}$.
+  \item $A^\top\bfx$, where $A \in \bbR^{m \times n}$ and $\bfx \in \bbR^{n
+      \times 1}$.
+  \item $\bfx A$, where $A \in \bbR^{m \times n}$ and $\bfx \in \bbR^{n}$.
+  \item $\bfx^\top B$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+  \item $\bfx B$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+  \item $\bfx B^\top$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+  \item $\bfx^\top B^\top$, where $\bfx \in \bbR^{n}$ and $B \in \bbR^{n \times p}$.
+  \item $\bfx^\top \bfy$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+  \item $\bfy^\top \bfx$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+  \item $\bfy \bfx$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+  \item $\bfy^\top \bfx^\top$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+  \item $\bfy \bfx^\top$, where $\bfx \in \bbR^{n}$ and $\bfy \in \bbR^{n}$.
+  \item $\bfy A \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+  \item $\bfx^\top A     \bfy    $, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+  \item $\bfy^\top A^\top \bfx^\top$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+  \item $\bfx^\top A^\top \bfy$, where $\bfx \in \bbR^{n}$, $A \in \bbR^{n \times p}$ and $\bfy \in \bbR^{p}$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}
