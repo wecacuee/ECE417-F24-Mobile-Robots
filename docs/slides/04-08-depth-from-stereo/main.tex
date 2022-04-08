@@ -55,11 +55,13 @@
   \vspace{10em}
 
 \item Find the intersection of rays (lines) \ref{enit:right-ray} and \ref{enit:left-ray}.
+  \vspace{10em}
 \end{enumerate}
 
+\newpage
 \begin{prob}
-  When the depth corresponding to the point $\ubfu_L$ is unknown, the possible
-  pixels ($\ubfu_r$) on the right image that can correspond to  the point form a
+  When the depth corresponding to the point $\bfx$ is unknown, the possible
+  pixels ($\bfx'$) on the right image that can correspond to  the point form a
   line. What is the equation of that line?
   \\
   \includegraphics[width=0.5\linewidth]{media/epipolar-line.png}
@@ -68,16 +70,13 @@
 \begin{enumerate}
 \item Find the equation of ray corresponding to the pothole in the left image.
   In other words, write the equation of the ray corresponding to the point
-  $\ubfu_L$, in camera frame $L$.
+  $\bfx$, in the first camera frame.
   \vspace{10em}
 
-\item Find the rotation matrix ${}^rR_L$ and translation vector ${}^r\bft_L$, so
-  that they transform any point in the coordinate frame $L$ to a point in the
-  coordinate frame $r$. ($\bfX_r = {}^rR_L \bfX_L + {}^r\bft_L$).
-  \vspace{10em}
-
-\item Transform the equation of ray from coordinate frame $L$ to coordinate
-  frame $r$.
+\item Assume the rotation matrix $R$ and translation vector $\bft$, so
+  that they transform any point in the left coordinate frame to a point in the
+  right coordinate frame. ($\bfX' = R \bfX+ \bft$). Transform the equation of
+  ray from the left coordinate frame to the right coordinate frame.
   \vspace{10em}
 
 \item Project the equation of ray to the right camera.
