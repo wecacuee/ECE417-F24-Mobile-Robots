@@ -1,0 +1,88 @@
+
+\documentclass[times,singlecolumn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{hyperref}
+\input{sym}
+
+\newcommand{\ubfu}{\underline{\bfu}}
+\newcommand{\ubfx}{\underline{\bfx}}
+
+\newtheorem{prob}{Problem}
+
+
+\title{ECE 417/598: Depth from stereo}
+\author{Instructor: Vikas Dhiman}
+\DeclareMathOperator{\diag}{diag}
+\begin{document}
+\maketitle
+\begin{tabular}{p{0.5\linewidth}p{0.5\linewidth}}
+  (1) Student name:& Student email: \\
+\end{tabular}
+
+\begin{prob}
+  Find the 3D position of the pothole give that the right camera $r$  is moved
+  along X-axis by $b=1m$ with respect to the left camera $L$. 
+\end{prob}
+
+\includegraphics[width=\linewidth]{media/image-road-triangulation-ray-ray.pdf}
+
+\newpage
+\begin{enumerate}
+\item Find the equation of ray corresponding to the pothole in the left image.
+  In other words, write the equation of the ray corresponding to the point
+  $\ubfu_L$, in camera frame $L$.
+  \vspace{10em}
+
+\item Find the rotation matrix ${}^rR_L$ and translation vector ${}^r\bft_L$, so
+  that they transform any point in the coordinate frame $L$ to a point in the
+  coordinate frame $r$. ($\bfX_r = {}^rR_L \bfX_L + {}^r\bft_L$).
+  \vspace{10em}
+
+\item Transform the equation of ray from coordinate frame $L$ to coordinate
+  frame $r$.
+  \label{enit:left-ray}
+  \vspace{10em}
+
+\item Find the equation of ray corresponding to the pothole in the right image.
+  In other words, write the equation of the ray corresponding to the point
+  $\ubfu_r$, in camera frame $r$.
+  \label{enit:right-ray}
+  \vspace{10em}
+
+\item Find the intersection of rays (lines) \ref{enit:right-ray} and \ref{enit:left-ray}.
+\end{enumerate}
+
+\begin{prob}
+  When the depth corresponding to the point $\ubfu_L$ is unknown, the possible
+  pixels ($\ubfu_r$) on the right image that can correspond to  the point form a
+  line. What is the equation of that line?
+  \\
+  \includegraphics[width=0.5\linewidth]{media/epipolar-line.png}
+\end{prob}
+
+\begin{enumerate}
+\item Find the equation of ray corresponding to the pothole in the left image.
+  In other words, write the equation of the ray corresponding to the point
+  $\ubfu_L$, in camera frame $L$.
+  \vspace{10em}
+
+\item Find the rotation matrix ${}^rR_L$ and translation vector ${}^r\bft_L$, so
+  that they transform any point in the coordinate frame $L$ to a point in the
+  coordinate frame $r$. ($\bfX_r = {}^rR_L \bfX_L + {}^r\bft_L$).
+  \vspace{10em}
+
+\item Transform the equation of ray from coordinate frame $L$ to coordinate
+  frame $r$.
+  \vspace{10em}
+
+\item Project the equation of ray to the right camera.
+  \vspace{10em}
+
+\end{enumerate}
+
+\end{document}
