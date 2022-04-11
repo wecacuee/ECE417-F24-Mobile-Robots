@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
     std::cout << "file path : " << fpath << "\n";
 
     cv::Mat img = cv::imread(fpath, cv::IMREAD_GRAYSCALE);
+    cv::Mat img_corners = cv::imread(fpath);
     if (img.empty()) {
         std::cerr << "ERROR: Failed to load the image \n";
         return 1;
@@ -29,29 +30,36 @@ int main(int argc, char** argv) {
     cv::imshow("windowname", img);
     cv::waitKey(-1);
 
-    cv::Size patternsize(10,8); //number of centers
+    cv::Size patternsize(8,6); //number of centers
     std::vector<cv::Point2f> centers; //this will be filled by the detected centers
     bool patternfound = cv::findChessboardCornersSB(
         img,
         patternsize,
         centers);
-
-    Eigen::MatrixXd corners;
-    cv::cv2eigen(cv::Mat(centers), corners);
-
-    std::cout << "Corners: " << corners << "\n";
-    if (! patternfound) {
+    if (patternfound) {
+        std::cout << "Pattern found \n";
+    } else {
         std::cerr << "Pattern not found \n";
         return -1;
     }
 
+    cv::Mat centers_mat ( centers );
+
     std::cerr << "Drawing\n";
-    cv::drawChessboardCorners(img,
+    cv::drawChessboardCorners(img_corners,
                               patternsize,
-                              cv::Mat(centers),
+                              centers_mat,
                               patternfound);
 
-    cv::imshow("windowname", img);
+    cv::imshow("windowname", img_corners);
     cv::waitKey(-1);
+
+
+    Eigen::MatrixXd corners(centers.size(), 2);
+    for (int i = 0; i < centers.size(); ++i) {
+        corners(i, 0) = centers[i].x;
+        corners(i, 1) = centers[i].x;
+    }
+    std::cout << "Corners : " << corners << "\n";
     return 0;
 }
