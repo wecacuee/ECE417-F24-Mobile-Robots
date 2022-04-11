@@ -20,6 +20,23 @@ We learned about creating a ROS package in [turtlesim tutorials](http://wiki.ros
 
 OpenCV stands for open source computer vision library. We have used OpenCV to implement loading images and converting them from ROS messages to Eigen matrices. If you look back at the template code of Birds Eye View Lab and Homography lab, you can find code using OpenCV.
 
+## OpenCV and CMake
+
+You will need to find the package OpenCV using
+
+``` cmake
+find_package(OpenCV 4.2 REQUIRED)
+```
+
+And then include_directories and target_link_libraries with the target
+
+``` cmake
+include_directories(${OpenCV_INCLUDE_DIRS})
+target_link_libraries(some_target_name_here 
+other_libraries_names_here like ${catkin_LIBRARIES}, Eigen3::Eigen
+${OpenCV_LIBRARIES}
+)
+```
 
 ## Reading, Displaying and Writing an Image
 
@@ -34,3 +51,8 @@ For details please follow the tutorial [here](https://docs.opencv.org/4.x/db/deb
 
 1. Read an image from file (using [cv::imread](https://docs.opencv.org/4.x/d4/da8/group__imgcodecs.html#ga288b8b3da0892bd651fce07b3bbd3a56))
 2. Find chessboard corners using [cv::findChessboardCornersSB](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#gadc5bcb05cb21cf1e50963df26986d7c9)
+
+You might find this tutorial helpful:
+<https://docs.opencv.org/4.x/d9/dab/tutorial_homography.html>
+
+##
