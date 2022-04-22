@@ -1,0 +1,65 @@
+
+\documentclass[times,singlecolumn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{ulem}
+\usepackage{hyperref}
+\input{sym}
+
+\newcommand{\ubfu}{\underline{\bfu}}
+\newcommand{\ubfx}{\underline{\bfx}}
+
+\newtheorem{prob}{Problem}
+
+
+\title{ECE 417/598: What did we learn?}
+\author{Instructor: Vikas Dhiman}
+\DeclareMathOperator{\diag}{diag}
+\begin{document}
+\maketitle
+
+\paragraph{Things to take away from this course}
+\begin{enumerate}
+  \item Converting 3D vision problems to a system of linear equations.
+  \item Converting system of  linear equations to the form $A\bfx = b$ or $A \bfy = 0$ form and
+    solving them in the least square sense.
+    \begin{enumerate}
+      \item The solution $\bfx = A^\dagger \bfb$ minimizes $\min_{\bfx} \|A\bfx
+        - \bfb\|^2$.
+        \item The SVD based solution $\bfy = \lambda_{r+1} \bfv_{r+1} + \dots +
+          \lambda_{n} \bfv_n$, if $A = U\Sigma V^\top$ is the SVD of $A$,
+          minimizes $\min_\bfy \| A\bfy \|^2 \text{ such  that } \|\bfy\| = 1$.
+      \end{enumerate}
+  \item Pinhole camera model, $\bfu = \lambda K \bfX$ or equivalently $\bfX =
+    \lambda K^{-1} \bfu$.
+  \item Geometry problems like line-plane intersection, plane-plane
+    intersection and line-line intersection.
+  \item Finding Homography $H$, Projection matrix $P$, camera matrix $K$ from
+    correspondence points.
+\end{enumerate}
+
+\paragraph{Limitations of this course}
+
+This course has focused mostly on linear equations and their least-square solutions.
+\begin{enumerate}
+  \item What to do when the equations are not linear? Can you covert non-linear
+    equations into approximate linear equations?
+    \vspace{10em}
+  \item What happens when least-square is not the best way to handle noise?
+    \\
+    \includegraphics[width=0.5\linewidth,trim=0 2em 0 0,clip]{media/least-square-vs-ransac.png}
+    \vspace{10em}
+
+  \item How to automatically find correspondence points?
+    \\
+    \vspace{10em}
+\end{enumerate}
+
+\paragraph{Some questions on the ECE 598 paper} 
+
+\url{./Zhang.pdf}
+
+\end{document}
