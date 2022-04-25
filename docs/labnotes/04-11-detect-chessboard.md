@@ -55,4 +55,25 @@ For details please follow the tutorial [here](https://docs.opencv.org/4.x/db/deb
 You might find this tutorial helpful:
 <https://docs.opencv.org/4.x/d9/dab/tutorial_homography.html>
 
-##
+## Template code for the project
+
+1. The template code (a catkin workspace) for the project is [here](https://github.com/wecacuee/ECE417-Mobile-Robots/tree/master/docs/labnotes/04-11-detect-chessboard/code). All the files linked below are in that folder.
+
+2. You have to run the cv_camera_node (or usb_cam_node) to publish the image topics at `/cv_camera/image_raw`
+
+   ``` shellsession
+   rosrun cv_camera  cv_camera_node   _image_width:=800 _image_height:=600 _frame_id:=camera __name:=cv_camera
+   ```
+
+3. While the above node is running, you can catkin_make the provided ROS node try fixing the math in [this file](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-11-detect-chessboard/code/catkin_ws/src/camera_calibration_3d/src/camera_calibration.cpp)
+
+   ``` shellsession
+   cd "path where you downloaded the above files"/catkin_ws
+   catkin_make
+   source devel/setup.bash
+   rosrun camera_calibration_3d camera_calibration
+   ```
+   
+   The camera_calibration node will cycle through "sliding windows" in the image to find the chessboard. You might have to tweak some parameters to make it work on your image. I tested it on [this image](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-11-detect-chessboard/code/catkin_ws/src/camera_calibration_3d/data/two-chessboard.jpg)
+   
+4. If you like launch files, [here is a launch file](https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/labnotes/04-11-detect-chessboard/code/catkin_ws/src/camera_calibration_3d/launch/camera_calibration_3d.launch) to run multiple nodes.
