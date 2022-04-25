@@ -7,7 +7,7 @@ project(camera_calibration_3d)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED roscpp cv_bridge)
 find_package(Eigen3 3.3 REQUIRED)
 find_package(OpenCV 4.2 REQUIRED)
 

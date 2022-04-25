@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<launch>
+  <node type="usb_cam_node" pkg="usb_cam" name="cv_camera" output="log">
+    <param name="image_width" value="800" />
+    <param name="image_height" value="600" />
+    <param name="pixel_format" value="mjpeg" />
+  </node>
+
+  <!-- uncomment these lines if you want to use cv_camera instead of
+       usb_cam_node. For some computers, cv_camera might work better -->
+  <!-- node type="cv_camera_node" pkg="cv_camera" name="cv_camera" output="log">
+    <param name="image_width" value="800" />
+    <param name="image_height" value="600" />
+  </node -- >
+
+  <!-- uncomment these lines to view the image --> 
+  <!-- node type="image_view" pkg="image_view" name="image_view"  >
+    <remap from="image" to="cv_camera/image_raw" />
+  </node -->
+
+</launch>
