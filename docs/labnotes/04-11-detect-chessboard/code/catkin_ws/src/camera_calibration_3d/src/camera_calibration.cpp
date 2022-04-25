@@ -163,10 +163,11 @@ findProjection(const Eigen::MatrixXd& Xs,
 
     auto svd = A.jacobiSvd(Eigen::ComputeFullV);
     // y = v₁₂
-    // TODO: Find the P matrix from nullspace
+    // TODO: Find nullspace using SVD
     // Eigen::VectorXd nullspace = ?
 
     Eigen::MatrixXd P(Du, DX);
+    // TODO: Find the P matrix from nullspace
     // P.row(0) = ?
     // P.row(1) = ?
     // P.row(2) = ?
