@@ -121,19 +121,19 @@ findAllChessboardCorners(const cv::Mat img_bgr,
 }
 
 bool
-testProjectionFit(const std::vector<Eigen::VectorXd>& Xs,
-                  const std::vector<Eigen::VectorXd>& us,
+testProjectionFit(const Eigen::MatrixXd& Xs,
+                  const Eigen::MatrixXd& us,
                   const Eigen::MatrixXd& P)
 {
-    for (int i=0; i < us.size(); ++i) {
-        Eigen::Vector3d us_got = P * Xs[i];
+    for (int i=0; i < us.rows(); ++i) {
+        Eigen::Vector3d us_got = P * Xs.row(i).transpose();
         us_got /= us_got(2);
-        if (us_got.isApprox(us[i])) {
+        if (us_got.isApprox(us.row(i).transpose())) {
             std::cout << "Good fit for " << i << "\n";
         } else {
             std::cout << "Bad fit for " << i << "\n";
-            std::cout << "ups_got[" << i << "] = " << us_got << "\n";
-            std::cout << "ups[" << i << "] = " << us[i] << "\n";
+            std::cout << "ups_got[" << i << "] = " << us_got.transpose() << "\n";
+            std::cout << "ups[" << i << "] = " << us.row(i) << "\n";
             return false;
         }
     }
@@ -148,29 +148,26 @@ findProjection(const Eigen::MatrixXd& Xs,
         std::cerr << "Need at least six points got " << Xs.rows() << " and " << us.rows() << "\n";
         throw std::runtime_error("Need atleast six points");
     }
-    int DX =  Xs.cols(); // Dimension of X = 4
-    int Du =  us.cols(); // Dimension of u = 3
+    int DX =  Xs.cols(); // Dimension of X
+    int Du =  us.cols(); // Dimension of u
     Eigen::MatrixXd A(2*us.rows(), DX*Du); A.setZero();
     for (int i = 0; i < us.rows(); ++i) {
         // [[0ᵀ      -w'ᵢ Xᵢᵀ   yᵢ' Xᵢᵀ]]
         //  [wᵢ'Xᵢᵀ        0ᵀ   -xᵢ Xᵢᵀ]]
-        // TODO: Initialize two rows of the A matrix properly
-        // A.block(2*i,   DX,   1, DX) = ?
-        // A.block(2*i,   DX*2, 1, DX) = ?
-        // A.block(2*i+1, 0,    1, DX) = ?
-        // A.block(2*i+1, DX*2, 1, DX) = ?
+        A.block(2*i,   DX,   1, DX) = -us(i, 2) * Xs.row(i);
+        A.block(2*i,   DX*2, 1, DX) = us(i, 1) * Xs.row(i);
+        A.block(2*i+1, 0,    1, DX) = us(i, 2) * Xs.row(i);
+        A.block(2*i+1, DX*2, 1, DX) = -us(i, 0) * Xs.row(i);
     }
 
     auto svd = A.jacobiSvd(Eigen::ComputeFullV);
-    // y = v₁₂
-    // TODO: Find nullspace using SVD
-    // Eigen::VectorXd nullspace = ?
+    // y = v₉
+    Eigen::VectorXd nullspace = svd.matrixV().col(DX*Du-1);
 
     Eigen::MatrixXd P(Du, DX);
-    // TODO: Find the P matrix from nullspace
-    // P.row(0) = ?
-    // P.row(1) = ?
-    // P.row(2) = ?
+    P.row(0) = nullspace.block(0, 0, DX, 1).transpose();
+    P.row(1) = nullspace.block(DX, 0, DX, 1).transpose();
+    P.row(2) = nullspace.block(2*DX, 0, DX, 1).transpose();
     return P;
 }
 
@@ -185,11 +182,10 @@ generateChessboard3DCoordinates(const cv::Size& patternsize,
     // Let left chessboard be in YZ plane
     for (int z = 0;  z  < patternsize.height; ++z) {
         for (int y  = 0; y  < patternsize.width; ++y) {
-            // TODO: Initialize the 3D Chessboard corners properly, then uncomment these lines
-            // corners(corner_idx, 0) =  ?
-            // corners(corner_idx, 1) =  ?
-            // corners(corner_idx, 2) =  ?
-            // corners(corner_idx, 3) =  ?
+            corners(corner_idx, 0) =  0;
+            corners(corner_idx, 1) =  (y+1)*chessboxdim;
+            corners(corner_idx, 2) =  -1*(z+1)*chessboxdim;
+            corners(corner_idx, 3) =  1;
             ++corner_idx;
         }
     }
@@ -197,11 +193,10 @@ generateChessboard3DCoordinates(const cv::Size& patternsize,
     // Let right  chessboard be in  the XZ plane
     for (int z = 0;  z  < patternsize.height; ++z) {
         for (int x  = 0; x  < patternsize.width; ++x) {
-            // TODO: Initialize the 3D Chessboard corners properly, then uncomment these lines
-            // corners(corner_idx, 0) =  ?
-            // corners(corner_idx, 1) =  ?
-            // corners(corner_idx, 2) =  ?
-            // corners(corner_idx, 3) =  ?
+            corners(corner_idx, 0) =  (x+1)*chessboxdim;
+            corners(corner_idx, 1) =  0;
+            corners(corner_idx, 2) =  -1*(z+1)*chessboxdim;
+            corners(corner_idx, 3) =  1;
             ++corner_idx;
         }
     }
@@ -214,8 +209,34 @@ gramSchmidtForRQFactorization(const Eigen::MatrixXd& M) {
 
     Eigen::MatrixXd R = Eigen::MatrixXd::Identity(M.rows(), M.cols());
     Eigen::Matrix3d K = Eigen::Matrix3d::Zero();
+    for (int r = M.rows() - 1; r >= 0; --r) {
+        Eigen::Vector3d c = M.row(r).transpose();
+        // c_proj_so_far is similar to
+        // (cᵀr₂)r₂ + (cᵀr₁)r₁
+        // in the notes
+        Eigen::Vector3d c_proj_so_far = Eigen::Vector3d::Zero();
+        for (int col = r+1; col < M.rows(); ++col) {
+            Eigen::Vector3d r_col = R.row(col).transpose();
+            double cdotr = c.dot(r_col);
+            c_proj_so_far +=  cdotr * r_col;
+            K(r, col) = cdotr;
+        }
+        // (cᵀr₃)r₃ = c - ((cᵀr₂)r₂ + (cᵀr₁)r₁)
+        Eigen::Vector3d  r3_unnorm = c - c_proj_so_far;
+        // r₃ = (c - ((cᵀr₂)r₂ + (cᵀr₁)r₁)) / |c - (cᵀr₂)r₂ - (cᵀr₁)r₁|
+        double cdotr = r3_unnorm.norm();
+        R.row(r) = r3_unnorm.transpose() / r3_unnorm.norm();
+        K(r,r) = c.dot(R.row(r));
+        assert(c.transpose().isApprox(K.row(r)*R)); // Throw error if c ≠ K(r, :) * R
 
-    // TODO: Do the Gram Schmidt process to find K and R
+    }
+    assert(
+        (R.transpose() * R)
+        .isApprox(
+            Eigen::MatrixXd::Identity(R.rows(), R.cols()),
+            1e-6)
+        ); // Throw error if RᵀR ≠ I
+    assert(M.isApprox(K*R)); // Throw error if M ≠ K * R
     return std::make_pair(K, R);
 }
 
@@ -248,6 +269,7 @@ findAndPrintCameraMatrix(cv::Mat img_bgr) {
     Eigen::MatrixXd Xs = generateChessboard3DCoordinates(patternsize);
     Eigen::MatrixXd P = findProjection(Xs, us);
     std::cout << "P : " << P << "\n";
+    testProjectionFit(Xs, us, P);
 
     Eigen::Matrix3d K;
     Eigen::Matrix3d R;
@@ -322,9 +344,9 @@ int main(int argc, char** argv) {
     // // Pass image path as an argument to the command
     // // For example,
     // // rosrun camera_calibration_3d camera_calibration src/camera_calibration_3d/data/two-chessboard.jpg
-    // return main_to_read_from_image(argc, argv);
+    return main_to_read_from_image(argc, argv);
 
 
     // Calls the main function to ros
-    return main_ros(argc, argv);
+    // return main_ros(argc, argv);
 }
