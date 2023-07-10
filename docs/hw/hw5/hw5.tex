@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[top=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[colorlinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+
+\input{sym}
+
+\title{ECE 417/598: Homework 5}
+\author{Max marks: 100 marks}
+\date{Due on March 24, 2021, midnight, 11:59 PM.}
+
+\newtheorem{prob}{Problem}
+
+\newif\ifsol
+\soltrue
+
+\newcommand{\bx}{\bar{x}}
+\newcommand{\by}{\bar{y}}
+\newcommand{\bz}{\bar{z}}
+\newcommand{\ubfu}{\underline{\bfu}}
+\begin{document}
+
+\maketitle
+
+\begin{prob}
+  In figure~\ref{fig:line-plane-triangulation} find the 3D representation of the
+  lane the World coordinate frame, in terms of $h$ (the height of the camera),
+  image-representation of the line $\bfl$ (provided in figure), camera matrix
+  $K$ (provided in figure). Assume the lane to be a straight line.
+  The Camera is mounted directly on top of the
+  world frame, both of which are aligned to the gravity vector.
+  The road is a perfect plane with a slope such that the equation of road plane
+  in world-coordinate frame is given by $100 Y_w - Z_w = 0$ and the lane lies
+  on the road plane. Provide the formula or pseudo-code for computing the
+  3D representation of the lane, and also substitute in the values. (20 min, 20 marks)
+
+  \label{prob:lane-plane-triangulation}
+
+  Implement the solution to problem 9 in homework 4 in C++.  
+  Use the line output from
+  \href{https://github.com/wecacuee/ECE417-Mobile-Robots/blob/master/docs/slides/03-11-svd-null-space/code/}{fitline.cpp}.
+  Structure your code into four functions one for each step of the algorithm as
+  provided in the solutions to HW4:
+  \begin{enumerate}
+  \item \verb|Eigen::Vector4d image_line_to_plane_3D(const Eigen::Matrix3d& K, const Eigen::Vector3d& l)|
+   This function to should convert the line in the image to a plane in 3D.
+ \item
+\begin{verbatim}
+Eigen::Vector4d plane_from_camera_to_world(
+const Eigen::Matrix3d& wRc,
+const Eigen::Vector3d& wtc,
+const Eigen::Vector4d& plane_c)
+\end{verbatim}
+   This function to should convert the plane in camera coordinates to a plane in
+   the world coordinates.
+ \item
+\begin{verbatim}
+std::pair<Eigen::Vector3d, Eigen::Vector3d>
+ plane_plane_intersection(
+const Eigen::Vector4d& plane_p
+const Eigen::Vector4d& plane_q)
+\end{verbatim}
+   This function to should find the intersection of to planes and return the
+   parametric representation of line as two 3D vectors where the first vector represents the
+   direction of the line and the other vector represents any point on the line.
+   For example, if the parametric representation of line is $\bfx = \lambda \bfv
+   + \bfx_0$, where $\lambda$ is a free parameter, $\bfv \in \bbR^3$ is the
+   direction of the line and  $\bfx_0 \in \bbR^3$ is any point on the line.
+ \item
+   In the main function, first test your solution for HW4 problem 8 values.
+   Then
+   test it for random representation of a line and random representation of a road plane, 10 times. 
+\end{enumerate}
+  
+\end{prob}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{media/image-road-triangulation-line-plane.pdf}
+  \caption{Line-plane triangulation}
+  \label{fig:line-plane-triangulation}
+\end{figure}
+
+
+\end{document}

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC   -shared -Wl,-soname,libgtest_main.so -o ../lib/libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -Wl,-rpath,/home/vdhiman/wrk/teaching/ECE417/website/docs/labnotes/04-11-detect-chessboard/code/catkin_ws/build/gtest/lib ../lib/libgtest.so -lpthread 

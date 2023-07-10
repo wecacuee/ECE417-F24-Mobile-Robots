@@ -35,7 +35,9 @@ plainwhite:
   html_lang: "en"
 
   navigation:
-    - title: Schedule
+    - title: Syllabus
       url: "https://docs.google.com/document/d/e/2PACX-1vQJuraDoCy1Sn7cm8hdzG_3uvrlI6fiZaCLCvXtGqJvyGe2lNgMkGSz8pZZwJKypAFKuZR2TonI5Pqu/pub"
+    - title: Schedule
+      url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTy5zYzW2jeB45tGV4-NDJsPksf20aBddG9gex1dbk3FMr_oN9agZWx8UsvDQf4hspdBMKWBGN_Mcv0/pubhtml?gid=0&single=true"
 
   portfolio_image: images/jetbot.jpg

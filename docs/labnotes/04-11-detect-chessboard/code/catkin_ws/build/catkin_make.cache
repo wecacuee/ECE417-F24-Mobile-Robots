@@ -1,0 +1,2 @@
+camera_calibration_3d
+-DCATKIN_DEVEL_PREFIX=/home/vdhiman/wrk/ECE417/website/docs/labnotes/04-11-detect-chessboard/code/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/vdhiman/wrk/ECE417/website/docs/labnotes/04-11-detect-chessboard/code/catkin_ws/install -G Unix Makefiles
