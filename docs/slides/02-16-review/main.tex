@@ -1,4 +1,4 @@
-\documentclass[twocolumn]{article}
+\documentclass{article}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amsthm}
@@ -167,6 +167,7 @@ row  vectors $\bfa_i^\top$,
 \end{align}
 %
 
+\paragraph{Properties of the transpose operation}
 \begin{enumerate}
 \item  If $A$ has $n$rows and  $m$  columns, then  $A^\top$  has $m$ rows and
   $n$  columns. If  $A \in \bbR^{n \times  m}$, then  $A^\top \in \bbR^{m
@@ -185,7 +186,10 @@ row  vectors $\bfa_i^\top$,
       C^\top & D^\top
     \end{bmatrix}
     \]
-    
+  \item The transpose of sum of matrices is sum of transpose of each matrix.
+    \[ (A+B+C)^\top = A^\top + B^\top + C^\top \]
+  \item The transpose of product of matrices changes the order of the product. 
+    \[ (ABC)^\top = C^\top B^\top A^\top \]
 \end{enumerate}
 
 
@@ -302,7 +306,7 @@ vectors $\bfb_i \in \bbR^{m \times  1}$. Then the matrix multiplication $AB \in
 
 \paragraph{Block matrix  multiplication}
 Block matrix multiplication works in a similar way  as scalar multiplication as
-long as sub-matrix multiplication is properly defined,
+long as sub-matrix multiplication is well defined,
 %
 \begin{align}
   \begin{bmatrix}  A & B \\  C &  D \end{bmatrix}
@@ -313,7 +317,7 @@ long as sub-matrix multiplication is properly defined,
   %
 
 \begin{defn}[Orthogonal matrices]
-  A square matrix $A$ is said to be orthogonal if and only if $A^\top A = I$
+  A square matrix $A$ is said to be orthogonal if and only if $A^\top A = I$, where $I$ is the identity matrix.
 \end{defn}
 
 \subsubsection{Transpose of matrix multiplication}

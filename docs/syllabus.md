@@ -61,8 +61,12 @@ Homework: 25%; Midterm Exam: 20%; Labs: 25%; and Final project: 30%
   + [ECE 276A from UCSD by Prof Nikolay Atanasov](https://natanaso.github.io/ece276a2021/)
   + [ECE 276b from UCSD by Prof Nikolay Atanasov](https://natanaso.github.io/ece276b2021/)
   + [CS 354: Autonomous Robotics from JMU by Nathan Sprague](https://w3.cs.jmu.edu/spragunr/CS354/schedule.shtml)
+  + <https://cse.buffalo.edu/~robplatt/cse510_2013.html>
+  + <https://www.cs.unh.edu/~mbegum/IntroToMobileRobotics.pdf>
+  + <https://cdme.osu.edu/aims-lab/courses/robot-fundamentals>
+  + [Standford EECS, Advanced Robotics](http://www.cs.berkeley.edu/~pabbeel/cs287-fa11/)
+  + [RPI CS, Robotics II](http://www.cs.rpi.edu/~trink/Courses/RoboticsII/RoboticsII.html)
   + [Modern Robotics book](http://hades.mech.northwestern.edu/images/7/7f/MR.pdf) [Videos](https://www.youtube.com/playlist?list=PLggLP4f-rq02vX0OQQ5vrCxbJrzamYDfx)
-
 
 ## Student Learning Outcomes (SLOs)
 
