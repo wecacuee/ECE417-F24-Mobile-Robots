@@ -1,5 +1,5 @@
 ---
-permalink: /category/{category}
+permalink: categories/{category}
 layout: default
 ---
 
@@ -33,7 +33,7 @@ layout: default
             {%- if post.categories.size > 0-%}
             <ul class="post-categories">
                 {%- for tag in post.categories -%}
-                <li><a href="/category/{{tag}}">{{ tag }}</a></li>
+                <li><a href="{{site.baseurl}}/category/{{tag}}">{{ tag }}</a></li>
                 {%- endfor -%}
             </ul>
             {%- endif -%}

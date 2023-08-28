@@ -13,7 +13,7 @@ layout: default
     <li class="posts-labelgroup" id="posts-labelgroup">
       <h1 id="posts-label">Updates</h1>
       <a href="{{site.baseurl}}/feed.xml">
-          <img src="{{site.baseurl}}/images/Feed-icon.svg"
+          <img src="{{site.baseurl}}/assets/Feed-icon.svg"
                style="height:12px; margin:0 4px" />
       </a>
       {% if site.plainwhite.search %}
@@ -41,7 +41,7 @@ layout: default
           {%- if post.categories.size > 0-%}
           <ul class="post-categories">
             {%- for tag in post.categories -%}
-              <li><a href="/category/{{ tag }}">{{ tag }}</a></li>
+              <li><a href="categories/{{ tag }}">{{ tag }}</a></li>
             {%- endfor -%}
           </ul>
           {%- endif -%}
