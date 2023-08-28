@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>ECE417/598: setting the scope</title>
+	<title>ECE498/598: setting the scope</title>
 
 	<meta name="description" content="">
 	<meta name="author" content="Vikas Dhiman">
@@ -69,143 +69,145 @@
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
 
-    <section> <h1>ECE 417/598: Intro to (Mobile) Robotics</h1>
+    <section> <h1>ECE 498/598: Intro to Mobile Robotics</h1>
         <p>
             Vikas Dhiman
             <br/>
             <small>Barrows Hall Rm 105, <tt>vikas.dhiman@maine.edu</tt></small>
-            <br/>
-            TA: Sarah Meyer-Waldo
-            <br/>
-            <small>TBD, <tt>saray.meyerwaldo@maine.edu</tt></small>
         </p>
     </section>
     <section> <h2>Syllabus</h2>
-            Course website: <a href="https://vikasdhiman.info/ECE417-Mobile-Robots/" >https://vikasdhiman.info/ECE417-Mobile-Robots/</a>
+            Course website: <a
+              href="https://vikasdhiman.info/ECE498-Mobile-Robots/"
+              >https://vikasdhiman.info/ECE498-Mobile-Robots/</a>
         </section>
-        <section><h2>Textbook</h2>
-
-            <img src="01-19-intro-to-robotics_files/PeterCorkeRobotics.png" style="width:500px" />
+        <section><h2>Recommended books</h2>
+          <h5>Open books</h5>
+            <img src="01-19-intro-to-robotics_files/books/2006-lavalle.png"
+            style="height:300px" />
+            <img src="01-19-intro-to-robotics_files/books/2019-lynch-mr.png"
+            style="height:300px" />
+            <br/>
+          <h5>Other books</h5>
+            <img src="01-19-intro-to-robotics_files/books/2011-scaramuzza-amr.png"
+            style="height:300px" />
+            <img src="01-19-intro-to-robotics_files/books/2011-corke-rvc.png"
+            style="height:300px" />
+            <img src="01-19-intro-to-robotics_files/books/2005-thrun-pr.png"
+            style="height:300px" />
     </section>
 
     <section data-markdown>
         <textarea data-template>
-    ## Grading
-     - Homeworks: 25%
-     - Labs: 25%
-     - Two mid term exams (about Feb. 18 and about Mar. 25): 20%
-     - Final project: 30%
+## Grading 
+ - Assignments: 45%
+ - Two mid term exams (Oct. 6 and about Nov. 8): 20%
+ - Project: 30% (For ECE498)
+    * For ECE598: Project (20%) and Paper presentation (10%)
+
+    <https://vikasdhiman.info/ECE498-Mobile-Robots/>
         </textarea>
     </section>
 
-<section data-markdown>
-    <textarea data-template>
-
-### COVID-19
-
-To keep our campus safe, students are expected to comply with all University policies related to the COVID-19 pandemic. For the latest guidance, please visit <https://umaine.edu/return>
-
-    </textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-
-### Students Accessibility Services Statement
-
-Please contact Student Accessibility Services, 121 East Annex, 581.2319.
-
-### Observance of Religious Holidays/Events
-
-Provide adequate notice (at least one week and longer if at all possible), these students are allowed to make up course requirements.
-
-### Academic Honesty Statement
-
- Academic honesty is very important.
-
-### Sexual Discrimination Reporting
-
-If you tell any of your teachers about sexual discrimination involving members of the campus, *your teacher is required to report* this information to Title IX Student Services or the Office of Equal Opportunity.
-
-
-    </textarea>
-</section>
     <section>
-      <h2>What is Robotics?</h2>
+      <h2>What is a Robot?</h2>
       <iframe width="560" height="315" src="https://www.youtube.com/embed/tF4DML7FIWk" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media; " allowfullscreen></iframe>
       <div class="source">Boston Dynamics</div>
-
+      <img src="01-19-intro-to-robotics_files/robot-manufacturing.png" 
+        style="height:300px"
+        class="fragment"/>
+    </section>
+    <section>
+        <h2>Also a robot</h2>
+        <img src="01-19-intro-to-robotics_files/roomba-mapping.png" 
+        style="height:300px"
+        class="fragment"/>
+        <img src="01-19-intro-to-robotics_files/tesla-pedestrian.png" 
+        style="height:300px"
+        class="fragment"/>
+        <img src="01-19-intro-to-robotics_files/kiwibot.png" 
+        style="height:300px"
+        class="fragment"/>
     </section>
 
     <section>
-        <h2>What is Robotics?</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/XIPzSmwClJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="source">iRobot Roomba</div>
-
+        <h2>Abstract robot</h2>
+        <img src="01-19-intro-to-robotics_files/abstract-robot.svg"
+        style="height:500px"
+        />
     </section>
     <section>
-        <h2>What is Robotics?</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/tlThdr3O5Qo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <div class="source">Tesla FSD</div>
+      <h2>More robots</h2>
+        <img src="01-19-intro-to-robotics_files/more-robots/buynak-l1-035.png"
+        style="height:300px"
+        class="fragment"/>
+        <img src="01-19-intro-to-robotics_files/more-robots/buynak-l1-037.png"
+        style="height:300px"
+        class="fragment"/>
+        <img src="01-19-intro-to-robotics_files/more-robots/buynak-l1-040.png"
+        style="height:300px"
+        class="fragment"/>
+        <img src="01-19-intro-to-robotics_files/more-robots/buynak-l1-041.png"
+        style="height:300px"
+        class="fragment"/>
+        <img src="01-19-intro-to-robotics_files/more-robots/buynak-l1-042.png"
+        style="height:300px"
+        class="fragment"/>
     </section>
+
     <section>
-        <h2>What is Robotics?</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/0-GbFrrWcL4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </section>
-    <section>
-        <h2>What is Robotics?</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/aQhElFs5B48" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </section>
-    <section >
-      <h2>Hype?</h2>
-
+      <h2>Topics in this course</h2>
+        <img
+        src="01-19-intro-to-robotics_files/planning-mapping-localization.svg"
+        style="height:500px"
+        />
     </section>
 
-    <section >
-      <h2>Future?</h2>
+    <section data-markdown>
+<textarea data-template>
+## Rough course outline
 
+- Planning
+  + Planning
+  + Coordinate tranformation
+  + Rigid body motions
+  + Forward and inverse kinematics
+- State estimation (Mapping/localization)
+  + Camera model
+  + Structure from motion
+  + Localization
+  + EKF SLAM
+- Control
+  + LQR
+  + PID Control
+  + Reinforcement learning
+</textarea>
     </section>
+
+<section data-markdown>
+<textarea data-template>
+  ## Are robots good?
+</textarea>
+</section>
 
     <section >
       <h2>Ethics</h2>
-      <ul><li>
+      <ul><li class="fragment">
           What is the effect of my innovation/product on society and others?
-      </li><li>
+      </li><li class="fragment">
           Who wins and who loses?
-      </li><li>
+      </li><li class="fragment">
           Should we make robots?
-          <ul><li>
+          <ul><li class="fragment">
               Effect on jobs?
-          </li><li>
+          </li><li class="fragment">
               Robots for military?
           </li></ul>
-      </li><li>
+      </li><li class="fragment">
           When we make them how should we test them?
           <img src="01-19-intro-to-robotics_files/felony-charges-autopilot.png" />
       </li></ul>
     </section>
-
-    <section >
-      <h2>Goals of the course</h2>
-      <ul><li>
-          Cover a wide range of basic algorithms.
-      </li><li>
-          Enable you to program robots.
-      </li><li>
-          Enable you to get an internship or job at a "robotics" company.
-      </li></ul>
-
-    </section>
-
-    <section >
-      <h2>Teaching philosophy</h2>
-      <ul><li>
-          More questions, please.
-      </li><li>
-          Maybe inverted classroom?
-      </li></ul>
-    </section>
-
 
     <script>
 			// Full list of configuration options available here:
