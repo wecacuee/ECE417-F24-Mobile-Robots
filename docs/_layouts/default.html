@@ -7,35 +7,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 <!-- and it's easy to individually load additional languages -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/verilog.min.js"></script>
-
- <script type="text/javascript"
-
-  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-  MathJax.Hub.Config({
-
-    TeX: {
-
-      equationNumbers: {
-
-        autoNumber: "AMS"
-
-      }
-
-    },
-
-    tex2jax: {
-
-      inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
-
-      displayMath: [ ['$$','$$'] ],
-
-      processEscapes: true,
-
-    }
-
-  });
-
-</script> 
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
 </head>
 
 {%- if site.plainwhite.condensed_mobile contains page.layout -%}
