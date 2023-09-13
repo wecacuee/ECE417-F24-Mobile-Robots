@@ -1,1 +1,1 @@
-jupyter notebook
+jupyter lab
