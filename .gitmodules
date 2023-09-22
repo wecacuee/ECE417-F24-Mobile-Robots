@@ -11,3 +11,6 @@
 [submodule "docs/labnotes/02-28/virtual-jetbot/src/car_demo"]
 	path = docs/labnotes/02-28/gazebo-tutorials-car-demo/src/car_demo
 	url = https://github.com/wecacuee/car_demo.git
+[submodule "docs/labnotes/09-20/jetson-containers"]
+	path = docs/labnotes/09-20/jetson-containers
+	url = git@github.com:dusty-nv/jetson-containers.git
