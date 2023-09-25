@@ -3,9 +3,8 @@
     <Domain id="any">
       <Discovery>
         <Peers>
-          <!--Peer address="10.0.0.1" ></Peer-->
           <Peer address="10.0.0.2" ></Peer>
-          <Peer address="10.0.0.3" ></Peer>
+          <Peer address="10.0.0.4" ></Peer>
         </Peers>
       </Discovery>
         <General>
