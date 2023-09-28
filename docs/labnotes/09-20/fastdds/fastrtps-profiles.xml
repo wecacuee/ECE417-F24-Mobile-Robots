@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<dds xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+    <profiles>
+        <participant profile_name="participant_profile">
+            <!-- ... -->
+        </participant>
+
+        <data_writer profile_name="datawriter_profile">
+            <!-- ... -->
+        </data_writer>
+
+        <data_reader profile_name="datareader_profile">
+            <!-- ... -->
+        </data_reader>
+
+        <topic profile_name="topic_profile">
+            <!-- ... -->
+        </topic>
+
+        <transport_descriptors>
+            <!-- ... -->
+        </transport_descriptors>
+    </profiles>
+
+    <library_settings>
+        <!-- ... -->
+    </library_settings>
+
+    <log>
+        <!-- ... -->
+    </log>
+
+    <types>
+        <!-- ... -->
+    </types>
+</dds>
+

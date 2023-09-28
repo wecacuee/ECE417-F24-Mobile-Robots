@@ -14,3 +14,6 @@
 [submodule "docs/labnotes/09-20/jetson-containers"]
 	path = docs/labnotes/09-20/jetson-containers
 	url = git@github.com:dusty-nv/jetson-containers.git
+[submodule "docs/labnotes/09-25/ws/src/ros_aruco_opencv"]
+	path = docs/labnotes/09-25/ws/src/ros_aruco_opencv
+	url = git@github.com:wecacuee/ros_aruco_opencv.git
