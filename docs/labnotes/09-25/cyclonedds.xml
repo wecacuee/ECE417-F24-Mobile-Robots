@@ -3,7 +3,7 @@
     <Domain id="any">
       <Discovery>
         <Peers>
-          <Peer address="10.0.0.1" ></Peer>
+          <Peer address="10.0.0.4" ></Peer>
           <Peer address="10.0.0.2" ></Peer>
         </Peers>
         <MaxAutoParticipantIndex>32</MaxAutoParticipantIndex>
