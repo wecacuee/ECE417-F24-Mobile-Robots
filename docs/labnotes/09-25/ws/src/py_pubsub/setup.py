@@ -31,6 +31,7 @@ setup(
     entry_points={
         'console_scripts': [
             'astar = py_pubsub.publisher_member_function:main',
+            'calibrator = py_pubsub.calibrator:main'
         ],
     },
 )

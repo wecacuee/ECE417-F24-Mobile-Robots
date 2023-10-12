@@ -3,64 +3,55 @@ from rclpy.node import Node
 
 from aruco_opencv_msgs.msg import ArucoDetection
 from geometry_msgs.msg import Twist
+import numpy as np
 
 VMIN = 0.07
-OMIN = 1.25
-DT = 0.25
+OMIN = np.pi # one rotation per two sec
+DT = 0.2
 
 def shortest_path_astar(state, obstacles, goal):
     # astar algorithm here
     path = [(0.01, 0.01)]
     return path
 
-class Astar(Node):
+def new_twist(linear_vel, ang_vel, scale_lin=1.0, scale_ang=0.70):
+    twist = Twist()
+    twist.linear.x = scale_lin * linear_vel
+    twist.linear.y = 0.
+    twist.linear.z = 0.
+    twist.angular.x = 0.
+    twist.angular.y = 0.
+    twist.angular.z = scale_ang * ang_vel
+    return twist
 
+class Astar(Node):
     def __init__(self):
         super().__init__('astar')
-        self.get_logger().info('in init')
         self.sub = self.create_subscription(ArucoDetection,
                                             '/aruco_detections', 
                                             self.on_aruco_detection, 10)
         self.pub = self.create_publisher(Twist, '/jetbot/cmd_vel', 10)
+        self.counter = 0
+        self.next_pub_zero = False
         self.timer = None
 
     def on_aruco_detection(self, msg):
-        print("hi")
-        self.get_logger().info('Received: "%s"' % msg.markers)
-
-        # your fancy Astar algorithm here
-        state = None # What should be state?
-        obstacles = None # Where are the obstacles?
-        goal = None # Where is the goal?
-        path = shortest_path_astar(state, obstacles, goal)
-        # Take the first step in the path as the action for now
-        # action = path[0] # or something else?
-        linear_vel, ang_vel = 0.0, OMIN
-
-        # initialize the twist message and publish it the jetbot
-        # self.get_logger().info('Publishing: "%s"' % action)
-        twist = Twist()
-        twist.linear.x = linear_vel
-        twist.linear.y = 0.
-        twist.linear.z = 0.
-        twist.angular.x = 0.
-        twist.angular.y = 0.
-        twist.angular.z = ang_vel
         if self.timer is None:
-            self.pub.publish(twist)
+            self.pub.publish(new_twist(0., OMIN))
+            self.next_pub_zero = True
+            self.counter += 1
             self.timer = self.create_timer(DT, self.timer_callback)
 
     def timer_callback(self):
-        # initialize the twist message and publish it the jetbot
-        twist = Twist()
-        twist.linear.x = 0.
-        twist.linear.y = 0.
-        twist.linear.z = 0.
-        twist.angular.x = 0.
-        twist.angular.y = 0.
-        twist.angular.z = 0.
-        self.pub.publish(twist)
-        self.destroy_timer(self.timer)
+        if self.next_pub_zero:
+            self.pub.publish(new_twist(0., 0.))
+            self.next_pub_zero = False
+            self.timer.reset()
+        elif self.counter < (2/DT):
+            self.pub.publish(new_twist(0., OMIN))
+            self.next_pub_zero = True
+            self.counter += 1
+            self.timer.reset()
 
 
 def main(args=None):
