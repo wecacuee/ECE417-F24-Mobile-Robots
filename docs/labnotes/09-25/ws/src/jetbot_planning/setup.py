@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import find_packages, setup
 
-package_name = 'py_pubsub'
+package_name = 'jetbot_planning'
 
 setup(
     name=package_name,
@@ -30,8 +30,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'astar = py_pubsub.publisher_member_function:main',
-            'calibrator = py_pubsub.calibrator:main'
+            'astar = jetbot_planning.astar_node:main',
+            'calibrator = jetbot_planning.calibrator:main'
         ],
     },
 )

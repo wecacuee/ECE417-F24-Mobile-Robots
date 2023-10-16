@@ -1,7 +1,7 @@
 <launch>
   <node name="gscam_driver_nvgst" pkg="gscam" exec="gscam_node" output="screen">
     <param name="camera_name" value="default"/>
-    <param name="camera_info_url" value="package://py_pubsub/launch/csi_cam_640x360.ini"/>
+    <param name="camera_info_url" value="package://jetbot_planning/launch/csi_cam_640x360.ini"/>
     <param name="gscam_config" value="nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=(int)640, height=(int)360, framerate=10/1, format=(string)NV12 ! nvvidconv flip-method=0 ! video/x-raw ! videoconvert"/>
     <param name="frame_id" value="/v4l_frame"/>
     <param name="sync_sink" value="true"/>
