@@ -1,20 +1,15 @@
 url: https://vikasdhiman.info
-baseurl: /ECE498-Mobile-Robots
+baseurl: /ECE417-F24-Mobile-Robots
 remote_theme:  samarsault/plainwhite-jekyll
-title: Mobile  Robots (ECE498) at the University of Maine
+title: Mobile  Robots (ECE417) at the University of Maine
 author: Vikas Dhiman
-description: Mobile  Robots (ECE498) at the University of Maine
+description: Mobile  Robots (ECE417) at the University of Maine
 show_excerpts: true
 
 # Build settings
 markdown: kramdown
 permalink: pretty
 paginate: 10
-
-
-header_pages:
-  - syllabus.md
-  - labs.md
 
 
 plugins:
@@ -24,7 +19,7 @@ plugins:
   - jekyll-remote-theme
 
 plainwhite:
-  name: Mobile Robots (ECE498)
+  name: Mobile Robots (ECE417)
   tagline: |
      Perception, Planning and Control for Mobile Robots
 
@@ -38,8 +33,8 @@ plainwhite:
     - title: Syllabus
       url: "https://docs.google.com/document/d/e/2PACX-1vQJuraDoCy1Sn7cm8hdzG_3uvrlI6fiZaCLCvXtGqJvyGe2lNgMkGSz8pZZwJKypAFKuZR2TonI5Pqu/pub"
     - title: Schedule
-      url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTy5zYzW2jeB45tGV4-NDJsPksf20aBddG9gex1dbk3FMr_oN9agZWx8UsvDQf4hspdBMKWBGN_Mcv0/pubhtml?gid=0&single=true"
+      url: "https://docs.google.com/spreadsheets/d/1k-nGcetapCx0A1oiH9MzKOYh6n_ZnszZq3CxtD5ovdQ/pubhtml?gid=976795384&single=true"
     - title: Zoom Link
-      url: "https://maine.zoom.us/j/87817514688?pwd=WkRsNnlZaitkYXpwQk5RZ2tJd3ZHUT09"
+      url: "https://maine.zoom.us/j/82357016182?pwd=weRkg7PnszrpwbsqXzBXXm9rMe5MwD.1"
 
   portfolio_image: images/jetbot.jpg
