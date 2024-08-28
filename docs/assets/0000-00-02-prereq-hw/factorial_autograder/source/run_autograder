@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ -d /autograder ]; then
+    cd /autograder
+fi
+WORKDIR=$(pwd)
+
+# Prepare submission
+FILE=test_factorial.c
+cp submission/$FILE source/$FILE
+
+## Compile
+cd source
+EXEC=test_factorial
+gcc $FILE -o $EXEC
+
+## RUN tests
+python3 run_tests.py $WORKDIR/results/results.json

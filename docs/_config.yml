@@ -1,9 +1,9 @@
 url: https://vikasdhiman.info
 baseurl: /ECE417-F24-Mobile-Robots
 remote_theme:  samarsault/plainwhite-jekyll
-title: Mobile  Robots (ECE417) at the University of Maine
+title: Mobile  Robots (ECE417-F24) at the University of Maine
 author: Vikas Dhiman
-description: Mobile  Robots (ECE417) at the University of Maine
+description: Mobile  Robots (ECE417-F24) at the University of Maine
 show_excerpts: true
 
 # Build settings

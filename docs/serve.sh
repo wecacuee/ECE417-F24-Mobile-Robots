@@ -1,1 +1,1 @@
-bundle exec jekyll serve --host 0.0.0.0 --port 8000 --trace --livereload --draft
+bundle exec jekyll serve --host 0.0.0.0 --port 8000
