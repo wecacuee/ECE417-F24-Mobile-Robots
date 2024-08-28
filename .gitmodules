@@ -21,3 +21,6 @@
 	path = docs/labnotes/09-25/ws/src/jetbot_planning
 	url = git@github.com:wecacuee/ECE498_jetbot_planning.git
 	branch = master
+[submodule "docs/labnotes/09-25/ws/src/gv_tools"]
+	path = docs/labnotes/09-25/ws/src/gv_tools
+	url = https://github.com/GREAT-WHU/gv_tools/
