@@ -74,5 +74,6 @@ int main(int argc, char** argv) {
       fprintf(stderr, "Unable to read the input to number\n");
       return 1;
   }
+  printf("%s\n", is_prime(n, &factor) ? "prime" : "not prime");
   return 0;
 }

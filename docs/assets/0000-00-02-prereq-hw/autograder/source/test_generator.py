@@ -19,10 +19,9 @@ def check_correct_filenames(root_dir, expecting_files):
         if file in submitted_files:
             tests.append(
                 dict(name=f"Found submitted file {file}",
-                     status="success",
+                     status="passed",
                      score=2,
                      max_score=2,
-                     number=0,
                      visibility="visible"))
         else:
             tests.append(
@@ -30,7 +29,6 @@ def check_correct_filenames(root_dir, expecting_files):
                      status="failed",
                      score=0,
                      max_score=2,
-                     number=0,
                      visibility="visible",
                      output=f"""You submitted {submitted_files}; none of """
                      f"""which is {file}. Cannot run further tests."""))
@@ -40,7 +38,7 @@ def check_correct_filenames(root_dir, expecting_files):
 def prepare_and_compile_submission(root_dir, file):
     # Prepare submission
     tests = check_correct_filenames(root_dir, [file])
-    if tests[0]['status'] != "success":
+    if tests[0]['status'] != "passed":
         os.chdir(f"{root_dir}")
         return tests
     shutil.copy2(f"submission/{file}",  f"source/{file}")
@@ -55,17 +53,15 @@ def prepare_and_compile_submission(root_dir, file):
                  status="failed",
                  score=0,
                  max_score=5,
-                 number=1,
                  visibility="visible",
                  output=f"""Output: {process.stdout.decode('utf-8')}\n\n\n"""
                  f"""Errors: {process.stderr.decode('utf-8')}"""))
     else:
         tests.append(
             dict(name=f"Succefully compiled {file}",
-                 status="success",
+                 status="passed",
                  score=5,
                  max_score=5,
-                 number=1,
                  visibility="visible",
                  output=f"""Output: {process.stdout.decode('utf-8')}\n\n\n"""
                  f"""Errors: {process.stderr.decode('utf-8')}"""))
