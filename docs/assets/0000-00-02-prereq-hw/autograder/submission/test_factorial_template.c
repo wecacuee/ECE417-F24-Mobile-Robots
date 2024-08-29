@@ -11,7 +11,7 @@ long factorial(short n);
 
 // DONOT edit this
 bool test_factorial() {
-    short n = randint(1, 25);
+    short n = randint(0, 25);
     if (factorial(n) != n*factorial(n-1)) {
         fprintf(stderr, "Fail for factorial(%d)\n", n);
         return false;
@@ -22,7 +22,7 @@ bool test_factorial() {
 // Please EDIT this. DONOT change the function signature
 long factorial(short n) {
     // TODO: Write this recursive function in C
-    return 1;
+//YOUR ANSWER HERE
 }
 
 int main(int argc, char** argv) {

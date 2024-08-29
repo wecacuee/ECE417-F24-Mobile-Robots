@@ -7,11 +7,12 @@ long randint(long min, long max) {
     return rand() % (max - min)  + min;
 }
 
+//YOUR ANSWER HERE
+
 // EDIT this function. DONOT edit the signature of the function
 bool is_prime(long n, long* factor_p) {
     // TODO: FIXME: Write a function. Extra credit for making it recursive
-    *factor_p = 2;
-    return false; // most numbers are not prime
+//YOUR ANSWER HERE
 }
 
 // DONOT edit this function
