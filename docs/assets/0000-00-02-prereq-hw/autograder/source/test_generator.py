@@ -22,6 +22,7 @@ def check_correct_filenames(root_dir, expecting_files):
                      status="success",
                      score=2,
                      max_score=2,
+                     number=0,
                      visibility="visible"))
         else:
             tests.append(
@@ -29,6 +30,7 @@ def check_correct_filenames(root_dir, expecting_files):
                      status="failed",
                      score=0,
                      max_score=2,
+                     number=0,
                      visibility="visible",
                      output=f"""You submitted {submitted_files}; none of """
                      f"""which is {file}. Cannot run further tests."""))
@@ -46,25 +48,27 @@ def prepare_and_compile_submission(root_dir, file):
     ## Compile
     os.chdir(f"{root_dir}/source")
     executable, _ = os.path.splitext(file)
-    process = subprocess.run(["gcc", file,  "-o",  executable], capture_output=True)
+    process = subprocess.run(["gcc", file, "-O3",  "-o",  executable], capture_output=True)
     if process.returncode != 0:
         tests.append(
             dict(name=f"Failed to compile {file}",
                  status="failed",
                  score=0,
                  max_score=5,
+                 number=1,
                  visibility="visible",
-                 output=f"""Output: {process.stdout}\n\n\n"""
-                 f"""Errors: {process.stderr}"""))
+                 output=f"""Output: {process.stdout.decode('utf-8')}\n\n\n"""
+                 f"""Errors: {process.stderr.decode('utf-8')}"""))
     else:
         tests.append(
             dict(name=f"Succefully compiled {file}",
                  status="success",
                  score=5,
                  max_score=5,
+                 number=1,
                  visibility="visible",
-                 output=f"""Output: {process.stdout}\n\n\n"""
-                 f"""Errors: {process.stderr}"""))
+                 output=f"""Output: {process.stdout.decode('utf-8')}\n\n\n"""
+                 f"""Errors: {process.stderr.decode('utf-8')}"""))
 
     os.chdir(f"{root_dir}")
     return tests
@@ -159,11 +163,13 @@ class TestMetaclass(type):
             stdin = load_test_file(dir_name, 'input')
 
             startTime = time.time()
-            output, err = proc.communicate(stdin, settings.get('timeout', 1))
+            output_b, err = proc.communicate(stdin, settings.get('timeout', 1))
             stopTime = time.time()
             timeTaken = stopTime - startTime
 
-            expected_output = load_test_file(dir_name, 'output')
+            output = output_b.decode('utf-8').strip()
+            expected_output = load_test_file(dir_name,
+                                             'output').decode('utf-8').strip()
             expected_err = load_test_file(dir_name, 'err')
 
             msg = settings.get('msg', "Output did not match expected")

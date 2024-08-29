@@ -17,7 +17,7 @@ def imp_load_source(module_name, module_path):
     return module
 
 def results_json_post_processor(tests, results_json_data):
-    results_json_data["tests"].extend(tests)
+    results_json_data["tests"] = tests + results_json_data["tests"]
 
 
 def run_tests(ROOT_DIR, tests):
