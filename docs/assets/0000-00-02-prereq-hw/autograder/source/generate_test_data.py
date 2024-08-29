@@ -14,14 +14,14 @@ def imp_load_source(module_name, module_path):
 def generate_test_factorial():
     inputs = list(map(str, [0, 3, 5] + [
         random.randint(0, 20) for _ in range(10)]))
-    msgs = ["Incorrect factorial for inp={inp}".format(inp=inp)
+    docs = ["Factorial for inp={inp}".format(inp=inp)
             for inp in inputs]
     setting1 = dict(weight=1, visibility="visible")
     setting2 = dict(weight=1, visibility="visible")
-    settings = [dict(msg=msg, **setting1) 
-                for msg in msgs[:3]
-                ] + [dict(msg=msg, **setting2)
-                     for msg in msgs[3:]]
+    settings = [dict(doc=doc, **setting1) 
+                for doc in docs[:3]
+                ] + [dict(doc=doc, **setting2)
+                     for doc in docs[3:]]
     test_generator.TestMetaclass.create_test_data_from_solutions(
             inputs=inputs,
             settings=settings,
@@ -34,10 +34,10 @@ def generate_test_prime():
                       +
                       [
         random.randint(0, 99_999) for _ in range(7)]))
-    msgs = ["Incorrect factorial for inp={inp}".format(inp=inp)
+    docs = ["Prime check for inp={inp}".format(inp=inp)
             for inp in inputs]
     setting2 = dict(weight=1, visibility="visible")
-    settings = [dict(msg=msg, **setting2) for msg in msgs]
+    settings = [dict(doc=doc, **setting2) for doc in docs]
     test_generator.TestMetaclass.create_test_data_from_solutions(
             inputs=inputs,
             settings=settings,
