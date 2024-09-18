@@ -1,1 +1,1 @@
-pipenv shell
+workon ece417
