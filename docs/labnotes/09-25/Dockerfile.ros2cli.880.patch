@@ -1,0 +1,5 @@
+ARG BASE_IMAGE=dustynv/ros:humble-pytorch-l4t-r32.7.1
+FROM ${BASE_IMAGE}
+
+WORKDIR /opt/ros/humble/install/lib/python3.6/site-packages/
+RUN wget https://patch-diff.githubusercontent.com/raw/ros2/ros2cli/pull/880.patch -O - | patch -p2
