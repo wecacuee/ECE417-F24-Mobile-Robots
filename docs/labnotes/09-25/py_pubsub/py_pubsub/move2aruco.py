@@ -1,25 +1,37 @@
 import rclpy
 from rclpy.node import Node
+# Detection msg format from ARUCO markers
 from aruco_opencv_msgs.msg import ArucoDetection
+# Twist msg format to jetbot motors
 from geometry_msgs.msg import Twist
 import math
 
+# what is minimum distance from the ARUCO marker at which 
+# the jetbot should have VMAX
 MAXVELDIST = 0.20
 VMAX = 0.10
+VMIN = 0.07 # if he velocity is less than this, the motors are unable to move
 
-VMIN = 0.07
+# what is minimum distance from the ARUCO marker at which 
+# the jetbot should have VMIN
 MINDIST = 0.10
+
+# https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller
 Kp_linear = 1.
 
-OMIN = 0.50
-OMINANGLE = 5 * math.pi/180.
-
-OMAX = 1.00
+# what is maximum angle to the ARUCO marker at which 
+# the jetbot should have OMAX
 OMAXANGLE = 25 * math.pi/180.
+OMAX = 1.00
+
+
+# what is minimum angle to the ARUCO marker at which 
+# the jetbot should have OMIN
+OMINANGLE = 5 * math.pi/180.
+# if angular velocity is smaller than this, then motors are unable to move the jetbot
+OMIN = 0.50 
 
 Kp_angular = 1.
-
-DT = 0.1
 
 def new_twist(linear_vel, ang_vel):
     """Generate a new command to be sent to the motors_waveshare
@@ -46,21 +58,46 @@ class MoveToARUCO(Node):
         self.on_aruco_detection, 10)
         self.pub = self.create_publisher(Twist, '/jetbot/cmd_vel', 10)
         self.timer = None
-        self.last_marker_id = None
+        # We are going to chase this marker
+        self.chosen_marker_to_chase = None # Undecided for now
 
     def on_aruco_detection(self, msg):
-        """ This function will be called whenever an ARUCO detection message 
-        is received"""
+        """ This function will be called whenever one-single message of ARUCO
+        detection message is received. (Basically all the times repeatedly, as
+        long as markers are being detected)"""
         self.get_logger().info('Received: "%s"' % msg.markers)
-        if len(msg.markers):
-            self.get_logger().info('Position: "%s"' %
-                                   msg.markers[0].pose.position)
-            # Extract the minimum amount of information, x and z coordinate of
+        if not len(msg.markers):
+            self.pub.publish(new_twist(0., 0.))
+        else:
+            # What if there are multiple markers in the scene
+            if self.chosen_marker_to_chase is None:
+                # this is the first time we received some detections, pick the
+                # first marker as the chosen one.
+                self.chosen_marker_to_chase = msg.markers[0].marker_id
+                themarker = msg.marker_id[0]
+            else:
+                # We know the chosen one, look for it in all detections
+                themarker = None
+                for m in msg.markers:
+                    if m.marker_id == self.chosen_marker_to_chase:
+                        themarker = m
+                if themarker is not None:
+                    # Found it
+                    themarker = markers[0]
+                else:
+                    # Give up. Wont chase anyone else other than the chosen
+                    # one
+                    self.get_logger().warning("Unable to find marker_id %d" %
+                                              self.chosen_marker_to_chase)
+                    return
+
+            # Extract the minimum (2D) amount of information, x and z coordinate of
             # the marker
-            marker_position_z = msg.markers[0].pose.position.z
-            z = marker_position_z
-            x = msg.markers[0].pose.position.x
-            # Recall trignometry and get the angle between the robot facing
+            self.get_logger().info('Position: "%s"' %
+                                   themarker.pose.position)
+            z = themarker.pose.position.z
+            x = themarker.pose.position.x
+            # Get the angle between the robot facing
             # direction and the line connecting the robot to the marker
             angle = math.atan2(x, z)
 
@@ -85,8 +122,6 @@ class MoveToARUCO(Node):
                                ang_vel)
             self.get_logger().info('Angular: "%f";' % ang_vel_clipped)
             self.pub.publish(new_twist(-linear_vel_clipped, ang_vel_clipped))
-        else:
-            self.pub.publish(new_twist(0., 0.))
 
 
 def main(args=None):
