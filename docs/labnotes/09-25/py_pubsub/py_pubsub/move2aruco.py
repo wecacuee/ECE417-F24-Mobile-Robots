@@ -74,7 +74,7 @@ class MoveToARUCO(Node):
                 # this is the first time we received some detections, pick the
                 # first marker as the chosen one.
                 self.chosen_marker_to_chase = msg.markers[0].marker_id
-                themarker = msg.markers[0].marker_id
+                themarker = msg.markers[0]
             else:
                 # We know the chosen one, look for it in all detections
                 themarker = None
@@ -83,7 +83,8 @@ class MoveToARUCO(Node):
                         themarker = m
                 if themarker is not None:
                     # Found it
-                    themarker = markers[0]
+                    # themarker = markers[0]
+                    pass
                 else:
                     # Give up. Wont chase anyone else other than the chosen
                     # one
