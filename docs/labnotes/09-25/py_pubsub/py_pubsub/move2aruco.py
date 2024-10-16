@@ -83,7 +83,7 @@ class MoveToARUCO(Node):
                         themarker = m
                 if themarker is not None:
                     # Found it
-                    # themarker = markers[0]
+                    # themarker = msg.markers[0]
                     pass
                 else:
                     # Give up. Wont chase anyone else other than the chosen
