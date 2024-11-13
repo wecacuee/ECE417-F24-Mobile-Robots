@@ -61,13 +61,25 @@ The rotation matrix is obtained by writing the basis vectors of the destination 
   [2/7, 6/7, -3/7]^\top$, $\bfy = [-6/7, 3/7, 2/7]^\top$ and $\bfz = [3/7, 2/7, 6/7]^\top$.
   Find the rotation matrix $^{ouvw}R_{oxyz}$ that converts coordinates from frame OXYZ to frame OUVW. (10 marks)
 \end{prob}
+
+Let OPQR be the coordinate system in which the coordinates of basis vectors are specified.
 \begin{align}
   ^{OUVW}R_{OPQR} &= \begin{bmatrix}
+    | & | & | \\
+    \bfu & \bfv & \bfw \\
+    | & | & | \\
+  \end{bmatrix}
+    = \begin{bmatrix}
     3/7 & 2/7 & 4 \\
     2/7 & 6/7 & 5  \\
     6/7 & 3/7 & 6 \\
   \end{bmatrix} \\
   ^{OXYZ}R_{OPQR} &= \begin{bmatrix}
+    | & | & | \\
+    \bfx & \bfy & \bfz \\
+    | & | & | \\
+  \end{bmatrix}
+  = \begin{bmatrix}
     2/7 & -6/7 & 3/7 \\
     6/7 & 3/7 & 2/7  \\
     -3/7 & 2/7 & 6/7 \\
