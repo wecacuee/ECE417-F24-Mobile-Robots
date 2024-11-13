@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1731505365 "mt2.tex" "mt2.pdf" "mt2" 1731505365
-  "/etc/texmf/web2c/texmf.cnf" 1705125391 475 c0e671620eb5563b2130f56340a5fde8 ""
+["pdflatex"] 1731512155 "mt2.tex" "mt2.pdf" "mt2" 1731512155
+  "/etc/texmf/web2c/texmf.cnf" 1705515673 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -67,13 +67,13 @@
   "/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty" 1635798903 56029 3f7889dab51d620aa43177c391b7b190 ""
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
-  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1705125557 4073795 a82a847ac97773bf4a607ab050efa3a1 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1712416807 1435851 c6d0c7618904381e1a1d8bb6aee2c813 ""
-  "media/Rodrigues-formula.pdf" 1699506462 21245 e52f390c4882414d7986d263ac2bf0f3 ""
-  "media/transformations.png" 1699506463 72027 5d78fdcf68399e39a5c7449d129f5847 ""
-  "mt2.aux" 1731505365 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
-  "mt2.tex" 1731505365 5550 ce570c89faf9edc5ba83a722f5dce4d0 ""
-  "sym.tex" 1699506462 5434 f0077a78428f81ce179c39ffcfd918ba ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1707415351 4092535 dea3f59a0ac4f652749ce856f40f3ffa ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1710586596 1484447 263c1fe9661c4738c6a76f47e9f52eac ""
+  "media/Rodrigues-formula.pdf" 1699380919 21245 e52f390c4882414d7986d263ac2bf0f3 ""
+  "media/transformations.png" 1699373510 72027 5d78fdcf68399e39a5c7449d129f5847 ""
+  "mt2.aux" 1731512155 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
+  "mt2.tex" 1731512154 6115 b931dc7a2c63e0caa2b368f2946685df ""
+  "sym.tex" 1699373415 5434 f0077a78428f81ce179c39ffcfd918ba ""
   (generated)
   "mt2.aux"
   "mt2.log"

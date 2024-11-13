@@ -97,14 +97,16 @@ The rotation matrix is obtained by writing the basis vectors of the destination 
   \includegraphics[width=0.5\linewidth]{media/Rodrigues-formula.pdf}
 \end{prob}
 \begin{align}
-  \hat{\bfw} = \frac{\hat{k} \times \bfv}{\|\hat{k} \times \bfv\|}
+  \hat{\bfw} = \frac{\hat{\bfk} \times \bfv}{\|\hat{\bfk} \times \bfv\|}
 \end{align}
+Note that $\hat{\bfk} \times \bfv$ has the magnitude $\|\hat{\bfk} \times \bfv\| = |\hat{\bfk}||\bfv| \sin(\alpha) = |\bfv| \sin(\alpha)$ where $\alpha$ is the angle between $\bfv$ and $\hat{\bfk}$.
 \begin{align}
-\bfv_\perp = -\hat{\bfk} \times \hat{\bfk} \times \bfv
+\bfv_\perp = -\hat{\bfk} \times (\hat{\bfk} \times \bfv)
 \end{align}
+The magnitude of $\bfv_\perp$ is same as RHS because both $|\bfv_\perp| = |\bfv|\sin(\alpha)$ and $|-\hat{\bfk} \times (\hat{\bfk}  \times \bfv)| = |\bfv||\hat{\bfk}|^2 \sin(\alpha) \sin(90^\circ) = |\bfv|\sin(\alpha)$ where $\alpha$ is the angle between $\bfv$ and $\hat{\bfk}$.
 \begin{align}
-  \bfv_{\perp,rot} = -(\hat{\bfk} \times \hat{\bfk} \times \bfv) \cos(\theta) +
-  (\hat{\bfk} \times \bfv) \sin(\theta)
+  \bfv_{\perp,rot} = \bfv_\perp \cos(\theta) +
+  \hat{\bfw}|\hat{\bfk} \times \bfv| \sin(\theta)
 \end{align}
 
 
@@ -115,7 +117,10 @@ The rotation matrix is obtained by writing the basis vectors of the destination 
   Derive the rotation matrix corresponding to the Euler angle representation $R = R_x(\psi) R_z(\phi) R_y(\theta)$. Also derive an expression to convert the rotation matrix back to Euler angles. (20 marks).
 \end{prob}
 \begin{align}
-  \begin{bmatrix}
+  R = R_x(\psi) R_z(\phi) R_y(\theta)
+\end{align}
+\begin{align}
+  \implies \begin{bmatrix}
     r_{11} & r_{12} & r_{13}  \\
     r_{21} & r_{22} & r_{23}  \\
     r_{31} & r_{32} & r_{33}  
@@ -150,7 +155,7 @@ The rotation matrix is obtained by writing the basis vectors of the destination 
   \end{bmatrix}
 \end{align}
 \begin{align}
-  \begin{bmatrix}
+  \implies \begin{bmatrix}
     r_{11} & r_{12} & r_{13}  \\
     r_{21} & r_{22} & r_{23}  \\
     r_{31} & r_{32} & r_{33}  
@@ -163,7 +168,7 @@ The rotation matrix is obtained by writing the basis vectors of the destination 
 \end{align}
 
 \begin{align}
-  \phi &= \sin^{-1}(-r_{12}) \\
+  \phi &= \sin^{-1}(-r_{12}) \in [-\pi/2, \pi/2]\\
   \theta &= \text{arctan2}(r_{13}, r_{11}) \\
   \psi &= \text{arctan2}(r_{32}, r_{22})
 \end{align}
