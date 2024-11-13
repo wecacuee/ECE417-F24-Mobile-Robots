@@ -38,6 +38,17 @@
   Find the 4x4 transformation matrix $^1T_0$ that transforms coordinates from coordinate frame 1 to coordinate frame 0 (5 marks).\\
   \includegraphics[width=0.7\linewidth,trim=0 0 0 1in,clip]{./media/transformations.png}
 \end{prob}
+I am going to write transform from frame 1 to frame 0. $^0T_1$
+\begin{align}
+  ^0T_1 = \begin{bmatrix}
+    1 & 0 & 0 & -3.5\\
+    0 & -1 & 0 & 3 \\
+    0 & 0 & -1 & 1\\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+\end{align}
+The rotation matrix is obtained by writing the basis vectors of the destination coordinate system in the source coordinate system.
+
 \newpage
 .
 \newpage
@@ -50,6 +61,29 @@
   [2/7, 6/7, -3/7]^\top$, $\bfy = [-6/7, 3/7, 2/7]^\top$ and $\bfz = [3/7, 2/7, 6/7]^\top$.
   Find the rotation matrix $^{ouvw}R_{oxyz}$ that converts coordinates from frame OXYZ to frame OUVW. (10 marks)
 \end{prob}
+\begin{align}
+  ^{OUVW}R_{OPQR} &= \begin{bmatrix}
+    3/7 & 2/7 & 4 \\
+    2/7 & 6/7 & 5  \\
+    6/7 & 3/7 & 6 \\
+  \end{bmatrix} \\
+  ^{OXYZ}R_{OPQR} &= \begin{bmatrix}
+    2/7 & -6/7 & 3/7 \\
+    6/7 & 3/7 & 2/7  \\
+    -3/7 & 2/7 & 6/7 \\
+  \end{bmatrix} \\
+  ^{OUVW}R_{OXYZ} &= ^{OUVW}R_{OPQR} (^{OXYZ}R_{OPQR})^\top \\
+&= \begin{bmatrix}
+    3/7 & 2/7 & 4 \\
+    2/7 & 6/7 & 5  \\
+    6/7 & 3/7 & 6 \\
+  \end{bmatrix}
+\begin{bmatrix}
+    2/7 & -6/7 & 3/7 \\
+    6/7 & 3/7 & 2/7  \\
+    -3/7 & 2/7 & 6/7 \\
+  \end{bmatrix}^\top
+\end{align}
 \newpage
 
 \begin{prob}
@@ -62,6 +96,17 @@
   (15 marks)\\
   \includegraphics[width=0.5\linewidth]{media/Rodrigues-formula.pdf}
 \end{prob}
+\begin{align}
+  \hat{\bfw} = \frac{\hat{k} \times \bfv}{\|\hat{k} \times \bfv\|}
+\end{align}
+\begin{align}
+\bfv_\perp = -\hat{\bfk} \times \hat{\bfk} \times \bfv
+\end{align}
+\begin{align}
+  \bfv_{\perp,rot} = -(\hat{\bfk} \times \hat{\bfk} \times \bfv) \cos(\theta) +
+  (\hat{\bfk} \times \bfv) \sin(\theta)
+\end{align}
+
 
 \newpage
 
@@ -69,7 +114,59 @@
   The Euler angles of rotation YZX are given as $\theta$, $\phi$ and $\psi$.
   Derive the rotation matrix corresponding to the Euler angle representation $R = R_x(\psi) R_z(\phi) R_y(\theta)$. Also derive an expression to convert the rotation matrix back to Euler angles. (20 marks).
 \end{prob}
+\begin{align}
+  \begin{bmatrix}
+    r_{11} & r_{12} & r_{13}  \\
+    r_{21} & r_{22} & r_{23}  \\
+    r_{31} & r_{32} & r_{33}  
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1 & 0 & 0\\
+    0 & c_\psi & -s_\psi \\
+    0 & s_\psi & c_\psi \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    c_\phi & -s_\phi & 0 \\
+    s_\phi & c_\phi & 0 \\
+    0 & 0 & 1\\
+  \end{bmatrix}
+  \begin{bmatrix}
+    c_\theta & 0 & s_\theta \\
+    0 & 1 & 0\\
+    -s_\theta & 0 & c_\theta \\
+  \end{bmatrix}
+\end{align}
+\begin{align}
+  = \begin{bmatrix}
+    1 & 0 & 0\\
+    0 & c_\psi & -s_\psi \\
+    0 & s_\psi & c_\psi \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    c_\phi c_\theta & - s_\phi & c_\phi s_\theta \\
+    s_\phi c_\theta &   c_\phi & s_\phi s_\theta \\
+    -s_\theta & 0 & c_\theta \\
+  \end{bmatrix}
+\end{align}
+\begin{align}
+  \begin{bmatrix}
+    r_{11} & r_{12} & r_{13}  \\
+    r_{21} & r_{22} & r_{23}  \\
+    r_{31} & r_{32} & r_{33}  
+  \end{bmatrix}
+  = \begin{bmatrix}
+    c_\phi c_\theta & - s_\phi & c_\phi s_\theta \\
+    c_\psi s_\phi c_\theta + s_\psi s_\theta &  c_\psi c_\phi & c_\psi s_\phi s_\theta  - s_\psi c_\theta \\
+    s_\psi s_\phi c_\theta - c_\psi s_\theta & s_\psi c_\phi & s_\psi s_\phi s_\theta + c_\psi c_\theta
+  \end{bmatrix}
+\end{align}
 
+\begin{align}
+  \phi &= \sin^{-1}(-r_{12}) \\
+  \theta &= \text{arctan2}(r_{13}, r_{11}) \\
+  \psi &= \text{arctan2}(r_{32}, r_{22})
+\end{align}
 \newpage
 
 \end{document}
