@@ -569,9 +569,12 @@ If the OUVW system has basis vectors $\bfu = (1/\sqrt2, 0, 1/\sqrt2)^\top$, $\bf
 \end{prob}
 
 \begin{solution}
-Let the coordinates be specified in a system $OPQR$, then the rotation matrices, 
+
+Recall that the columns of rotation matrix are formed by basis-vectors of the source coordinate frame represented in the destination coordinate frame.
+
+Let the coordinates be specified in a system $OPQR$, then the rotation matrices are, 
 \begin{align}
-  ^{OUVW}R_{OPQR} = \begin{bmatrix}
+  ^{OPQR}R_{OUVW} = \begin{bmatrix}
     \bfu & \bfv & \bfw 
   \end{bmatrix} 
   = \frac{1}{\sqrt2}\begin{bmatrix} 
@@ -579,7 +582,7 @@ Let the coordinates be specified in a system $OPQR$, then the rotation matrices,
     0 & 0 & -\sqrt{2} \\
     1 & 1 & 0
   \end{bmatrix}\\
-  ^{OXYZ}R_{OPQR} = \begin{bmatrix}
+  ^{OPQR}R_{OXYZ} = \begin{bmatrix}
     \bfx & \bfy & \bfz 
   \end{bmatrix} 
   = \frac{1}{\sqrt2}\begin{bmatrix} 
@@ -590,26 +593,26 @@ Let the coordinates be specified in a system $OPQR$, then the rotation matrices,
 \end{align}
 A rotation matrix between the two system is,
 \begin{align}
-  ^{OUVW}R_{OXYZ} &= ^{OUVW}R_{OPQR} (^{OPQR}R_{OXYZ}) = ^{OUVW}R_{OPQR} (^{OXYZ}R_{OPQR})^\top\\
+  ^{OUVW}R_{OXYZ} &= ^{OUVW}R_{OPQR} (^{OPQR}R_{OXYZ}) = (^{OPQR}R_{OUVW})^\top (^{OPQR}R_{OXYZ})\\
                   &= \frac{1}{\sqrt2}\begin{bmatrix} 
     1 & -1 & 0 \\
     0 & 0 & -\sqrt{2} \\
     1 & 1 & 0
-  \end{bmatrix}
+  \end{bmatrix}^\top
   \frac{1}{\sqrt2}\begin{bmatrix} 
     \sqrt2 & 0 & 0 \\
     0 & 1 & 1\\
     0 & -1 & 1
-  \end{bmatrix}^\top\\
+  \end{bmatrix}\\
                   &= \frac{1}{\sqrt2}\begin{bmatrix} 
-    1 & -1 & 0 \\
-    0 & 0 & -\sqrt{2} \\
-    1 & 1 & 0
+    1 & 0 & 1 \\
+    -1 & 0 & 1 \\
+    0 & -\sqrt2  & 0
   \end{bmatrix}
   \frac{1}{\sqrt2}\begin{bmatrix} 
-    \sqrt2 & 0 & 0 \\
-    0 & 1 & -1\\
-    0 & 1 & 1
+    \sqrt2 & -1 & 1\\
+    -\sqrt2 & -1 & 1\\
+    0 & -\sqrt2 & -\sqrt2
   \end{bmatrix}\\
                   &= \frac{1}{2}\begin{bmatrix}
                     \sqrt{2} & -1 & 1 \\
@@ -671,7 +674,7 @@ We are given the following 4x4 homogeneous transformation matrices,
     {}^BR^\top_A & - {}^BR^\top_A {}^B\bft_A \\ 
     \mathbf{0}^\top & 1
   \end{bmatrix}
-  = \begin{bmatrix}
+  = \frac{1}{7}\begin{bmatrix}
     2 & 6 & -3 & -5\\
     -6 & 3 & 2 & -6\\
     3 & 2 & 6 & -27 \\
@@ -810,7 +813,7 @@ where $\bfx_1$ is the direction of $x_1$ in terms of coordinate frame 0.
 
 \begin{align}
   {}^0A_2 = \begin{bmatrix}
-    0  & 1 &  0 & b \\
+    0  & 1 &  0 & -b \\
     -1 & 0 &  0  & c+e\\
     0  & 0 &  1 & 0\\
     0  & 0 &  0 & 1
@@ -863,7 +866,7 @@ where $\bfx_1$ is the direction of $x_1$ in terms of coordinate frame 0.
   {}^4A_5 = \begin{bmatrix}
      0 &  0 & -1 & b\\
      1 &  0 &  0 & 0\\
-     0 & -1 &  0 & a-d\\
+     0 & -1 &  0 & d\\
      0 &  0 &  0 & 1
   \end{bmatrix}
 \end{align}
