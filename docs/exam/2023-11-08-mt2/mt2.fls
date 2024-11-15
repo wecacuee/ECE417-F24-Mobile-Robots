@@ -204,6 +204,17 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
 INPUT /usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/latex-fonts/lasy6.tfm
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
 INPUT ./sym.tex
 INPUT ./sym.tex
 INPUT ./sym.tex

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1731512703 "mt2.tex" "mt2.pdf" "mt2" 1731512704
+["pdflatex"] 1731669507 "mt2.tex" "mt2.pdf" "mt2" 1731669507
   "/etc/texmf/web2c/texmf.cnf" 1705515673 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -53,6 +53,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty" 1636758526 2444 926f379cc60fcf0c6e3fee2223b4370d ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1636758526 20144 8a7de377ae7a11ee924a7499611f5a9d ""
   "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1636758526 8448 96f18c76bf608a36ee6fbf021ac1dd32 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty" 1472166125 10197 204f75d5d8d88aa345a8c402e879e63b ""
   "/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg" 1459978653 1213 620bba36b25224fa9b7e1ccb4ecb76fd ""
@@ -71,8 +72,8 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1710586596 1484447 263c1fe9661c4738c6a76f47e9f52eac ""
   "media/Rodrigues-formula.pdf" 1699380919 21245 e52f390c4882414d7986d263ac2bf0f3 ""
   "media/transformations.png" 1699373510 72027 5d78fdcf68399e39a5c7449d129f5847 ""
-  "mt2.aux" 1731512703 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
-  "mt2.tex" 1731512702 6401 d273bcc54d73816b4823862ff7824d4a ""
+  "mt2.aux" 1731669507 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
+  "mt2.tex" 1731669506 6689 61cb62088fff713c06d4d4093cc7b92e ""
   "sym.tex" 1699373415 5434 f0077a78428f81ce179c39ffcfd918ba ""
   (generated)
   "mt2.aux"

@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{ulem}
+\usepackage{comment}
 \input{sym}
 
 
@@ -14,7 +15,14 @@
 
 \newtheorem{prob}{Problem}
 \newif\ifsol
-\solfalse
+\soltrue
+
+\ifsol
+  \newenvironment{solution}{\emph{Solution:}}{}
+\else
+  \excludecomment{solution}
+\fi
+
 
 \begin{document}
 \maketitle
@@ -38,6 +46,7 @@
   Find the 4x4 transformation matrix $^1T_0$ that transforms coordinates from coordinate frame 1 to coordinate frame 0 (5 marks).\\
   \includegraphics[width=0.7\linewidth,trim=0 0 0 1in,clip]{./media/transformations.png}
 \end{prob}
+\begin{solution}
 I am going to write transform from frame 1 to frame 0. $^0T_1$
 \begin{align}
   ^0T_1 = \begin{bmatrix}
@@ -49,6 +58,7 @@ I am going to write transform from frame 1 to frame 0. $^0T_1$
 \end{align}
 The rotation matrix is obtained by writing the basis vectors of the destination coordinate system in the source coordinate system.
 
+\end{solution}
 \newpage
 .
 \newpage
@@ -61,10 +71,11 @@ The rotation matrix is obtained by writing the basis vectors of the destination 
   [2/7, 6/7, -3/7]^\top$, $\bfy = [-6/7, 3/7, 2/7]^\top$ and $\bfz = [3/7, 2/7, 6/7]^\top$.
   Find the rotation matrix $^{ouvw}R_{oxyz}$ that converts coordinates from frame OXYZ to frame OUVW. (10 marks)
 \end{prob}
+\begin{solution}
 
 Let OPQR be the coordinate system in which the coordinates of basis vectors are specified.
 \begin{align}
-  ^{OUVW}R_{OPQR} &= \begin{bmatrix}
+  ^{OPQR}R_{OUVW} &= \begin{bmatrix}
     | & | & | \\
     \bfu & \bfv & \bfw \\
     | & | & | \\
@@ -74,7 +85,7 @@ Let OPQR be the coordinate system in which the coordinates of basis vectors are 
     2/7 & 6/7 & 5  \\
     6/7 & 3/7 & 6 \\
   \end{bmatrix} \\
-  ^{OXYZ}R_{OPQR} &= \begin{bmatrix}
+  ^{OPQR}R_{OXYZ} &= \begin{bmatrix}
     | & | & | \\
     \bfx & \bfy & \bfz \\
     | & | & | \\
@@ -84,18 +95,19 @@ Let OPQR be the coordinate system in which the coordinates of basis vectors are 
     6/7 & 3/7 & 2/7  \\
     -3/7 & 2/7 & 6/7 \\
   \end{bmatrix} \\
-  ^{OUVW}R_{OXYZ} &= ^{OUVW}R_{OPQR} (^{OXYZ}R_{OPQR})^\top \\
+    ^{OUVW}R_{OXYZ} &= {}^{OUVW}R_{OPQR} {}^{OPQR}R_{OXYZ} = (({}^{OPQR}R_{OUVW})^\top ) {}^{OPQR}R_{OXYZ}\\
 &= \begin{bmatrix}
     3/7 & 2/7 & 4 \\
     2/7 & 6/7 & 5  \\
     6/7 & 3/7 & 6 \\
-  \end{bmatrix}
+  \end{bmatrix}^\top
 \begin{bmatrix}
     2/7 & -6/7 & 3/7 \\
     6/7 & 3/7 & 2/7  \\
     -3/7 & 2/7 & 6/7 \\
-  \end{bmatrix}^\top
+  \end{bmatrix}
 \end{align}
+\end{solution}
 \newpage
 
 \begin{prob}
@@ -108,6 +120,7 @@ Let OPQR be the coordinate system in which the coordinates of basis vectors are 
   (15 marks)\\
   \includegraphics[width=0.5\linewidth]{media/Rodrigues-formula.pdf}
 \end{prob}
+\begin{solution}
 \begin{align}
   \hat{\bfw} = \frac{\hat{\bfk} \times \bfv}{\|\hat{\bfk} \times \bfv\|}
 \end{align}
@@ -120,7 +133,7 @@ The magnitude of $\bfv_\perp$ is same as RHS because both $|\bfv_\perp| = |\bfv|
   \bfv_{\perp,rot} = \bfv_\perp \cos(\theta) +
   \hat{\bfw}|\hat{\bfk} \times \bfv| \sin(\theta)
 \end{align}
-
+\end{solution}
 
 \newpage
 
@@ -128,6 +141,7 @@ The magnitude of $\bfv_\perp$ is same as RHS because both $|\bfv_\perp| = |\bfv|
   The Euler angles of rotation YZX are given as $\theta$, $\phi$ and $\psi$.
   Derive the rotation matrix corresponding to the Euler angle representation $R = R_x(\psi) R_z(\phi) R_y(\theta)$. Also derive an expression to convert the rotation matrix back to Euler angles. (20 marks).
 \end{prob}
+\begin{solution}
 \begin{align}
   R = R_x(\psi) R_z(\phi) R_y(\theta)
 \end{align}
@@ -184,6 +198,7 @@ The magnitude of $\bfv_\perp$ is same as RHS because both $|\bfv_\perp| = |\bfv|
   \theta &= \text{arctan2}(r_{13}, r_{11}) \\
   \psi &= \text{arctan2}(r_{32}, r_{22})
 \end{align}
+\end{solution}
 \newpage
 
 \end{document}

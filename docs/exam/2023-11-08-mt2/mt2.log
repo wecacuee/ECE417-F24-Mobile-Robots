@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.16)  13 NOV 2024 10:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.16)  15 NOV 2024 06:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -146,7 +146,9 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
 \ULC@box=\box54
 Package: ulem 2019/11/18
 \ULdepth=\dimen160
-) (./sym.tex)
+) (/usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write3
+ Excluding comment 'comment') (./sym.tex)
 \c@prob=\count275
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
@@ -155,20 +157,20 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 ) (./mt2.aux)
 \openout1 = `mt2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -223,27 +225,27 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 20.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 28.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 20.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 28.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (38.99998pt too wide) in paragraph at lines 24--27
+Overfull \hbox (38.99998pt too wide) in paragraph at lines 32--35
 [][] 
  []
 
 <./media/transformations.png, id=1, 770.88pt x 702.625pt>
 File: ./media/transformations.png Graphic file (type png)
 <use ./media/transformations.png>
-Package pdftex.def Info: ./media/transformations.png  used on input line 39.
+Package pdftex.def Info: ./media/transformations.png  used on input line 47.
 (pdftex.def)             Requested size: 328.82707pt x 268.88322pt.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./media/transformations.png>] [2] [3]
-Overfull \hbox (19.48709pt too wide) in paragraph at lines 57--63
+Overfull \hbox (19.48709pt too wide) in paragraph at lines 67--73
 []\OT1/cmr/m/it/10 Consider a co-or-di-nate sys-tem OUVW whose or-dered set of ba-sis vec-tors given by $\OT1/cmr/bx/n/10 u \OT1/cmr/m/n/10 = [3\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 7\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 2\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 7\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 6\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 7][]$\OT1/cmr/m/it/10 ,
  []
 
@@ -251,24 +253,24 @@ Overfull \hbox (19.48709pt too wide) in paragraph at lines 57--63
 <media/Rodrigues-formula.pdf, id=31, 216.80998pt x 216.80998pt>
 File: media/Rodrigues-formula.pdf Graphic file (type pdf)
 <use media/Rodrigues-formula.pdf>
-Package pdftex.def Info: media/Rodrigues-formula.pdf  used on input line 109.
+Package pdftex.def Info: media/Rodrigues-formula.pdf  used on input line 121.
 (pdftex.def)             Requested size: 234.8775pt x 234.88902pt.
 
-Overfull \hbox (11.92458pt too wide) in paragraph at lines 117--119
+Overfull \hbox (11.92458pt too wide) in paragraph at lines 130--132
 \OT1/cmr/m/n/10 The mag-ni-tude of $\OT1/cmr/bx/n/10 v[]$ \OT1/cmr/m/n/10 is same as RHS be-cause both $\OMS/cmsy/m/n/10 j\OT1/cmr/bx/n/10 v[]\OMS/cmsy/m/n/10 j \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 j\OT1/cmr/bx/n/10 v\OMS/cmsy/m/n/10 j []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 \OT1/cmr/m/n/10 )$ and $\OMS/cmsy/m/n/10 j ^^@ [] ^^B \OT1/cmr/m/n/10 ([] \OMS/cmsy/m/n/10 ^^B \OT1/cmr/bx/n/10 v\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 j \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 j\OT1/cmr/bx/n/10 v\OMS/cmsy/m/n/10 jj[]j[] []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 \OT1/cmr/m/n/10 ) [](90[]) =
  []
 
 [5 <./media/Rodrigues-formula.pdf>] [6] (./mt2.aux) ) 
 Here is how much of TeX's memory you used:
- 3423 strings out of 480129
- 48822 string characters out of 5893409
- 359543 words of memory out of 5000000
- 21352 multiletter control sequences out of 15000+600000
+ 3478 strings out of 480129
+ 49930 string characters out of 5893409
+ 361433 words of memory out of 5000000
+ 21403 multiletter control sequences out of 15000+600000
  477979 words of font info for 62 fonts, out of 8000000 for 9000
  81 hyphenation exceptions out of 8191
  55i,14n,62p,299b,218s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb>
-Output written on mt2.pdf (6 pages, 224664 bytes).
+Output written on mt2.pdf (6 pages, 224821 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream
