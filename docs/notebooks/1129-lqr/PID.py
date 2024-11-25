@@ -98,7 +98,7 @@ class PIDController:
         #rho = np.hypot(x_diff, y_diff)
         x_diff = x_goal - x
         dhat = np.array([np.cos(theta), np.sin(theta)])
-        x_err = np.linalg.norm(x_diff) * np.sign(x_diff @ dhat)
+        x_err = x_diff @ dhat
 
         moving_angle = np.arctan2(x_diff[1], x_diff[0])
         moving_angle_err = Angle.diff(np.asarray(moving_angle),
@@ -109,7 +109,7 @@ class PIDController:
         v = self.Kp_rho * x_err
         w =  (self.Kp_alpha * moving_angle_err
               if (np.linalg.norm(x_diff) > 0.001) else
-              controller.Kp_beta * dest_angle_err)
+              self.Kp_beta * dest_angle_err)
         return np.array([v, w])
     def control(self, state, state_goal):
         return self.calc_control_command(state[:2], state_goal[:2], state[2],
