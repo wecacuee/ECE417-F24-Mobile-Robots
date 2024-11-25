@@ -98,7 +98,7 @@ class PIDController:
         #rho = np.hypot(x_diff, y_diff)
         x_diff = x_goal - x
         dhat = np.array([np.cos(theta), np.sin(theta)])
-        x_err = (x_diff @ dhat)
+        x_err = np.linalg.norm(x_diff) * np.sign(x_diff @ dhat)
 
         moving_angle = np.arctan2(x_diff[1], x_diff[0])
         moving_angle_err = Angle.diff(np.asarray(moving_angle),
@@ -240,7 +240,7 @@ def main():
         Jf_u = unicycle_Jf_u, 
         dt = dt,
         init_controller = pid_controller)
-    controller = lqr_controller
+    controller = pid_controller
 
     for i in range(5):
         x_start = 20 * random()
