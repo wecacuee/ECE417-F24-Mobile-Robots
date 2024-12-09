@@ -15,7 +15,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from random import random
 
-from ilqr import iLQRController
+try:
+    from lqr import LQRController
+except ImportError:
+    print("lqr.py not found. Put it next to PID.py to run")
+    LQRController = None
+try:
+    from ilqr import iLQRController
+except ImportError:
+    print("ilqr.py not found. Put it next to PID.py to run")
+    iLQRController = None
 
 class Angle:
     @staticmethod
@@ -232,14 +241,22 @@ def main():
     # simulation parameters
     dt = 0.01
     pid_controller = PIDController(9, 15, 3)
-    lqr_controller = iLQRController(
-        Q = np.diag([0.9, 0.9, 0.1]),
-        R = np.eye(2) * 0.01,
-        f = unicycle_f, 
-        Jf_x = unicycle_Jf_x, 
-        Jf_u = unicycle_Jf_u, 
-        dt = dt,
-        init_controller = pid_controller)
+    if LQRController is not None:
+        T = 100
+        lqr_controller = LQRController(
+                Qs = [np.zeros((3,3))]*T+np.diag([1., 1., 0.1.]),
+                Rs = [np.eye(3)]*T,
+                As = [
+                )
+    if iLQRController is not None:
+        ilqr_controller = iLQRController(
+            Q = np.diag([0.9, 0.9, 0.1]),
+            R = np.eye(2) * 0.01,
+            f = unicycle_f, 
+            Jf_x = unicycle_Jf_x, 
+            Jf_u = unicycle_Jf_u, 
+            dt = dt,
+            init_controller = pid_controller)
     controller = pid_controller
 
     for i in range(5):
