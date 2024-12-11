@@ -241,13 +241,6 @@ def main():
     # simulation parameters
     dt = 0.01
     pid_controller = PIDController(9, 15, 3)
-    if LQRController is not None:
-        T = 100
-        lqr_controller = LQRController(
-                Qs = [np.zeros((3,3))]*T+np.diag([1., 1., 0.1.]),
-                Rs = [np.eye(3)]*T,
-                As = [
-                )
     if iLQRController is not None:
         ilqr_controller = iLQRController(
             Q = np.diag([0.9, 0.9, 0.1]),
@@ -256,7 +249,7 @@ def main():
             Jf_x = unicycle_Jf_x, 
             Jf_u = unicycle_Jf_u, 
             dt = dt,
-            init_controller = pid_controller)
+            init_controller = lqr_controller)
     controller = pid_controller
 
     for i in range(5):
