@@ -1,11 +1,13 @@
 """
-Taken from: https://github.com/AtsushiSakai/PythonRobotics/blob/master/Control/move_to_pose/move_to_pose.py
+Adapted from: https://github.com/AtsushiSakai/PythonRobotics/blob/master/Control/move_to_pose/move_to_pose.py
 
 Move to specified pose
 
 Author: Daniel Ingram (daniel-s-ingram)
         Atsushi Sakai (@Atsushi_twi)
         Seied Muhammad Yazdian (@Muhammad-Yazdian)
+
+Some changes by: Vikas Dhiman
 
 P. I. Corke, "Robotics, Vision & Control", Springer 2017, ISBN 978-3-319-54413-7
 
@@ -15,17 +17,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from random import random
 
-try:
-    from lqr import LQRController
-except ImportError:
-    print("lqr.py not found. Put it next to PID.py to run")
-    LQRController = None
+###### ilqr by Vikas Dhiman
 try:
     from ilqr import iLQRController
 except ImportError:
-    print("ilqr.py not found. Put it next to PID.py to run")
-    iLQRController = None
+    pass
+###### ilqr by Vikas Dhiman
 
+
+##### class Angle @author: Vikas Dhiman
 class Angle:
     @staticmethod
     def wrap(theta):
@@ -37,6 +37,8 @@ class Angle:
 
     @staticmethod
     def diff(a, b):
+        a = np.asarray(a)
+        b = np.asarray(b)
         assert Angle.iswrapped(a).all()
         assert Angle.iswrapped(b).all()
         # np.where is like a conditional statement in numpy 
@@ -48,6 +50,7 @@ class Angle:
     def dist(a, b):
         # The distance between two angles is minimum of a - b and b - a.
         return np.minimum(Angle.diff(a, b), Angle.diff(b, a))
+##### class Angle @author: Vikas Dhiman
 
 
 class PIDController:
@@ -70,7 +73,7 @@ class PIDController:
         self.Kp_alpha = Kp_alpha
         self.Kp_beta = Kp_beta
 
-    def calc_control_command(self, x, x_goal, theta, theta_goal):
+    def calc_control_command(self, t, x, x_goal, theta, theta_goal):
         """
         Returns the control command for the linear and angular velocities as
         well as the distance to goal
@@ -104,10 +107,11 @@ class PIDController:
         # from 0 rad to 2*pi rad with slight turn
 
         # Proportional control
-        #rho = np.hypot(x_diff, y_diff)
+        ########## slight reformulation of PID error by Vikas Dhiman
         x_diff = x_goal - x
         dhat = np.array([np.cos(theta), np.sin(theta)])
-        x_err = x_diff @ dhat
+        x_err = (x_diff @ dhat)
+        rho = np.linalg.norm(x_diff)
 
         moving_angle = np.arctan2(x_diff[1], x_diff[0])
         moving_angle_err = Angle.diff(np.asarray(moving_angle),
@@ -115,13 +119,18 @@ class PIDController:
 
         dest_angle_err = Angle.diff(np.asarray(theta_goal),
                                     np.asarray(theta))
-        v = self.Kp_rho * x_err
-        w =  (self.Kp_alpha * moving_angle_err
-              if (np.linalg.norm(x_diff) > 0.001) else
-              self.Kp_beta * dest_angle_err)
+        compromise_angle = Angle.wrap((1-np.exp(-rho))*moving_angle
+                                   +np.exp(-rho)*theta_goal)
+        v = self.Kp_rho * rho * np.cos(moving_angle_err)
+        w =  (self.Kp_alpha
+              *((1-np.exp(-10*rho))*moving_angle_err+np.exp(-10*rho)*dest_angle_err)
+              if rho > 0.001
+              else self.Kp_beta * Angle.diff(theta_goal, theta))
         return np.array([v, w])
-    def control(self, state, state_goal):
-        return self.calc_control_command(state[:2], state_goal[:2], state[2],
+        ########## slight reformulation of PID error by Vikas Dhiman
+
+    def control(self, t, state, state_goal):
+        return self.calc_control_command(t, state[:2], state_goal[:2], state[2],
                                          state_goal[2])
 
 def rotmat2D(theta):
@@ -151,8 +160,8 @@ def move_to_pose(controller,
                                             np.asarray(theta))) > 0.001:
         pos_traj.append(x)
 
-        u = controller.calc_control_command(
-            t, x, pos_goal, theta, theta_goal)
+        u = controller.calc_control_command(t, 
+            x, pos_goal, theta, theta_goal)
         v = u[0]
         w = u[1]
 
@@ -238,50 +247,23 @@ def unicycle_Jf_u(x_t, u_t, dt):
     ])
 
 
-class ProjectSingleIntegratorToUnicycle:
-    def __init__(self, lqr):
-        self.lqr = lqr
-
-    def calc_control_command(self, t, x, x_goal, theta, theta_goal):
-        state_goal = np.hstack((x_goal, theta_goal))
-        state = np.hstack((x, theta))
-        return self.control(t, state, state_goal)
-
-    def control(self, t, state, state_goal):
-        x, y, theta = state
-        u = self.lqr.control(t, state, state_goal)
-        vx, vy, w = u
-        v = np.linalg.norm(u[:2])
-        w = w + Angle.diff(np.arctan2(vy, vx), theta) / 100
-        return np.array([v, w])
 
 def main():
     # simulation parameters
     dt = 0.01
     pid_controller = PIDController(9, 15, 3)
-    if iLQRController is not None:
-        T = 100
-        n = 3
-        m = 3
-        lqr_controller = LQRController(
-                Qs = [np.diag([1., 1., 1.])]*(T+1),
-                Rs = [np.eye(m) * 0.01]*T,
-                As = [np.eye(n)]*T,
-                Bs = [np.eye(m)*dt]*T,
-                T  = T)
-        project_lqr = ProjectSingleIntegratorToUnicycle(
-                lqr_controller)
-        m = 2
-        ilqr_controller = iLQRController(
-            Qs = [np.diag([1., 1., 1.])]*(T+1),
-            Rs = [np.eye(m) * 0.01]*T,
-            f = unicycle_f,
-            Jf_x = unicycle_Jf_x,
-            Jf_u = unicycle_Jf_u,
-            dt = dt,
-            T = T,
-            N = 100,
-            init_controller = pid_controller)
+    T = 100
+    ilqr_controller = iLQRController(
+        Qs = [np.diag([1., 1., 1.])]*(T+1),
+        Rs = [np.eye(2) * 0.01]*T,
+        f = unicycle_f,
+        Jf_x = unicycle_Jf_x,
+        Jf_u = unicycle_Jf_u,
+        dt = dt,
+        T = T,
+        init_controller = pid_controller)
+
+    # Choose the controller
     controller = ilqr_controller
 
     for i in range(5):

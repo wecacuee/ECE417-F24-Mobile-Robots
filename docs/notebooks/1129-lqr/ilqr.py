@@ -30,20 +30,20 @@ class iLQRController:
     3-DOF wheeled robot on a 2D plane
     """
 
-    def __init__(self, Q, R, f, Jf_x, Jf_u, dt, N=10, T=10,
+    def __init__(self, Qs, Rs, f, Jf_x, Jf_u, dt, N=10, T=10,
                  init_controller=None):
-        self.Q = Q
-        self.R = R
+        self.Qs = Qs
+        self.Rs = Rs
         self.f = f
         self.Jf_x = Jf_x
         self.Jf_u = Jf_u
         self.dt = dt
         self.N = N
         self.T = T
-        self.init_controller = RandomController(self.R.shape[0],
+        self.init_controller = RandomController(self.Rs[0].shape[0],
                                                 -1, 1)
 
-    def calc_control_command(self, x, x_goal, theta, theta_goal):
+    def calc_control_command(self, t, x, x_goal, theta, theta_goal):
         """
         Returns the control command for the linear and angular velocities as
         well as the distance to goal
@@ -63,14 +63,16 @@ class iLQRController:
         """
         state_goal = np.hstack((x_goal, theta_goal))
         state = np.hstack((x, theta))
-        return self.control(state, state_goal)
+        return self.control(t, state, state_goal)
 
-    def control(self, state, state_goal):
+    def control(self, k, state, state_goal):
         # make goal the origin
         T = self.T
+        if k >= T:
+            k = 0
         controls = []
         states = [state]
-        for t in range(T):
+        for t in range(k, T):
             x_t = states[-1]
             u_t = self.init_controller.control(x_t, state_goal)
             states.append(self.f(x_t, u_t, self.dt))
@@ -82,9 +84,9 @@ class iLQRController:
             Rs = []
             n = 3
             m = 2
-            for t in range(T):
-                x_lin_t = states[t]
-                u_lin_t = controls[t]
+            for t in range(k, T):
+                x_lin_t = states[t-k]
+                u_lin_t = controls[t-k]
                 x_ref_t = state_goal
 
                 A_t = self.Jf_x(x_lin_t, u_lin_t, self.dt)
@@ -101,7 +103,7 @@ class iLQRController:
                 B_t_hom[-1, :-1] = 0
                 Bs.append(B_t_hom)
 
-                Q_t = self.Q
+                Q_t = self.Qs[t]
                 Q_t_hom = np.eye(n+1)
                 Q_t_hom[:-1, :-1] = Q_t
                 Q_t_hom[-1, -1] = (x_lin_t - x_ref_t) @ (x_lin_t - x_ref_t)
@@ -109,14 +111,14 @@ class iLQRController:
                 Q_t_hom[-1, :-1] = Q_t_hom[:-1, -1]
                 Qs.append(Q_t_hom)
 
-                R_t = self.R
+                R_t = self.Rs[t]
                 Rs.append(R_t)
 
-            x_T = states[T]
-            Q_T = self.Q
+            x_T = states[T-k-1]
+            Q_T = self.Qs[T-k-1]
             Q_T_hom = np.eye(n+1)
             Q_T_hom[:-1, :-1] = Q_T
-            Q_T_hom[-1, -1] = (x_T - state_goal) @ (x_t - state_goal)
+            Q_T_hom[-1, -1] = (x_T - state_goal) @ (x_T - state_goal)
             Q_T_hom[:-1, -1] = Q_T @ (x_T - state_goal)
             Q_T_hom[-1, :-1] = Q_T_hom[:-1, -1]
             Qs.append(Q_T_hom)
@@ -126,11 +128,11 @@ class iLQRController:
             # Propagate trajectory
             new_states = [state]
             new_controls = []
-            for t in range(T):
-                x_lin_t = states[t]
-                u_lin_t = controls[t]
+            for t in range(k, T):
+                x_lin_t = states[t-k]
+                u_lin_t = controls[t-k]
                 x_t = new_states[-1]
-                u_t = u_lin_t - Ks[t][:, :-1] @ (x_t - x_lin_t)  - Ks[t][:, -1]
+                u_t = u_lin_t - Ks[t-k][:, :-1] @ (x_t - x_lin_t)  - Ks[t-k][:, -1]
                 x_tp1 = self.f(x_t, u_t, self.dt)
                 new_states.append(x_tp1)
                 new_controls.append(u_t)
