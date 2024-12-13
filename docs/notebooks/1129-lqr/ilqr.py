@@ -1,5 +1,4 @@
 import numpy as np
-
 def dare_backpropagation(Qs, Rs, As, Bs):
     # Dicrete algebraic Riccati equation
     P_T = Qs[-1]
@@ -43,7 +42,7 @@ class iLQRController:
         self.init_controller = RandomController(self.Rs[0].shape[0],
                                                 -1, 1)
 
-    def calc_control_command(self, t, x, x_goal, theta, theta_goal):
+    def calc_control_command(self, t, x, x_goal, theta, theta_goal, ax=None):
         """
         Returns the control command for the linear and angular velocities as
         well as the distance to goal
@@ -63,9 +62,9 @@ class iLQRController:
         """
         state_goal = np.hstack((x_goal, theta_goal))
         state = np.hstack((x, theta))
-        return self.control(t, state, state_goal)
+        return self.control(t, state, state_goal, ax=ax)
 
-    def control(self, k, state, state_goal):
+    def control(self, k, state, state_goal, ax=None):
         # make goal the origin
         T = self.T
         if k >= T:
@@ -77,6 +76,12 @@ class iLQRController:
             u_t = self.init_controller.control(x_t, state_goal)
             states.append(self.f(x_t, u_t, self.dt))
             controls.append(u_t)
+
+        if ax is not None:
+            print("plotting {}".format(states[:10]))
+            ax.plot([s[0] for s in states],
+                    [s[1] for s in states], 
+                    'r+')
         for i in range(self.N):
             As = []
             Bs = []

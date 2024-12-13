@@ -15,7 +15,9 @@ P. I. Corke, "Robotics, Vision & Control", Springer 2017, ISBN 978-3-319-54413-7
 
 import matplotlib.pyplot as plt
 import numpy as np
-from random import random
+from random import random, seed
+np.random.seed(0)
+seed(0)
 
 ###### ilqr by Vikas Dhiman
 try:
@@ -73,7 +75,7 @@ class PIDController:
         self.Kp_alpha = Kp_alpha
         self.Kp_beta = Kp_beta
 
-    def calc_control_command(self, t, x, x_goal, theta, theta_goal):
+    def calc_control_command(self, t, x, x_goal, theta, theta_goal, ax=None):
         """
         Returns the control command for the linear and angular velocities as
         well as the distance to goal
@@ -156,12 +158,14 @@ def move_to_pose(controller,
 
     rho = np.linalg.norm(x_diff)
     t = 0
-    while rho > 0.001 and np.abs(Angle.diff(np.asarray(theta_goal),
-                                            np.asarray(theta))) > 0.001:
+    while rho > 0.01 and np.abs(Angle.diff(np.asarray(theta_goal),
+                                            np.asarray(theta))) > 0.01:
+        if show_animation:  # pragma: no cover
+            plt.cla()
         pos_traj.append(x)
 
-        u = controller.calc_control_command(t, 
-            x, pos_goal, theta, theta_goal)
+        u = controller.calc_control_command(t,
+            x, pos_goal, theta, theta_goal, ax=plt.gca())
         v = u[0]
         w = u[1]
 
@@ -178,7 +182,6 @@ def move_to_pose(controller,
 
         t += 1
         if show_animation:  # pragma: no cover
-            plt.cla()
             plt.arrow(x_start, y_start, np.cos(theta_start),
                       np.sin(theta_start), color='r', width=0.1)
             plt.arrow(x_goal, y_goal, np.cos(theta_goal),
